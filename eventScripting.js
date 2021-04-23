@@ -65,7 +65,32 @@ jQuery(document).ready(function() {
 
     */
 
-    if (val.startsWith("Paperwork")) {
+    if (val.startsWith("PaperworkAndFees")) {
+        jQuery("#FOpenText112").val("Paperwork and Fees"); //AA status
+        jQuery("#FOpenText108").val("Q1"); //Quarter
+
+        if (val.endsWith("Resolution")) {
+            jQuery("#FOpenText35").val("Noncompliance Resolution"); //AA type
+            jQuery("#event").val(year + " Q1 Paperwork and Fees NONC Resolution"); //event title
+            jQuery("#EventDate").val("05/27/2021"); //EventDate obv
+            jQuery("#FOpenText144").val("05/27/2021"); //AA letter date
+            jQuery("select[name*='field.Status'").val("Void"); //Event status
+            setNicEditText("FOpenText38", textResolution); //nonc letter text
+            autosaveEvent(1);
+        }
+        else {
+            jQuery("#FOpenText35").val("Noncompliance"); //AA type
+            jQuery("#event").val(year + " Q1 Paperwork and Fees NONC"); //event title
+            jQuery("#EventDate").val("05/05/2021"); //EventDate obv
+            jQuery("#FOpenText144").val("05/05/2021"); //AA letter date
+            jQuery("#FOpenText72").val("05/26/2021"); //Due By
+            setNicEditText("FOpenText38", textPaperworkAndFees); //nonc letter text
+            autosaveEvent(1);
+            //resolution event
+            window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
+        }
+    }
+    else if (val.startsWith("Paperwork")) {
         jQuery("#FOpenText112").val("Paperwork"); //AA status
         jQuery("#FOpenText108").val("Q1"); //Quarter
 
@@ -111,31 +136,6 @@ jQuery(document).ready(function() {
             jQuery("#FOpenText144").val("05/05/2021"); //AA letter date
             jQuery("#FOpenText72").val("05/26/2021"); //Due By
             setNicEditText("FOpenText38", "<b>THE</b> <u>letter text</u>"); //nonc letter text
-            autosaveEvent(1);
-            //resolution event
-            window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
-        }
-    }
-    else if (val.startsWith("PaperworkAndFees")) {
-        jQuery("#FOpenText112").val("Paperwork and Fees"); //AA status
-        jQuery("#FOpenText108").val("Q1"); //Quarter
-
-        if (val.endsWith("Resolution")) {
-            jQuery("#FOpenText35").val("Noncompliance Resolution"); //AA type
-            jQuery("#event").val(year + " Q1 Paperwork and Fees NONC Resolution"); //event title
-            jQuery("#EventDate").val("05/27/2021"); //EventDate obv
-            jQuery("#FOpenText144").val("05/27/2021"); //AA letter date
-            jQuery("select[name*='field.Status'").val("Void"); //Event status
-            setNicEditText("FOpenText38", textResolution); //nonc letter text
-            autosaveEvent(1);
-        }
-        else {
-            jQuery("#FOpenText35").val("Noncompliance"); //AA type
-            jQuery("#event").val(year + " Q1 Paperwork and Fees NONC"); //event title
-            jQuery("#EventDate").val("05/05/2021"); //EventDate obv
-            jQuery("#FOpenText144").val("05/05/2021"); //AA letter date
-            jQuery("#FOpenText72").val("05/26/2021"); //Due By
-            setNicEditText("FOpenText38", textPaperworkAndFees); //nonc letter text
             autosaveEvent(1);
             //resolution event
             window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
