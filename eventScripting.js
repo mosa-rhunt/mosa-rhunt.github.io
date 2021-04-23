@@ -74,6 +74,7 @@ jQuery(document).ready(function() {
             jQuery("#event").val(year + " Q1 Paperwork NONC Resolution"); //event title
             jQuery("#EventDate").val("05/27/2021"); //EventDate obv
             jQuery("#FOpenText144").val("05/27/2021"); //AA letter date
+            jQuery("select[name*='field.Status'").val("Void"); //Event status
             setNicEditText("FOpenText38", textResolution); //nonc letter text
             autosaveEvent(1);
         }
@@ -99,6 +100,7 @@ jQuery(document).ready(function() {
             jQuery("#event").val(year + " Q1 Fees NONC Resolution"); //event title
             jQuery("#EventDate").val("05/27/2021"); //EventDate obv
             jQuery("#FOpenText144").val("05/27/2021"); //AA letter date
+            jQuery("select[name*='field.Status'").val("Void"); //Event status
             setNicEditText("FOpenText38", textResolution); //nonc letter text
             autosaveEvent(1);
         }
@@ -123,6 +125,7 @@ jQuery(document).ready(function() {
             jQuery("#event").val(year + " Q1 Paperwork and Fees NONC Resolution"); //event title
             jQuery("#EventDate").val("05/27/2021"); //EventDate obv
             jQuery("#FOpenText144").val("05/27/2021"); //AA letter date
+            jQuery("select[name*='field.Status'").val("Void"); //Event status
             setNicEditText("FOpenText38", textResolution); //nonc letter text
             autosaveEvent(1);
         }
