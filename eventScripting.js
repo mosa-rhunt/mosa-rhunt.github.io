@@ -111,7 +111,6 @@ jQuery(document).ready(function() {
             jQuery("#FOpenText144").val("05/05/2021"); //AA letter date
             jQuery("#FOpenText72").val("05/26/2021"); //Due By
             setNicEditText("FOpenText38", textPaperwork); //nonc letter text
-            setNicEditText("FOpenText94", "Invoice"); //enclosures
             jQuery("#FOpenText110").attr("checked", "checked"); //cc: NOP Appeals Team
             autosaveEvent(2);
             //resolution event
@@ -138,6 +137,7 @@ jQuery(document).ready(function() {
             jQuery("#FOpenText144").val("05/05/2021"); //AA letter date
             jQuery("#FOpenText72").val("05/26/2021"); //Due By
             setNicEditText("FOpenText38", textFees); //nonc letter text
+            setNicEditText("FOpenText94", "Invoice"); //enclosures
             jQuery("#FOpenText111").attr("checked", "checked"); //cc: NOP Appeals Team (w/out enclosure)
             autosaveEvent(1);
             //resolution event
