@@ -1,7 +1,7 @@
 //prepopulate events based on MosaPrepopulate parameter
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
 jQuery(document).ready(function() {
-    console.log(jQuery().jquery); //version
+    //console.log(jQuery().jquery); //version
     let parameters = {};
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
         parameters[key] = value; //decodeURIComponent(value)
@@ -90,7 +90,7 @@ jQuery(document).ready(function() {
             setNicEditText("FOpenText38", textPaperworkAndFees); //nonc letter text
             autosaveEvent(1);
             //resolution event
-            window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
+            //window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
         }
     }
     else if (val.startsWith("Paperwork")) {
@@ -117,7 +117,7 @@ jQuery(document).ready(function() {
             setNicEditText("FOpenText38", textPaperwork); //nonc letter text
             autosaveEvent(1);
             //resolution event
-            window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
+            //window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
         }
     }
     else if (val.startsWith("Fees")) {
@@ -145,7 +145,7 @@ jQuery(document).ready(function() {
             setNicEditText("FOpenText94", "Invoice"); //enclosures
             autosaveEvent(2);
             //resolution event
-            window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
+            //window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
         }
     }
     else if (val == "AnnualInspection") {
