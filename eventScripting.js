@@ -225,4 +225,3 @@ const textFees =
 "The NOP is notified of all noncompliances, proposed suspensions, and resolutions."
 + "</p>";
 
-</script>
