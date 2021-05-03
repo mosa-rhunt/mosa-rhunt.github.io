@@ -1,6 +1,7 @@
 //prepopulate events based on MosaPrepopulate parameter
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
 jQuery(document).ready(function() {
+    console.log(jQuery().jquery); //version
     let parameters = {};
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
         parameters[key] = value; //decodeURIComponent(value)
@@ -84,8 +85,9 @@ jQuery(document).ready(function() {
             jQuery("#EventDate").val("05/05/2021"); //EventDate obv
             jQuery("#FOpenText144").val("05/05/2021"); //AA letter date
             jQuery("#FOpenText72").val("05/26/2021"); //Due By
+            // jQuery("#FOpenText110").attr("checked", "checked"); //cc: NOP Appeals Team
+            jQuery("#FOpenText110_x").val("Yes"); //cc: NOP Appeals Team
             setNicEditText("FOpenText38", textPaperworkAndFees); //nonc letter text
-            jQuery("#FOpenText110").attr("checked", "checked"); //cc: NOP Appeals Team
             autosaveEvent(1);
             //resolution event
             window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
@@ -110,8 +112,9 @@ jQuery(document).ready(function() {
             jQuery("#EventDate").val("05/05/2021"); //EventDate obv
             jQuery("#FOpenText144").val("05/05/2021"); //AA letter date
             jQuery("#FOpenText72").val("05/26/2021"); //Due By
+            // jQuery("#FOpenText110").attr("checked", "checked"); //cc: NOP Appeals Team
+            jQuery("#FOpenText110_x").val("Yes"); //cc: NOP Appeals Team
             setNicEditText("FOpenText38", textPaperwork); //nonc letter text
-            jQuery("#FOpenText110").attr("checked", "checked"); //cc: NOP Appeals Team
             autosaveEvent(1);
             //resolution event
             window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
@@ -136,13 +139,18 @@ jQuery(document).ready(function() {
             jQuery("#EventDate").val("05/05/2021"); //EventDate obv
             jQuery("#FOpenText144").val("05/05/2021"); //AA letter date
             jQuery("#FOpenText72").val("05/26/2021"); //Due By
+            // jQuery("#FOpenText111").attr("checked", "checked"); //cc: NOP Appeals Team (w/out enclosure)
+            jQuery("#FOpenText111_x").val("Yes"); //cc: NOP Appeals Team (w/out enclosure)
             setNicEditText("FOpenText38", textFees); //nonc letter text
             setNicEditText("FOpenText94", "Invoice"); //enclosures
-            jQuery("#FOpenText111").attr("checked", "checked"); //cc: NOP Appeals Team (w/out enclosure)
             autosaveEvent(2);
             //resolution event
             window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
         }
+    }
+    else if (val == "AnnualInspection") {
+        // jQuery("#event").val(year + " Q1 Fees NONC"); //event title
+        // jQuery("#FOpenText35").val("Noncompliance"); //AA type
     }
 });
 
@@ -216,3 +224,5 @@ const textFees =
 + "</p><p>" +
 "The NOP is notified of all noncompliances, proposed suspensions, and resolutions."
 + "</p>";
+
+</script>
