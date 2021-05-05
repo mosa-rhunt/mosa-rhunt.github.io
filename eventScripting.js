@@ -168,7 +168,7 @@ const textPaperworkAndFees =
 + "</p><p>" +
 "This noncompliance must be fully addressed by 5/26/2021. We request that you submit your required annual update paperwork and fees plus applicable late fees. A late fee of $150.00 has been assessed to your account. If this noncompliance is not fully addressed by 5/26/2021, the late fee may increase to $300.00. MOSA accepts credit cards."
 + "</p><p>" +
-"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification,but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
+"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification, but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
 + "</p><p>" +
 "You may also submit a rebuttal to this notice."
 + "</p><p>" +
@@ -191,7 +191,7 @@ const textPaperwork =
 + "</p><p>" +
 "This noncompliance must be fully addressed by 5/26/2021. We request that you submit your required annual update paperwork plus applicable late fees. A late fee of $150.00 has been assessed to your account. If this noncompliance is not fully addressed by 5/26/2021, the late fee may increase to $300.00. MOSA accepts credit cards."
 + "</p><p>" +
-"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification,but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
+"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification, but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
 + "</p><p>" +
 "You may also submit a rebuttal to this notice."
 + "</p><p>" +
@@ -214,7 +214,7 @@ const textFees =
 + "</p><p>" +
 "This noncompliance must be fully addressed by 5/26/2021. We request that you submit your required 2021 fees. A late fee of $150.00 has been assessed to your account. If this noncompliance is not fully addressed by 5/26/2021, the late fee may increase to $300.00. MOSA accepts credit cards."
 + "</p><p>" +
-"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification,but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
+"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification, but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
 + "</p><p>" +
 "You may also submit a rebuttal to this notice."
 + "</p><p>" +
