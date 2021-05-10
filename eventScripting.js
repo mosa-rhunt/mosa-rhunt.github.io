@@ -151,7 +151,7 @@ jQuery(document).ready(function() {
     else if (val == "EZIR") {
         jQuery("#event").val(year + " EZ IR"); //event title
         jQuery("select[name*=AssignedTo]").val("90");
-        jQuery("input[name*=Close]").trigger("click");
+        jQuery("input[value*=Close]").trigger("click");
     }
     else if (val == "AnnualInspection") {
         // jQuery("#event").val(year + " Q1 Fees NONC"); //event title
