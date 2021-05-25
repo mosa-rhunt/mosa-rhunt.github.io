@@ -157,6 +157,17 @@ jQuery(document).ready(function() {
         // jQuery("#event").val(year + " Q1 Fees NONC"); //event title
         // jQuery("#FOpenText35").val("Noncompliance"); //AA type
     }
+    else if (val == "InspectionCorrection") {
+        //one-time correction to push event date ahead one so it can't confluct with IRs
+        let eventDate = jQuery("#EventDate").val();
+        eventDate.setDate(eventDate.getDate() + 1); //increment
+        let d = eventDate.getDate(); 
+        let m = eventDate.getMonth() + 1; //months are from 0 to 11
+        let y = eventDate.getFullYear();
+        let newDate = m +"/" + d + "/" + y;
+        jQuery("#EventDate").val(eventDate);
+        jQuery("input[type=button][value*=Close]").trigger("click");
+    }
 });
 
 const textResolution = "Thank you for submitting your 2021 annual update application paperwork and fees to our office. This resolves the issues identified in the Notice of Noncompliance dated 5/5/2021";
