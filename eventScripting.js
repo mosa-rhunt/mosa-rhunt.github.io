@@ -159,7 +159,7 @@ jQuery(document).ready(function() {
     }
     else if (val == "InspectionCorrection") {
         //one-time correction to push event date ahead one so it can't confluct with IRs
-        let eventDate = jQuery("#EventDate").val();
+        let eventDate = new Date(jQuery("#EventDate").val());
         eventDate.setDate(eventDate.getDate() + 1); //increment
         let d = eventDate.getDate(); 
         let m = eventDate.getMonth() + 1; //months are from 0 to 11
