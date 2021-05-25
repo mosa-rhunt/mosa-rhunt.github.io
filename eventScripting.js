@@ -165,7 +165,7 @@ jQuery(document).ready(function() {
         let m = eventDate.getMonth() + 1; //months are from 0 to 11
         let y = eventDate.getFullYear();
         let newDate = m +"/" + d + "/" + y;
-        jQuery("#EventDate").val(eventDate);
+        jQuery("#EventDate").val(newDate);
         jQuery("input[type=button][value*=Close]").trigger("click");
     }
 });
