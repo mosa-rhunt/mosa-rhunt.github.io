@@ -154,8 +154,24 @@ jQuery(document).ready(function() {
         jQuery("input[type=button][value*=Close]").trigger("click");
     }
     else if (val == "AnnualInspection") {
-        // jQuery("#event").val(year + " Q1 Fees NONC"); //event title
-        // jQuery("#FOpenText35").val("Noncompliance"); //AA type
+        jQuery("#event").val(year + " Annual"); //event title
+
+        let today = jQuery("#EventDate").val(); //upon event creation neworg uses today for the event date
+        jQuery("#FOpenText77").val(today); //File Sent to Inspector
+
+        //increment day so it can't conflict with IR
+        let eventDate = new Date(today); //don't even need to use today since js would assume that...
+        eventDate.setDate(eventDate.getDate() + 1); //increment
+        let d = eventDate.getDate(); 
+        let m = eventDate.getMonth() + 1; //Month from 0 to 11
+        let y = eventDate.getFullYear();
+        let newDate = m + "/" + d + "/" + y;
+        jQuery("#EventDate").val(newDate);
+
+        let inspector_id = jQuery("select[name*=field.OpenText1052] option:selected").val();
+        jQuery("select[name*=AssignedTo]").val(inspector_id);
+        
+        jQuery("input[type=button][value*=Close]").trigger("click");
     }
     else if (val == "InspectionCorrection") {
         //one-time correction to push event date ahead one so it can't confluct with IRs
