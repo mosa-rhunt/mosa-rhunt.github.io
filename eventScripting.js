@@ -168,7 +168,7 @@ jQuery(document).ready(function() {
         let newDate = m + "/" + d + "/" + y;
         jQuery("#EventDate").val(newDate);
 
-        let inspector_id = jQuery("select[name*=field.OpenText1052] option:selected").val();
+        let inspector_id = jQuery("select[name*=field.OpenText1052]").val();
         jQuery("select[name*=AssignedTo]").val(inspector_id);
         
         jQuery("input[type=button][value*=Close]").trigger("click");
