@@ -283,7 +283,7 @@ const textQ2Fees =
 + "</p><p>" +
 "You may submit a rebuttal to this noncompliance."
 + "</p><p>" +
-"Failure to adequately address this noncompliance by the stated deadline can lead to the issuance of a proposed suspension of your organic certification. Additionally, a failure to respond to certification requirements is subject to an additional fee, as described in the MOSA fee schedule. "
+"Failure to adequately address this noncompliance by the stated deadline can lead to the issuance of a proposed suspension of your organic certification. Additionally, as described in MOSA's fee schedule, there is a $10.00 quarterly late fee charged on accounts with balances 30 days pay due. The $10.00 charge is shown on the enclosed statement."
 + "</p><p>" +
 "The NOP is notified of all noncompliances, proposed suspensions, and resolutions. To avoid suspension and the costly and cumbersome reinstatement process, we urge you to address this noncompliance as soon as possible."
 + "</p><p>" +
