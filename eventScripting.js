@@ -1,5 +1,6 @@
 //prepopulate events based on MosaPrepopulate parameter
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
+// https://web5.neworg.com/mc2_mosa/EventUpdate.asp?Action=Create&new=New+Event&EventTypeNum=38&%40where.CustomerNum%40op.EQ=12145&MosaPrepopulate=Q2Fees
 jQuery(document).ready(function() {
     //console.log(jQuery().jquery); //version
     let parameters = {};
@@ -35,20 +36,21 @@ jQuery(document).ready(function() {
     // let eventType = eventTypes[parameters["EventTypeNum"]] || "Communications"; //maybe not necessary
     
     let year = (new Date()).getFullYear();
-    let textsUpdated = 0;
-    let setNicEditText = function(id, text) {
+    let textsUpdated = 0, textsRequired = 0;
+    let setNicEditText = function(id, text, first=true) {
+        if (first) textsRequired++;
         let editor = nicEditors.findEditor(id);
         if (editor) {
             editor.setContent(text);
             textsUpdated++;
         }
         else {
-            setTimeout(function() { setNicEditText(id, text); }, 500);
+            setTimeout(function() { setNicEditText(id, text, false); }, 500);
         }
     };
 
-    let autosaveEvent = function(textsRequired) {
-        if (textsUpdated < textsRequired) setTimeout(function() { autosaveEvent(textsRequired); }, 500);
+    let autosaveEvent = function() {
+        if (textsUpdated < textsRequired) setTimeout(function() { autosaveEvent(); }, 500);
         else jQuery("#btnSave").trigger("click");
     };
 
@@ -77,7 +79,7 @@ jQuery(document).ready(function() {
             jQuery("#FOpenText144").val("05/27/2021"); //AA letter date
             jQuery("select[name*='field.Status']").val("Void"); //Event status
             setNicEditText("FOpenText38", textResolution); //nonc letter text
-            autosaveEvent(1);
+            autosaveEvent();
         }
         else {
             jQuery("#FOpenText35").val("Noncompliance"); //AA type
@@ -88,7 +90,7 @@ jQuery(document).ready(function() {
             // jQuery("#FOpenText110").attr("checked", "checked"); //cc: NOP Appeals Team
             jQuery("#FOpenText110_x").val("Yes"); //cc: NOP Appeals Team
             setNicEditText("FOpenText38", textPaperworkAndFees); //nonc letter text
-            autosaveEvent(1);
+            autosaveEvent();
             //resolution event
             //window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
         }
@@ -104,7 +106,7 @@ jQuery(document).ready(function() {
             jQuery("#FOpenText144").val("05/27/2021"); //AA letter date
             jQuery("select[name*='field.Status']").val("Void"); //Event status
             setNicEditText("FOpenText38", textResolution); //nonc letter text
-            autosaveEvent(1);
+            autosaveEvent();
         }
         else {
             jQuery("#FOpenText35").val("Noncompliance"); //AA type
@@ -115,7 +117,7 @@ jQuery(document).ready(function() {
             // jQuery("#FOpenText110").attr("checked", "checked"); //cc: NOP Appeals Team
             jQuery("#FOpenText110_x").val("Yes"); //cc: NOP Appeals Team
             setNicEditText("FOpenText38", textPaperwork); //nonc letter text
-            autosaveEvent(1);
+            autosaveEvent();
             //resolution event
             //window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
         }
@@ -131,7 +133,7 @@ jQuery(document).ready(function() {
             jQuery("#FOpenText144").val("05/27/2021"); //AA letter date
             jQuery("select[name*='field.Status']").val("Void"); //Event status
             setNicEditText("FOpenText38", textResolution); //nonc letter text
-            autosaveEvent(1);
+            autosaveEvent();
         }
         else {
             jQuery("#FOpenText35").val("Noncompliance"); //AA type
@@ -143,14 +145,28 @@ jQuery(document).ready(function() {
             jQuery("#FOpenText111_x").val("Yes"); //cc: NOP Appeals Team (w/out enclosure)
             setNicEditText("FOpenText38", textFees); //nonc letter text
             setNicEditText("FOpenText94", "Invoice"); //enclosures
-            autosaveEvent(2);
+            autosaveEvent();
             //resolution event
             //window.open(window.location.href.replace(val, val + "Resolution"), "_blank").focus();
         }
     }
+    else if (val.startsWith("Q2Fees")) {
+        jQuery("#event").val(year + " Q2 Fees NONC"); //event title
+        jQuery("#EventDate").val("09/07/2021"); //EventDate obv
+        jQuery("#FOpenText112").val("Fees"); //AA status
+        jQuery("#FOpenText35").val("Noncompliance"); //AA type
+        jQuery("#FOpenText108").val("Q2"); //Quarter
+        jQuery("#FOpenText144").val("09/07/2021"); //AA letter date
+        jQuery("#FOpenText72").val("09/28/2021"); //Due By
+        jQuery("#FOpenText111").attr("checked", "checked"); //cc: NOP Appeals Team (w/out enclosure)
+        jQuery("#FOpenText111_x").val("Yes"); //cc: NOP Appeals Team (w/out enclosure)
+        setNicEditText("FOpenText94", "Statement"); //enclosures
+        setNicEditText("FOpenText38", textQ2Fees); //nonc letter text
+        autosaveEvent();
+    }
     else if (val == "EZIR") {
         jQuery("#event").val(year + " EZ IR"); //event title
-        jQuery("select[name*=AssignedTo]").val("90");
+        jQuery("select[name*=AssignedTo]").val("90"); //Unassigned
         jQuery("input[type=button][value*=Close]").trigger("click");
     }
     else if (val == "AnnualInspection") {
@@ -170,20 +186,20 @@ jQuery(document).ready(function() {
 
         let inspector_id = jQuery("select[name*=OpenText1052]").val();
         jQuery("select[name*=AssignedTo]").val(inspector_id);
-        
+
         jQuery("input[type=button][value*=Close]").trigger("click");
     }
-    else if (val == "InspectionCorrection") {
-        //one-time correction to push event date ahead one so it can't confluct with IRs
-        let eventDate = new Date(jQuery("#EventDate").val());
-        eventDate.setDate(eventDate.getDate() + 1); //increment
-        let d = eventDate.getDate(); 
-        let m = eventDate.getMonth() + 1; //months are from 0 to 11
-        let y = eventDate.getFullYear();
-        let newDate = m +"/" + d + "/" + y;
-        jQuery("#EventDate").val(newDate);
-        jQuery("input[type=button][value*=Close]").trigger("click");
-    }
+    // else if (val == "InspectionCorrection") {
+    //     //one-time correction to push event date ahead one so it can't confluct with IRs
+    //     let eventDate = new Date(jQuery("#EventDate").val()); 
+    //     eventDate.setDate(eventDate.getDate() + 1); //increment
+    //     let d = eventDate.getDate(); 
+    //     let m = eventDate.getMonth() + 1; //Month from 0 to 11
+    //     let y = eventDate.getFullYear();
+    //     let newDate = m + "/" + d + "/" + y;
+    //     jQuery("#EventDate").val(newDate);
+    //     jQuery("input[type=button][value*=Close]").trigger("click");
+    // }
 });
 
 const textResolution = "Thank you for submitting your 2021 annual update application paperwork and fees to our office. This resolves the issues identified in the Notice of Noncompliance dated 5/5/2021";
@@ -200,7 +216,7 @@ const textPaperworkAndFees =
 + "</p><p>" +
 "This noncompliance must be fully addressed by 5/26/2021. We request that you submit your required annual update paperwork and fees plus applicable late fees. A late fee of $150.00 has been assessed to your account. If this noncompliance is not fully addressed by 5/26/2021, the late fee may increase to $300.00. MOSA accepts credit cards."
 + "</p><p>" +
-"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification, but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
+"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification,but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
 + "</p><p>" +
 "You may also submit a rebuttal to this notice."
 + "</p><p>" +
@@ -223,7 +239,7 @@ const textPaperwork =
 + "</p><p>" +
 "This noncompliance must be fully addressed by 5/26/2021. We request that you submit your required annual update paperwork plus applicable late fees. A late fee of $150.00 has been assessed to your account. If this noncompliance is not fully addressed by 5/26/2021, the late fee may increase to $300.00. MOSA accepts credit cards."
 + "</p><p>" +
-"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification, but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
+"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification,but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
 + "</p><p>" +
 "You may also submit a rebuttal to this notice."
 + "</p><p>" +
@@ -246,7 +262,7 @@ const textFees =
 + "</p><p>" +
 "This noncompliance must be fully addressed by 5/26/2021. We request that you submit your required 2021 fees. A late fee of $150.00 has been assessed to your account. If this noncompliance is not fully addressed by 5/26/2021, the late fee may increase to $300.00. MOSA accepts credit cards."
 + "</p><p>" +
-"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification, but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
+"Alternatively, you may inform us of your surrender of your certification and pay all fees due through the effective date of the surrender. If you surrender your certification,but fail to pay the balance of your fees due, the unpaid fees will remain as an unresolved noncompliance. If you decide in the future to certify with MOSA or another accredited certifier, the unresolved noncompliance must be addressed"
 + "</p><p>" +
 "You may also submit a rebuttal to this notice."
 + "</p><p>" +
@@ -257,3 +273,19 @@ const textFees =
 "The NOP is notified of all noncompliances, proposed suspensions, and resolutions."
 + "</p>";
 
+const textQ2Fees = 
+"<p>" +
+"This letter is an official Notice of Noncompliance. The noncompliance procedure is described in Section 205.662(a) of the National Organic Program (NOP) Standards. The noncompliance is as follows: "
++ "</p><p>" +
+"NOP Standard 205.400(e) says a person seeking to maintain certification must pay the applicable fees charged by the certifying agent. Our records show that you have past-due MOSA fees. Your past-due statement, showing all past-due amounts and all amounts invoiced through 8/1/2021, is enclosed. Please note the due dates. MOSA's Program Manual explains that noncompliance proceedings are instituted if financial requirements are not met in a timely manner. "
++ "</p><p>" +
+"This noncompliance must be addressed by 9/28/2021. We request that you submit these past-due fees. Credit card payments are accepted."
++ "</p><p>" +
+"You may submit a rebuttal to this noncompliance."
++ "</p><p>" +
+"Failure to adequately address this noncompliance by the stated deadline can lead to the issuance of a proposed suspension of your organic certification. Additionally, a failure to respond to certification requirements is subject to an additional fee, as described in the MOSA fee schedule. "
++ "</p><p>" +
+"The NOP is notified of all noncompliances, proposed suspensions, and resolutions. To avoid suspension and the costly and cumbersome reinstatement process, we urge you to address this noncompliance as soon as possible."
++ "</p><p>" +
+"Please contact the MOSA office if you have any questions."
++ "</p>";
