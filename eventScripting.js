@@ -195,7 +195,7 @@ jQuery(document).ready(function() {
         setNicEditText("id_desc", "Letter sent to a mailing list, via both Letterstream and, where applicable, to clients with an email address. Ryan has been given the mailing list. -Gabrielle");
     
         jQuery("select[name*='field.Status']").val("Complete"); //Event status
-        jQuery("select[name*='FIELD.ReminderStatus']").val("Closed"); //Open/closed
+        jQuery("select[name*='ReminderStatus']").val("Closed"); //Open/closed
         jQuery("select[name*=AssignedTo]").val("21"); //Gabrielle
         jQuery("#FOpenText107").val("09/09/2021"); //Letter Date
 
