@@ -195,13 +195,12 @@ jQuery(document).ready(function() {
         setNicEditText("id_desc", "Letter sent to a mailing list, via both Letterstream and, where applicable, to clients with an email address. Ryan has been given the mailing list. -Gabrielle");
     
         jQuery("select[name*='field.Status']").val("Complete"); //Event status
-        let openclose = jQuery("select[name*='eminderStatu']").val("Closed"); //Open/closed
-        console.log(openclose);
+        jQuery("select[name*='eminderStatu']").val("Closed"); //Open/closed
         jQuery("select[name*=AssignedTo]").val("21"); //Gabrielle
         jQuery("#FOpenText107").val("09/09/2021"); //Letter Date
 
         setNicEditText("FOpenText91", DroughtLetter); //Generic Text
-        // autosaveEvent();
+        autosaveEvent();
         // jQuery("input[type=button][value*=Close]").trigger("click");
     }
     // else if (val == "InspectionCorrection") {
