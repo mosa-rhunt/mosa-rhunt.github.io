@@ -1,6 +1,6 @@
 //prepopulate events based on MosaPrepopulate parameter
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
-// https://web5.neworg.com/mc2_mosa/EventUpdate.asp?Action=Create&new=New+Event&EventTypeNum=38&%40where.CustomerNum%40op.EQ=12145&MosaPrepopulate=Q2Fees
+// https://web5.neworg.com/mc2_mosa/EventUpdate.asp?Action=Create&new=New+Event&MosaPrepopulate=DroughtLetter&EventTypeNum=54&%40where.CustomerNum%40op.EQ=12145
 jQuery(document).ready(function() {
     //console.log(jQuery().jquery); //version
     let parameters = {};
@@ -189,6 +189,20 @@ jQuery(document).ready(function() {
 
         jQuery("input[type=button][value*=Close]").trigger("click");
     }
+    else if (val == "DroughtLetter") {
+        //event title and description
+        jQuery("#event").val("2021 Extreme Weather and Organic Certification Requirements"); 
+        setNicEditText("id_desc", "Letter sent to a mailing list, via both Letterstream and, where applicable, to clients with an email address. Ryan has been given the mailing list. -Gabrielle");
+    
+        jQuery("select[name*='field.Status']").val("Complete"); //Event status
+        jQuery("select[name*='FIELD.ReminderStatus']").val("Closed"); //Open/closed
+        jQuery("select[name*=AssignedTo]").val("21"); //Gabrielle
+        jQuery("#FOpenText107").val("09/09/2021"); //Letter Date
+
+        setNicEditText("FOpenText91", DroughtLetter); //Generic Text
+        autosaveEvent();
+        // jQuery("input[type=button][value*=Close]").trigger("click");
+    }
     // else if (val == "InspectionCorrection") {
     //     //one-time correction to push event date ahead one so it can't confluct with IRs
     //     let eventDate = new Date(jQuery("#EventDate").val()); 
@@ -202,7 +216,9 @@ jQuery(document).ready(function() {
     // }
 });
 
+
 const textResolution = "Thank you for submitting your 2021 annual update application paperwork and fees to our office. This resolves the issues identified in the Notice of Noncompliance dated 5/5/2021";
+
 
 const textPaperworkAndFees =
 "<p>" + 
@@ -227,6 +243,7 @@ const textPaperworkAndFees =
 "The NOP is notified of all noncompliances, proposed suspensions, and resolutions."
  + "</p>";
 
+
 const textPaperwork = 
 "<p>" +
 "This letter is an official Notice of Noncompliance according to USDA National Organic Program regulations Section 205.662(a). NOP Standard 205.406(a) says to continue certification, a certified operation must annually pay the certification fees and submit an updated organic system plan to the certifying agent."
@@ -249,6 +266,7 @@ const textPaperwork =
 + "</p><p>" +
 "The NOP is notified of all noncompliances, proposed suspensions, and resolutions."
 + "</p>";
+
 
 const textFees = 
 "<p>" +
@@ -273,6 +291,7 @@ const textFees =
 "The NOP is notified of all noncompliances, proposed suspensions, and resolutions."
 + "</p>";
 
+
 const textQ2Fees = 
 "<p>" +
 "This letter is an official Notice of Noncompliance. The noncompliance procedure is described in Section 205.662(a) of the National Organic Program (NOP) Standards. The noncompliance is as follows: "
@@ -289,3 +308,26 @@ const textQ2Fees =
 + "</p><p>" +
 "Please contact the MOSA office if you have any questions."
 + "</p>";
+
+
+const DroughtLetter = 
+"<p>" +
+"<b>Extreme Weather and Organic Certification Requirements</b>"
++ "</p><p>" +
+"MOSA has received several recent inquiries from organic farmers who are concerned about their ability to meet the pasture requirements when faced with significant drought conditions. We also recognize that weather extremes are becoming more common. In some cases, the USDA may grant a variance from some organic requirements when compliance is not possible due to drought or other weather extremes. For example, due to significant drought conditions, in June, 2021, the USDA granted a temporary variance from the National Organic Program regulations regarding feed and pasture (§205.237(c)(1) and §205.239(a)(2)) for all certified organic ruminant livestock operations located in counties in California and Oregon that have been designated as primary or contiguous disaster areas. MOSA and the NOP monitor drought and other weather extremes, and MOSA can help advocate for consideration of temporary standards variance requests to the USDA."
++ "</p><p>" +
+"Temporary Variances are addressed at section 205.290 of the NOP regulations. And National Organic Program Handbook Instruction 2601 provides more detail regarding temporary variances. That document is found here: <a href='https://www.ams.usda.gov/sites/default/files/media/2606.pdf'>https://www.ams.usda.gov/sites/default/files/media/2606.pdf</a>"
++ "</p><p>" +
+"Variances may only be granted for the production and handling requirements at 7 C.F.R. §§ 205.203 - 205.207, 205.236 - 205.240, and 205.270 - 205.272. Reasons for requesting a variance may include natural disasters, damage caused by extreme weather or other business interruption, or research practices.&nbsp; A temporary variance may not be granted for any practice, material or procedure prohibited under §205.105, for feeding non-organic feed to organic livestock, or for any regulation not included in the sections listed above."
++ "</p><p>" +
+"MOSA-certified operations may submit a written request for a temporary variance to MOSA. Requests should include supporting documentation justifying the need for the temporary variance. Documentation could include drought maps, news articles describing conditions related to the need for a variance, information from government authorities, or other evidence. MOSA would then review the information and make a recommendation to the USDA. If the USDA grants the temporary variance, a Notice of Temporary Variance Approval would describe the scope, restrictions, and duration of the temporary variance and operators must maintain records on any procedures or practices impacted by the variance."
++ "</p><p>" +
+"Similarly, variances are possible under the OPT Grass-Fed program. For drought, operators must show they’re located in a county that is categorized as Moderate to Exceptional Drought conditions by the U.S. Drought Monitor (drought.gov); must provide facts showing that need for the variance was unavoidable and is ongoing, must explain why the short- and long-term pasture management strategies proved inadequate; and describe strategies for managing the available pasture if a variance is authorized."
++ "</p><p>" +
+"Please contact MOSA if you’d like more information."
++ "</p><p>" +
+"Current variances granted by the USDA can be found here: <a href='https://www.ams.usda.gov/sites/default/files/media/TemporaryVariancesCurrent.pdf'>https://www.ams.usda.gov/sites/default/files/media/TemporaryVariancesCurrent.pdf</a>"
++ "</p>";
+
+
+
