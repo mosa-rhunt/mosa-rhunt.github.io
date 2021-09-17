@@ -201,7 +201,7 @@ jQuery(document).ready(function() {
         jQuery("#FOpenText107").val("09/09/2021"); //Letter Date
 
         setNicEditText("FOpenText91", DroughtLetter); //Generic Text
-        autosaveEvent();
+        // autosaveEvent();
         // jQuery("input[type=button][value*=Close]").trigger("click");
     }
     // else if (val == "InspectionCorrection") {
