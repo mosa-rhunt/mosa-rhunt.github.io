@@ -166,7 +166,7 @@ jQuery(document).ready(function() {
     }
     else if (val.startsWith("Q3Fees")) {
         jQuery("#event").val(year + " Q3 and/or past-due fees NONC"); //event title
-        jQuery("#EventDate").val("11/19/2021"); //EventDate obv
+        jQuery("#EventDate").val("11/23/2021"); //EventDate obv
         jQuery("#FOpenText112").val("Fees"); //AA status
         jQuery("#FOpenText35").val("Noncompliance"); //AA type
         jQuery("#FOpenText108").val("Q3"); //Quarter
