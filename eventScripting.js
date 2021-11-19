@@ -164,6 +164,20 @@ jQuery(document).ready(function() {
         setNicEditText("FOpenText38", textQ2Fees); //nonc letter text
         autosaveEvent();
     }
+    else if (val.startsWith("Q3Fees")) {
+        jQuery("#event").val(year + " Q3 and/or past-due fees NONC"); //event title
+        jQuery("#EventDate").val("11/19/2021"); //EventDate obv
+        jQuery("#FOpenText112").val("Fees"); //AA status
+        jQuery("#FOpenText35").val("Noncompliance"); //AA type
+        jQuery("#FOpenText108").val("Q3"); //Quarter
+        jQuery("#FOpenText144").val("11/23/2021"); //AA letter date
+        jQuery("#FOpenText72").val("12/14/2021"); //Due By
+        jQuery("#FOpenText111").attr("checked", "checked"); //cc: NOP Appeals Team (w/out enclosure)
+        jQuery("#FOpenText111_x").val("Yes"); //cc: NOP Appeals Team (w/out enclosure)
+        setNicEditText("FOpenText94", "Statement"); //enclosures
+        setNicEditText("FOpenText38", textQ3Fees); //nonc letter text
+        autosaveEvent();
+    }
     else if (val == "EZIR") {
         jQuery("#event").val(year + " EZ IR"); //event title
         jQuery("select[name*=AssignedTo]").val("90"); //Unassigned
@@ -195,12 +209,13 @@ jQuery(document).ready(function() {
         setNicEditText("id_desc", "Letter sent to a mailing list, via both Letterstream and, where applicable, to clients with an email address. Ryan has been given the mailing list. -Gabrielle");
     
         jQuery("select[name*='field.Status']").val("Complete"); //Event status
-        jQuery("select[name*='eminderStatu']").val("Closed"); //Open/closed
-        jQuery("select[name*=AssignedTo]").val("21"); //Gabrielle
+        let openclose = jQuery("select[name*='eminderStatu']").val("Closed"); //Open/closed
+        console.log(openclose);
+        jQuery("select[name*='AssignedTo']").val("21"); //Gabrielle
         jQuery("#FOpenText107").val("09/09/2021"); //Letter Date
 
         setNicEditText("FOpenText91", DroughtLetter); //Generic Text
-        autosaveEvent();
+        // autosaveEvent();
         // jQuery("input[type=button][value*=Close]").trigger("click");
     }
     // else if (val == "InspectionCorrection") {
@@ -299,6 +314,24 @@ const textQ2Fees =
 "NOP Standard 205.400(e) says a person seeking to maintain certification must pay the applicable fees charged by the certifying agent. Our records show that you have past-due MOSA fees. Your past-due statement, showing all past-due amounts and all amounts invoiced through 8/1/2021, is enclosed. Please note the due dates. MOSA's Program Manual explains that noncompliance proceedings are instituted if financial requirements are not met in a timely manner. "
 + "</p><p>" +
 "This noncompliance must be addressed by 9/28/2021. We request that you submit these past-due fees. Credit card payments are accepted."
++ "</p><p>" +
+"You may submit a rebuttal to this noncompliance."
++ "</p><p>" +
+"Failure to adequately address this noncompliance by the stated deadline can lead to the issuance of a proposed suspension of your organic certification. Additionally, as described in MOSA's fee schedule, there is a $10.00 quarterly late fee charged on accounts with balances 30 days pay due. The $10.00 charge is shown on the enclosed statement."
++ "</p><p>" +
+"The NOP is notified of all noncompliances, proposed suspensions, and resolutions. To avoid suspension and the costly and cumbersome reinstatement process, we urge you to address this noncompliance as soon as possible."
++ "</p><p>" +
+"Please contact the MOSA office if you have any questions."
++ "</p>";
+
+
+const textQ3Fees = 
+"<p>" +
+"This letter is an official Notice of Noncompliance. The noncompliance procedure is described in Section 205.662(a) of the National Organic Program (NOP) Standards. The noncompliance is as follows:"
++ "</p><p>" +
+"NOP Standard 205.400(e) says a person seeking to maintain certification must pay the applicable fees charged by the certifying agent. Our records show that you have past-due MOSA fees. Your statement, which includes all past-due amounts, is enclosed. Please note the due dates. MOSA's Program Manual explains that noncompliance proceedings are instituted if financial requirements are not met in a timely manner."
++ "</p><p>" +
+"This noncompliance must be addressed by 12/14/2021. We request that you submit these past-due fees. Credit card payments are accepted."
 + "</p><p>" +
 "You may submit a rebuttal to this noncompliance."
 + "</p><p>" +
