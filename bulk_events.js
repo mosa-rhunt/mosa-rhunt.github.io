@@ -302,7 +302,6 @@ function create_bulk_events() {
 
         if (value) event_data[key] = value;
     }
-    console.log(event_data);
 
     //UI stuff
     $("#response").empty();
@@ -334,20 +333,22 @@ function create_bulk_events() {
         for (let key in event_data) {
             if (key.includes("CLIENT_ID")) {
                 this_event_data[key.replace("CLIENT_ID", client_id)] = event_data[key];
+                //flag contact for updating
+                this_event_data[`@UPDATE@key.${client_id}@comp.Customers_Update`] = client_id
             }
             else {
                 this_event_data[key] = event_data[key];
             }
         }
         this_event_data["@field.billable"] = client_id;
-        this_event_data["@field.CustomerAllNum@comp.Events_Create"] = client_id
-        this_event_data[`@UPDATE@key.${client_id}@comp.Customers_Update`] = client_id
+        this_event_data["@field.CustomerAllNum@comp.Events_Create"] = client_id;
+        console.log(this_event_data);
     
         $.ajax({
             url: "EventUpdate.asp",
             type: "POST",
-            async: false, //important to not overload the site with requests
-            data: event_data,
+            // async: false,
+            data: this_event_data,
             success: function(response) {
                 //console.log(response);
             },
