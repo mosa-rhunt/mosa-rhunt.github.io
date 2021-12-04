@@ -67,7 +67,7 @@ function create_initial_form() {
     let create_button_section = $("<tfoot></tfoot>");
 
     //static event fields
-    let txt_client_ids = $("<textarea id='client_ids' cols='90'></textarea>"); 
+    let txt_client_ids = $("<textarea id='client_ids' cols=90 rows=4></textarea>"); 
     let txt_event_name = $("<input type='text' id='event_name' class='form-control' />");
     let txt_event_desc = $("<input type='text' id='event_desc' class='form-control' />");
     let txt_event_date = $("<input type='text' id='event_date' class='form-control datepicker' data-toggle='datepicker' />");
@@ -79,6 +79,10 @@ function create_initial_form() {
 
     //assemble
     $(static_field_section)
+    .append(
+        $("<tr></tr>")
+        .append(td("", "<h3 style='color:white'>Bulk Event Creator</h3>", "colspan=2"))
+    )
     .append(
         $("<tr></tr>")
         .append(td("Client IDs", txt_client_ids, "colspan=2"))
@@ -107,7 +111,7 @@ function create_initial_form() {
     .append(
         $("<tr></tr>")
         .append($("<td></td>").append($("<input id='create_events_button' type='button' value='Create Events' />").on("click", create_bulk_events)))
-        .append($("<td></td>").append("<span id='response'></span>").append("<span id='errors'></span>"))
+        .append($("<td></td>").append("<label id='response' style='color:white'></label>").append("<label id='errors' style='color:white'></label>"))
     );
 
     //add to DOM
@@ -219,6 +223,7 @@ function create_bulk_events() {
         "@field.DriveTime@comp.Events_Create": "",
         "@field.Miles@comp.Events_Create": "",
         //static fields
+        "Action": "Save",
         "@CREATE@comp.Events_Create": "Save",
         "@CREATE@comp.EE_C": "Save",
         "@CREATE@comp.EE2_C": "Save",
@@ -276,7 +281,7 @@ function create_bulk_events() {
     //UI stuff
     $("#response").empty();
     $("#errors").empty();
-    $("#bulk_event_table").find(":input").prop("readonly", true).prop("disabled", true).css("background-color", "#bbb").find("option:not(:selected)").prop("disabled", true);
+    $("#bulk_event_table").find(":input").prop("readonly", true).prop("disabled", true).css("background-color", "#bbb !important").find("option:not(:selected)").prop("disabled", true);
     let index = -1;
 
     //finalize and send calls
