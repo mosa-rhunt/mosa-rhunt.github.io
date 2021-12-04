@@ -59,7 +59,6 @@ function create_initial_form() {
         setTimeout(create_initial_form, 500);
         return;
     }
-    console.log("Bulk Event Creator intializing");
     
     //Create UI
     let static_field_section = $("<thead></thead>");
@@ -75,6 +74,16 @@ function create_initial_form() {
     let sel_event_type = $("<select id='event_type' class='form-control'></select>").on("change", generate_event_fields);
     for (let event_type in event_types) {
         $(sel_event_type).append(`<option value='${event_type}'>${event_type}</option>`);
+    }
+
+    let sel_event_status = $("<select id='event_status' class='form-control'></select>");
+    for (let event_status of ["Complete", "Pending", "Void"]) {
+        $(sel_event_status).append(`<option value='${event_status}'>${event_status}</option>`);
+    }
+
+    let sel_event_open = $("<select id='event_open' class='form-control'></select>");
+    for (let event_open of ["Closed", "Open"]) {
+        $(sel_event_open).append(`<option value='${event_open}'>${event_open}</option>`);
     }
 
     //assemble
@@ -99,6 +108,11 @@ function create_initial_form() {
     )
     .append(
         $("<tr></tr>")
+        .append(td("Event Status", sel_event_status))
+        .append(td("Open/Closed", sel_event_open))
+    )
+    .append(
+        $("<tr></tr>")
         .append(td("", "<hr>", "colspan=2"))
     );
 
@@ -110,7 +124,7 @@ function create_initial_form() {
     )
     .append(
         $("<tr></tr>")
-        .append($("<td></td>").append($("<input id='create_events_button' type='button' value='Create Events' />").on("click", create_bulk_events)))
+        .append($("<td></td>").append($("<input id='create_events_button' type='button' value='Create Events' style='border:1px solid black;' />").on("click", create_bulk_events)))
         .append($("<td></td>").append("<label id='response' style='color:white'></label>").append("<label id='errors' style='color:white'></label>"))
     );
 
@@ -191,10 +205,20 @@ function create_bulk_events() {
     let event_desc = $("#event_desc").val().trim();
     let event_date = $("#event_date").val().trim();
     let event_type = $("#event_type").val();
+    let event_open = $("#event_open").val();
+    let event_status = $("#event_status").val();
 
     //required fields
     if (!Object.keys(event_types).includes(event_type)) {
         alert(`Event Type ${event_type} not recognized`);
+        return;
+    }
+    if (!["Complete", "Pending", "Void"].includes(event_status)) {
+        alert(`Event Status ${event_status} not recognized`);
+        return;
+    }
+    if (!["Open", "Closed"].includes(event_open)) {
+        alert(`${event_open} is not Open/Closed`);
         return;
     }
     if (client_ids.length == 0 || !event_name || !event_date || !event_type) {
@@ -230,6 +254,7 @@ function create_bulk_events() {
         "@CREATE@comp.EE3_C": "Save",
         "@field.Reminder@comp.Events_Create": "0",
         "@field.Attendees@comp.Events_Create": "1",
+        "@field.Access@comp.Events_Create": "Public",
         "EventStartHour": "12",
         "EventStartMinute": "00",
         "EventStartAMPM": "PM",
@@ -248,7 +273,8 @@ function create_bulk_events() {
     event_data["@field.Description@comp.Events_Create"] = event_desc;
     event_data["@FIELD.EventDate@comp.Events_Create"] = event_date;
     event_data["@field.Type@comp.Events_Create"] = event_type;
-
+    event_data["@field.ReminderStatus@comp.Events_Create"] = event_open;
+    event_data["@field.Status@comp.Events_Create" ] = event_status;
 
     //custom fields
     for (let field_num of event_types[event_type]) {
@@ -337,5 +363,6 @@ function create_bulk_events() {
     }
 
     //begin
+    $("#response").text(`(0/${client_ids.length})`);
     create_next_event();
 }
