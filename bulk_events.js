@@ -67,7 +67,7 @@ function create_initial_form() {
     let create_button_section = $("<tfoot></tfoot>");
 
     //static event fields
-    let txt_client_ids = $("<textarea id='client_ids'></textarea>"); 
+    let txt_client_ids = $("<textarea id='client_ids' cols='90'></textarea>"); 
     let txt_event_name = $("<input type='text' id='event_name' class='form-control' />");
     let txt_event_desc = $("<input type='text' id='event_desc' class='form-control' />");
     let txt_event_date = $("<input type='text' id='event_date' class='form-control datepicker' data-toggle='datepicker' />");
@@ -102,6 +102,10 @@ function create_initial_form() {
     $(create_button_section)
     .append(
         $("<tr></tr>")
+        .append(td("", "<hr>", "colspan=2"))
+    )
+    .append(
+        $("<tr></tr>")
         .append($("<td></td>").append($("<input id='create_events_button' type='button' value='Create Events' />").on("click", create_bulk_events)))
         .append($("<td></td>").append("<span id='response'></span>").append("<span id='errors'></span>"))
     );
@@ -111,7 +115,7 @@ function create_initial_form() {
     // .append(script)
     $("#Search").parent().empty()
     .append(
-        $("<table id='bulk_event_table' style='background-color:#BDCAD4'></table>")
+        $("<table id='bulk_event_table' style='background-color:#BDCAD4; width:600px;'></table>")
         .append(static_field_section)
         .append(dynamic_field_section)
         .append(create_button_section)
@@ -245,7 +249,7 @@ function create_bulk_events() {
         let def = fields[field_num];
 
         let key;
-        if (def["contact_field"] !== undefined && def["contact_field"]) {
+        if ("contact_field" in def && def["contact_field"] === true) {
             key = `@field.OpenText${field_num}@key.CLIENT_ID@comp.Customers_Update`;
         }
         else if (false) {
