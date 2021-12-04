@@ -181,19 +181,19 @@ function create_bulk_events() {
     let event_type = $("#event_type").val();
 
     //required fields
+    if (!Object.keys(event_types).includes(event_type)) {
+        alert(`Event Type ${event_type} not recognized`);
+        return;
+    }
     if (client_ids.length == 0 || !event_name || !event_date || !event_type) {
         alert("You must enter client id(s) and event name, date, type");
         return;
     }
-    if (!/\d{1,2}\/\d{1,2}\/\d{4}/.test(event_date)) {
+    if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(event_date)) {
         alert("Date is invalid");
         return;
     }
     if (!event_desc && !confirm("Do you wish to leave the description blank?")) {
-        return;
-    }
-    if (!Object.keys(event_types).includes(event_type)) {
-        alert(`Event Type ${event_type} not recognized`);
         return;
     }
 
@@ -241,7 +241,7 @@ function create_bulk_events() {
         let def = fields[field_num];
 
         let key;
-        if (def["contact_field"]) {
+        if (def["contact_field"] === true) {
             
             //DAMN GOTTA STASH THESE...
             key = `@field.OpenText${field_num}@key.${client_id}@comp.Customers_Update`;
@@ -290,8 +290,8 @@ function create_bulk_events() {
         if (!Number.isInteger(parseInt(client_id))) {
             let err = $("#errors").html();
             $("#errors").html(`${err}<br>${client_id} is not valid`);
-            index++;
             create_next_event();
+            return;
         }
 
         let this_event_data = {};
