@@ -92,6 +92,10 @@ function create_initial_form() {
         $("<tr></tr>")
         .append(td("Event Description", txt_event_desc))
         .append(td("Event Date", txt_event_date))
+    )
+    .append(
+        $("<tr></tr>")
+        .append(td("", "<hr>", "colspan=2"))
     );
 
     //assemble
@@ -103,9 +107,9 @@ function create_initial_form() {
     );
 
     //add to DOM
-    let script = $("#the_script"); //this file
+    // let script = $("#the_script"); //this file
+    // .append(script)
     $("#Search").parent().empty()
-    .append(script)
     .append(
         $("<table id='bulk_event_table' style='background-color:#BDCAD4'></table>")
         .append(static_field_section)
@@ -241,13 +245,8 @@ function create_bulk_events() {
         let def = fields[field_num];
 
         let key;
-        if (def["contact_field"] === true) {
-            
-            //DAMN GOTTA STASH THESE...
-            key = `@field.OpenText${field_num}@key.${client_id}@comp.Customers_Update`;
+        if (def["contact_field"] !== undefined && def["contact_field"]) {
             key = `@field.OpenText${field_num}@key.CLIENT_ID@comp.Customers_Update`;
-
-            continue;
         }
         else if (false) {
             key = `@field.OpenText${field_num}@comp.EE_C`;
