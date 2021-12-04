@@ -4,17 +4,17 @@ const fields = {
     //prototype
     "fieldnum": {
         "name": "field name",
-        "input": "text", //or date, number, checkbox, select
+        "input": "text", //or date, number, checkbox, select. default is text
         "values": ["one", "two"], //for select options
         "contact_field": true, //only set/true for event fields that are also contact fields
-    }
+    },
 
     //New Client Outeach fields
-    "150": { "input":"text", "name":"Client's overall satisfaction" }, 
-    "215": { "input":"text", "name":"Client's Organic Certificate" }, 
-    "153": { "input":"text", "name":"Re-certification application" }, 
-    "156": { "input":"text", "name":"Any anticipated changes" }, 
-    "127": { "input":"text", "name":"Communication with MOSA" },
+    "150": { "name":"Client's overall satisfaction" }, 
+    "215": { "name":"Client's Organic Certificate" }, 
+    "153": { "name":"Re-certification application" }, 
+    "156": { "name":"Any anticipated changes" }, 
+    "127": { "name":"Communication with MOSA" },
 
 };
 
@@ -151,7 +151,6 @@ function generate_event_fields() {
         }
         else { 
             inp = $(`<input type='text' id='F${fnum}' class='form-control' />`);
-            console.log(def["input"] + " not a valid input type");
         }
 
         field_tds.push(td(def["name"], inp));
