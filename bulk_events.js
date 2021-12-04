@@ -271,10 +271,13 @@ function create_bulk_events() {
     $("#response").empty();
     $("#errors").empty();
     $("#bulk_event_table").find(":input").prop("readonly", true).prop("disabled", true).css("background-color", "#bbb").find("option:not(:selected)").prop("disabled", true);
-    let index = 0;
+    let index = -1;
 
     //finalize and send calls
     function create_next_event() {
+        index++;
+        $("#response").text(`(${index}/${client_ids.length})`);
+        
         if (index >= client_ids.length) {
             //re-enable form inputs
             $("#bulk_event_table").find(":input").removeProp("readonly").removeProp("disabled").css("background-color", "").find("option:not(:selected)").removeProp("disabled");
@@ -314,10 +317,8 @@ function create_bulk_events() {
             error: function(response) {
                 let err = $("#errors").html();
                 $("#errors").html(`${err}<br>error for ${client_id}`);
-            }
+            },
             complete: function() {
-                index++;
-                $("#response").text(`(${index}/${client_ids.length})`)
                 create_next_event();
             }
         });
