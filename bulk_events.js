@@ -115,7 +115,7 @@ function create_initial_form() {
     // .append(script)
     $("#Search").parent().empty()
     .append(
-        $("<table id='bulk_event_table' style='background-color:#BDCAD4; width:600px;'></table>")
+        $("<table id='bulk_event_table' style='background-color:#607584; width:600px;'></table>")
         .append(static_field_section)
         .append(dynamic_field_section)
         .append(create_button_section)
@@ -137,29 +137,29 @@ function generate_event_fields() {
     //create fields
     let field_tds = [];
     let date_fields = [];
-    for (let fnum of event_types[event_type]) {
-        let def = fields[fnum];
+    for (let field_num of event_types[event_type]) {
+        let def = fields[field_num];
         if (!def) {
-            console.log(fnum + " not found?!");
+            console.log(field_num + " not found?!");
             continue;
         }
 
         let inp;    
         if (def["input"] == "select") {
-            inp = $(`<select id='F${fnum}' class='form-control'></select>`);
+            inp = $(`<select id='F${field_num}' class='form-control'></select>`);
             for (let opt of def["values"]) {
                 $(inp).append(`<option value='${opt}'>${opt}</option>`);
             }
         }
         else if (def["input"] == "date") {
-            inp = $(`<input type='text' id='F${fnum}' class='form-control datepicker' data-toggle='datepicker' />`);
+            inp = $(`<input type='text' id='F${field_num}' class='form-control datepicker' data-toggle='datepicker' />`);
             date_fields.push(inp);
         }
         else if (["text", "number", "checkbox"].includes(def["input"])) { 
-            inp = $(`<input type='${def["input"]}' id='F${fnum}' class='form-control' />`);
+            inp = $(`<input type='${def["input"]}' id='F${field_num}' class='form-control' />`);
         }
         else { 
-            inp = $(`<input type='text' id='F${fnum}' class='form-control' />`);
+            inp = $(`<input type='text' id='F${field_num}' class='form-control' />`);
         }
 
         field_tds.push(td(def["name"], inp));
@@ -244,12 +244,13 @@ function create_bulk_events() {
     event_data["@FIELD.EventDate@comp.Events_Create"] = event_date;
     event_data["@field.Type@comp.Events_Create"] = event_type;
 
+
     //custom fields
-    for (let field_num in event_types[event_type]) {
+    for (let field_num of event_types[event_type]) {
         let def = fields[field_num];
 
         let key;
-        if ("contact_field" in def && def["contact_field"] === true) {
+        if (def["contact_field"] === true) {
             key = `@field.OpenText${field_num}@key.CLIENT_ID@comp.Customers_Update`;
         }
         else if (false) {
@@ -270,6 +271,7 @@ function create_bulk_events() {
 
         if (value) event_data[key] = value;
     }
+    console.log(event_data);
 
     //UI stuff
     $("#response").empty();
