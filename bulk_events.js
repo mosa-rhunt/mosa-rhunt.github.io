@@ -52,13 +52,14 @@ function td(lbl, el, attr="") {
 }
 
 
-jQuery(document).on("load", create_initial_form);
+jQuery(document).ready(create_initial_form);
 function create_initial_form() {
     if ($("#Search").length == 0) {
         console.log("No search form yet");
         setTimeout(create_initial_form, 500);
         return;
     }
+    console.log("Bulk Event Creator intializing");
     
     //Create UI
     let static_field_section = $("<thead></thead>");
@@ -167,7 +168,7 @@ function generate_event_fields() {
 
     //enable datepickers
     for (let date_field of date_fields) {
-        $(date_field).datepicker({"format":"mm/dd/yyyy", "autoHide":true, "assumeNearbyYear":20}); 
+        $(date_field).datepicker(picker_config); 
     }
 }
 
@@ -277,7 +278,7 @@ function create_bulk_events() {
     function create_next_event() {
         index++;
         $("#response").text(`(${index}/${client_ids.length})`);
-        
+
         if (index >= client_ids.length) {
             //re-enable form inputs
             $("#bulk_event_table").find(":input").removeProp("readonly").removeProp("disabled").css("background-color", "").find("option:not(:selected)").removeProp("disabled");
