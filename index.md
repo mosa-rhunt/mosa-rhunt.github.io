@@ -1,1 +1,1 @@
-testing github pages as host for scripting files
+testing github pages as host for small js files

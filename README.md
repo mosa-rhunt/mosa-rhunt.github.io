@@ -1,4 +1,2 @@
 # mosa-rhunt.github.io
-ghp
-
-read me
+Simple space for small js file hosting

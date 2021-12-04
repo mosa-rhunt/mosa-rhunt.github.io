@@ -1,6 +1,6 @@
 //prepopulate events based on MosaPrepopulate parameter
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
-// https://web5.neworg.com/mc2_mosa/EventUpdate.asp?Action=Create&new=New+Event&MosaPrepopulate=DroughtLetter&EventTypeNum=54&%40where.CustomerNum%40op.EQ=12145
+//EventUpdate.asp?Action=Create&new=New+Event&MosaPrepopulate=DroughtLetter&EventTypeNum=54&%40where.CustomerNum%40op.EQ=12145
 jQuery(document).ready(function() {
     //console.log(jQuery().jquery); //version
     let parameters = {};
