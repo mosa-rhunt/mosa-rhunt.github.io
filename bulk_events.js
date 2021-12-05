@@ -307,7 +307,7 @@ function create_bulk_events() {
     //UI stuff
     $("#response").empty();
     $("#errors").empty();
-    $("#bulk_event_table").find(":input").css("background", "#bbb !important").prop("disabled", true).prop("readonly", true).find("option:not(:selected)").prop("disabled", true);
+    $("#bulk_event_table").find(":input").css("background-color", "#bbb !important").prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
     let index = -1; //gets incremented immediately
 
     //finalize and send calls
@@ -317,7 +317,7 @@ function create_bulk_events() {
 
         if (index >= client_ids.length) {
             //re-enable form inputs
-            $("#bulk_event_table").find(":input").css("background", "").removeProp("disabled").removeProp("readonly").find("option:not(:selected)").removeProp("disabled");
+            $("#bulk_event_table").find(":input").css("background-color", "").removeProp("disabled").find("option:not(:selected)").removeProp("disabled");
             return;
         }
 
