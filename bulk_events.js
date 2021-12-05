@@ -5,8 +5,10 @@ const fields = {
     "fieldnum": {
         "name": "field name",
         "input": "text", //or date, number, checkbox, select. default is text
-        "values": ["one", "two"], //for select options
-        "contact_field": true, //only set/true for event fields that are also contact fields
+        "options": ["one", "two"], //values in the select
+
+        // "contact_field": true, //only set/true for event fields that are also contact fields 
+        //(but don't use event fields to update contact fields)
     },
 
     //New Client Outeach fields
@@ -16,6 +18,7 @@ const fields = {
     "156": { "name":"Any anticipated changes" }, 
     "127": { "name":"Communication with MOSA" },
 
+    //Communications
 };
 
 const event_types = {
@@ -165,7 +168,7 @@ function generate_event_fields() {
         let inp;    
         if (def["input"] == "select") {
             inp = $(`<select id='F${field_num}' class='form-control'></select>`);
-            for (let opt of def["values"]) {
+            for (let opt of def["options"]) {
                 $(inp).append(`<option value='${opt}'>${opt}</option>`);
             }
         }
@@ -279,22 +282,20 @@ function create_bulk_events() {
     //custom fields
     for (let field_num of event_types[event_type]) {
         let def = fields[field_num];
+        let num = parseInt(field_num);
 
-        let key;
-        if (def["contact_field"] === true) {
-            key = `@field.OpenText${field_num}@key.CLIENT_ID@comp.Customers_Update`;
-        }
-        else if (false) {
-            key = `@field.OpenText${field_num}@comp.EE_C`;
-        }
-        else {
-            key = `@field.OpenText${field_num}@comp.Events_Create`;
-        }
+        let key = `@field.OpenText${field_num}`;
+        if (num > 400) key += "@comp.EE3_C";
+        else if (num > 250) key += "@comp.EE2_C";
+        else if (num > 100) key += "@comp.EE_C";
+        else key += "@comp.Events_Create";
+        // if (def["contact_field"] === true) {
+        //     key = `@field.OpenText${field_num}@key.CLIENT_ID@comp.Customers_Update`;
+        // }
 
-        let value;
+        let value = "";
         if (def["input"] == "checkbox") {
             if ($(`#F${field_num}`).is(":checked")) value = "Yes";
-            else value = "";
         }
         else {
             value = $(`#F${field_num}`).val();
@@ -306,8 +307,8 @@ function create_bulk_events() {
     //UI stuff
     $("#response").empty();
     $("#errors").empty();
-    $("#bulk_event_table").find(":input").prop("readonly", true).prop("disabled", true).css("background-color", "#bbb !important").find("option:not(:selected)").prop("disabled", true);
-    let index = -1;
+    $("#bulk_event_table").find(":input").prop("readonly", true).prop("disabled", true).css("background", "#bbb !important").find("option:not(:selected)").prop("disabled", true);
+    let index = -1; //gets incremented immediately
 
     //finalize and send calls
     function create_next_event() {
@@ -316,8 +317,7 @@ function create_bulk_events() {
 
         if (index >= client_ids.length) {
             //re-enable form inputs
-            $("#bulk_event_table").find(":input").removeProp("readonly").removeProp("disabled").css("background-color", "").find("option:not(:selected)").removeProp("disabled");
-            // $("#create_events_button").removeProp("disabled");
+            $("#bulk_event_table").find(":input").removeProp("readonly").removeProp("disabled").css("background", "").find("option:not(:selected)").removeProp("disabled");
             return;
         }
 
@@ -342,7 +342,7 @@ function create_bulk_events() {
         }
         this_event_data["@field.billable"] = client_id;
         this_event_data["@field.CustomerAllNum@comp.Events_Create"] = client_id;
-        console.log(this_event_data);
+        // console.log(this_event_data);
     
         $.ajax({
             url: "EventUpdate.asp",
@@ -357,13 +357,12 @@ function create_bulk_events() {
                 $("#errors").html(`${err}<br>error for ${client_id}`);
             },
             complete: function() {
-                create_next_event();
+                create_next_event(); //effectively async
             }
         });
 
     }
 
     //begin
-    $("#response").text(`(0/${client_ids.length})`);
     create_next_event();
 }
