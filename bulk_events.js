@@ -1,5 +1,6 @@
 //Bulk event creation form. Used on a report page
 
+
 const fields = {
     //prototype
     "fieldnum": {
@@ -12,14 +13,15 @@ const fields = {
     },
 
     //New Client Outeach fields
-    "150": { "name":"Client's overall satisfaction" }, 
-    "215": { "name":"Client's Organic Certificate" }, 
-    "153": { "name":"Re-certification application" }, 
-    "156": { "name":"Any anticipated changes" }, 
-    "127": { "name":"Communication with MOSA" },
+    "150": { "name": "Client's overall satisfaction" }, 
+    "215": { "name": "Client's Organic Certificate" }, 
+    "153": { "name": "Re-certification application" }, 
+    "156": { "name": "Any anticipated changes" }, 
+    "127": { "name": "Communication with MOSA" },
 
     //Communications
 };
+
 
 const event_types = {
     // "Admin - Application Details",
@@ -44,11 +46,13 @@ const event_types = {
     // "Transfers",
 };
 
+
 const picker_config = {
     "format": "mm/dd/yyyy", 
     "autoHide": true, 
     "assumeNearbyYear": 20
 };
+
 
 function td(lbl, el, attr="") { 
     return $(`<td ${attr}></td>`).append(`<label style='color:white'>${lbl}</label>`).append("<br>").append(el); 
@@ -203,7 +207,7 @@ function generate_event_fields() {
 
 
 function create_bulk_events() {
-    let client_ids = $("#client_ids").val().replaceAll(/\n| /g, ",").split(",").filter(id => id.length > 0);
+    let client_ids = $("#client_ids").val().replaceAll(/\n| /g, ",").split(",").filter(id => /^[1-9][0-9]{0,4}$/.test(id));
     let event_name = $("#event_name").val().trim();
     let event_desc = $("#event_desc").val().trim();
     let event_date = $("#event_date").val().trim();
@@ -224,17 +228,25 @@ function create_bulk_events() {
         alert(`${event_open} is not Open/Closed`);
         return;
     }
-    if (client_ids.length == 0 || !event_name || !event_date || !event_type) {
-        alert("You must enter client id(s) and event name, date, type");
+    if (client_ids.length == 0 || !event_name || !event_date) {
+        alert("You must enter client id(s), event name and date");
         return;
     }
     if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(event_date)) {
         alert("Date is invalid");
         return;
     }
-    if (!event_desc && !confirm("Do you wish to leave the description blank?")) {
+    // if (!event_desc && !confirm("Do you wish to leave the description blank?")) {
+    //     return;
+    // }
+
+    //are you sure?
+    if (!confirm(`Proceed with creating ${client_ids.length} ${event_type} events?`)) {
         return;
     }
+
+    //assemble data
+    let event_data = {};
 
     const basic_event_fields = {
         //empty fields
@@ -267,11 +279,11 @@ function create_bulk_events() {
         "IF_CLOSE": "True", //if this isn't set then the page thinks it should reload after saving
     };
 
-    let event_data = {};
     for (let field in basic_event_fields) {
         event_data[field] = basic_event_fields[field];
     }
-    event_data["@field.AssignedTo@comp.Events_Create"] = "90"; //"Unassigned"
+
+    event_data["@field.AssignedTo@comp.Events_Create"] = "90"; //90 = "Unassigned"
     event_data["@field.Name@comp.Events_Create"] = event_name;
     event_data["@field.Description@comp.Events_Create"] = event_desc;
     event_data["@FIELD.EventDate@comp.Events_Create"] = event_date;
@@ -279,7 +291,7 @@ function create_bulk_events() {
     event_data["@field.ReminderStatus@comp.Events_Create"] = event_open;
     event_data["@field.Status@comp.Events_Create" ] = event_status;
 
-    //custom fields
+    //gather data from custom fields
     for (let field_num of event_types[event_type]) {
         let def = fields[field_num];
         let num = parseInt(field_num);
@@ -294,12 +306,8 @@ function create_bulk_events() {
         // }
 
         let value = "";
-        if (def["input"] == "checkbox") {
-            if ($(`#F${field_num}`).is(":checked")) value = "Yes";
-        }
-        else {
-            value = $(`#F${field_num}`).val();
-        }
+        if (def["input"] != "checkbox") value = $(`#F${field_num}`).val();
+        else if ($(`#F${field_num}`).is(":checked")) value = "Yes";
 
         if (value) event_data[key] = value;
     }
@@ -307,7 +315,7 @@ function create_bulk_events() {
     //UI stuff
     $("#response").empty();
     $("#errors").empty();
-    $("#bulk_event_table").find(":input").css("background-color", "#bbb !important").prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
+    $("#bulk_event_table").find(":input").css("background-color", "#bbbbbb").prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
     let index = -1; //gets incremented immediately
 
     //finalize and send calls
@@ -315,30 +323,28 @@ function create_bulk_events() {
         index++;
         $("#response").text(`(${index}/${client_ids.length})`);
 
+        //check to see if it reached the end
         if (index >= client_ids.length) {
             //re-enable form inputs
             $("#bulk_event_table").find(":input").css("background-color", "").removeProp("disabled").find("option:not(:selected)").removeProp("disabled");
             return;
         }
 
+        //gather data
         let client_id = client_ids[index];
-        if (!Number.isInteger(parseInt(client_id))) {
-            let err = $("#errors").html();
-            $("#errors").html(`${err}<br>${client_id} is not valid`);
-            create_next_event();
-            return;
-        }
-
         let this_event_data = {};
         for (let key in event_data) {
-            if (key.includes("CLIENT_ID")) {
-                this_event_data[key.replace("CLIENT_ID", client_id)] = event_data[key];
-                //flag contact for updating
-                this_event_data[`@UPDATE@key.${client_id}@comp.Customers_Update`] = client_id
-            }
-            else {
-                this_event_data[key] = event_data[key];
-            }
+            this_event_data[key] = event_data[key];
+
+            //this isn't needed aynmore since deciding to not include contact fields
+            // if (key.includes("CLIENT_ID")) {
+            //     this_event_data[key.replace("CLIENT_ID", client_id)] = event_data[key];
+            //     //flag contact for updating
+            //     this_event_data[`@UPDATE@key.${client_id}@comp.Customers_Update`] = client_id
+            // }
+            // else {
+            //     this_event_data[key] = event_data[key];
+            // }
         }
         this_event_data["@field.billable"] = client_id;
         this_event_data["@field.CustomerAllNum@comp.Events_Create"] = client_id;
@@ -347,17 +353,17 @@ function create_bulk_events() {
         $.ajax({
             url: "EventUpdate.asp",
             type: "POST",
-            // async: false,
             data: this_event_data,
+            // async: false,
             success: function(response) {
                 //console.log(response);
             },
             error: function(response) {
                 let err = $("#errors").html();
-                $("#errors").html(`${err}<br>error for ${client_id}`);
+                $("#errors").html(`${err}error for ${client_id}<br>`);
             },
             complete: function() {
-                create_next_event(); //effectively async
+                create_next_event(); //effectively synchronous
             }
         });
 
