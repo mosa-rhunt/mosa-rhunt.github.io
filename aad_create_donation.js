@@ -123,7 +123,7 @@ jQuery(document).ready(function() {
     try {
         pay_data = JSON.parse(json_data);
     }
-    catch(e) {
+    catch (e) {
         pay_data = {"pay_created": false};
     }
     if (pay_data["pay_created"]) $(chk_pay_created).prop("checked", true);

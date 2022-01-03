@@ -1,5 +1,4 @@
-//Bulk event creation form. Used on a report page
-
+//Bulk event creation form. Used on ReportGeneral.asp?RptNum=462
 
 const fields = {
     //prototype
@@ -12,6 +11,32 @@ const fields = {
         //(but don't use event fields to update contact fields)
     },
 
+    //Scopes/specialties
+    "54": { "input": "checkbox", "name": "Farm" },
+    "58": { "input": "checkbox", "name": "Livestock" },
+    "56": { "input": "checkbox", "name": "Handler" },
+    "55": { "input": "checkbox", "name": "Greenhouse" },
+    "59": { "input": "checkbox", "name": "Maple Syrup" },
+    "60": { "input": "checkbox", "name": "Mushroom" },
+    "62": { "input": "checkbox", "name": "Sprout" },
+    "63": { "input": "checkbox", "name": "Wild Crop" },
+    "53": { "input": "checkbox", "name": "Apiculture" },
+    "61": { "input": "checkbox", "name": "Retail" },
+    "217": { "input": "checkbox", "name": "Livestock Sales Facility" },
+    "181": { "input": "checkbox", "name": "Grass-Fed Dairy" },
+    "182": { "input": "checkbox", "name": "Grass-Fed Meat" },
+    "216": { "input": "checkbox", "name": "Grass-Fed Dairy Handling" },
+    "188": { "input": "checkbox", "name": "Grass-Fed Meat Handling" },
+
+    //Common fields
+    "69": { "name": "Sent On", "input": "date" },
+    "91": { "name": "Generic Text" },
+    "94": { "name": "Enclosures" },
+    "110": { "name": "cc: NOP Appeals Team", "input": "checkbox" },
+    "111": { "name": "cc: NOP Appeals Team - (w/out enclosures)", "input": "checkbox" },
+    "107": { "name": "Letter Date", "input": "date" },
+    // "": { "name": "" },
+
     //New Client Outeach fields
     "150": { "name": "Client's overall satisfaction" }, 
     "215": { "name": "Client's Organic Certificate" }, 
@@ -19,18 +44,32 @@ const fields = {
     "156": { "name": "Any anticipated changes" }, 
     "127": { "name": "Communication with MOSA" },
 
+    //AAD
+    "75": { "name": "Application Status", "input": "select", "options": ["Application Requested", "Application Received In Office", "Application Received Web", "Update application sent", "Initial Application Sent"] },
+    "66": { "name": "Reason for Sending", "input": "select", "options": ["Annual Update", "New Application", "Adding New OSP", "Significant Change to OSP"] },
+    // "": { "name": "" },
+
     //Communications
+    "214": { "name": "Subject Line" },
+    
+    // "": { "name": "" },
 };
 
 
 const event_types = {
-    // "Admin - Application Details",
+    "Communications": ["214", "107", "91", "94"],
+    "Admin - Application Details": [
+        //scopes
+        "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", //"217", "181", "182", "216", "188", 
+        //other
+        "75", "66", "69",
+    ],
+
     // "Adverse Action",
-    // "Communications",
     // "Initial Review",
-    // "Inspection",
+    // "Inspection": [],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
-    //
+    
     // "Complaint",
     // "Final Review",
     // "Final Review - Additional",
@@ -54,19 +93,131 @@ const picker_config = {
 };
 
 
+//unused so far
+const users = {
+"90": "Unassigned",
+
+"16": "Jo Anne Shrum",
+"20": "Susan Perry",
+"21": "Gabrielle Daniels",
+"22": "Stephen Walker",
+"23": "Katie Starr",
+"24": "Jackie DeMinter",
+"25": "Mark Geistlinger",
+"29": "Alexandra W Petrovits",
+"35": "Lynne Haynor",
+"40": "Cori Skolaski",
+"70": "Ben Caldwell",
+"81": "Erik Gundersen",
+"196": "Stephanie Leahy",
+"197": "Kendra Volk ",
+"198": "Tracy Trahan",
+"199": "Curt Parr",
+"109": "Joe Pedretti",
+"139": "Kristen Adams",
+"178": "Kelley Belina",
+"189": "Terri Okrasinski",
+"211": "Karin Woods",
+"222": "Mike Tuszynski",
+"229": "Rebekah Phillips",
+"232": "Kelsey Barale",
+"241": "Sarah Forsythe",
+"248": "Sammy Clopton",
+"249": "Val Torres",
+"250": "Cathie Gotthardt",
+"251": "Liz Happ",
+"252": "Cate Eddy",
+"253": "Ryan Hunt",
+"260": "Jake Overgaard",
+"261": "Shannon Bly",
+"265": "Adam Clopton",
+"285": "Olive Reynolds",
+
+"4": "Mike Bruyere",
+"60": "Kelly Skoda",
+"37": "Rebecca Claypool",
+"14": "Jenny Cruse",
+"27": "Kim Wahl",
+"30": "Robert Caldwell ",
+"32": "Michael Crotser",
+"38": "Feliciana Puig",
+"47": "Wendy Paulsen",
+"49": "Jeremy Dobson ",
+"55": "Dennis Jipson - (Paper Inspector)",
+"61": "Rich Pierce - (Paper Inspector)",
+"65": "Gary LeMasters ",
+"72": "Jeane Myszka - (Paper Inspector)",
+"75": "Steve Thorne ",
+"117": "Matt Urch - (Paper Inspector)",
+"118": "Roberta Ducharme",
+"123": "Elijah Beach",
+"131": "Steve Kinder ",
+"134": "Zachary J. Heth ",
+"175": "Kevin Channell",
+"180": "Alan Armstrong ",
+"181": "Liz O'Donnell ",
+"190": "Myrrh-Anna Kienitz",
+"191": "Tracy Noel ",
+"192": "Mike Gessel - (Paper Inspector)",
+"194": "Kate Plachetka",
+"200": "Chuck Anderas",
+"201": "Sara Tedeschi ",
+"202": "Gino Whitaker",
+"203": "Staff Inspector",
+"205": "Annaliese Eberle",
+"208": "Elizabeth Anderas",
+"209": "Moira Hastings",
+"210": "Beth Stephenson",
+"213": "Terrance Layhew  ",
+"216": "Kathy Turner ",
+"217": "Glen Ellickson",
+"219": "Mariann Holm - (Paper Inspector)",
+"220": "Lynn Johansen",
+"225": "Amanda Birk",
+"227": "Margarito Cal ",
+"228": "Tom Wozniak ",
+"231": "Dusty Kline",
+"234": "Eric Campbell ",
+"235": "Liana Nichols ",
+"239": "Richard Ehlers ",
+"240": "Robert Alexander ",
+"242": "Pat Madden ",
+"244": "Bec Anderson ",
+"245": "Sam Karns ",
+"246": "Willow Lovecky",
+"247": "Cecilia Kouba",
+"254": "Reagan Hulbert ",
+"256": "Anne Drehfal ",
+"257": "Karen Lehto ",
+"259": "Mat Eddy ",
+"262": "Don Erb ",
+"266": "Justine Dobson ",
+"267": "Karen Mischel ",
+"268": "Keith Moehn ",
+"275": "Pam Erb ",
+"276": "Dean Dickel ",
+"277": "Chris Lent",
+"278": "Trish Clarkweiss ",
+"280": "Jodi Ehlers ",
+"281": "Ben Bisbach ",
+"282": "Andre Barnaud ",
+"287": "Jack Gross ",
+};
+
+
 function td(lbl, el, attr="") { 
     return $(`<td ${attr}></td>`).append(`<label style='color:white'>${lbl}</label>`).append("<br>").append(el); 
 }
 
 
-jQuery(document).ready(create_initial_form);
-function create_initial_form() {
-    if ($("#Search").length == 0) {
-        console.log("No search form yet");
-        setTimeout(create_initial_form, 500);
-        return;
-    }
-    
+// jQuery(document).ready(create_initial_form);
+// function create_initial_form() {
+//     if ($("#Search").length == 0) {
+//         console.log("No search form yet");
+//         setTimeout(create_initial_form, 500);
+//         return;
+//     }
+jQuery(document).ready(function() {
     //Create UI
     let static_field_section = $("<thead></thead>");
     let dynamic_field_section = $("<tbody id='dynamic_field_section'></tbody>");
@@ -149,7 +300,7 @@ function create_initial_form() {
     $(txt_event_date).datepicker(picker_config); 
     //create dynamic fields
     generate_event_fields();
-}
+});
 
 
 function generate_event_fields() {
@@ -217,7 +368,7 @@ function create_bulk_events() {
 
     //required fields
     if (!Object.keys(event_types).includes(event_type)) {
-        alert(`Event Type ${event_type} not recognized`);
+        alert(`Event Type '${event_type}' not recognized`);
         return;
     }
     if (!["Complete", "Pending", "Void"].includes(event_status)) {
@@ -297,9 +448,10 @@ function create_bulk_events() {
         let num = parseInt(field_num);
 
         let key = `@field.OpenText${field_num}`;
-        if (num > 400) key += "@comp.EE3_C";
+        // if (num > 490) key += "@comp.EE4_C";
+        if (num > 370) key += "@comp.EE3_C";
         else if (num > 250) key += "@comp.EE2_C";
-        else if (num > 100) key += "@comp.EE_C";
+        else if (num > 120) key += "@comp.EE_C";
         else key += "@comp.Events_Create";
         // if (def["contact_field"] === true) {
         //     key = `@field.OpenText${field_num}@key.CLIENT_ID@comp.Customers_Update`;
