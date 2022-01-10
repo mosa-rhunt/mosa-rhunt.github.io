@@ -36,7 +36,7 @@ jQuery(document).ready(function() {
     let txt_check_num = $("<input type='text' id='check_num' class='form-control' />").on("change", on_form_change).on("keypress", on_form_change);
     let sel_pay_methods = $("<select id='pay_method' class='form-control'></select>").on("change", on_form_change);
     let sel_pay_frequency = $("<select id='pay_frequency' class='form-control'></select>").on("change", on_form_change);
-    let lnk_url = $("<a id='record_link' target='_blank'></a>");
+    let lnk_url = $("<a id='record_link' target='_blank' style='font-weight:bold'></a>");
     
     let methods = ["", "AMEX", "DISCOVER", "MASTERCARD", "VISA", "Cash", "Check", "Milk Check", "Invoice Me", "Other"];
     //also "Credit Card Offline", "Credit Memo", "Invoice Me", "Pay by Credit Card over Phone", "Pledge", "Pledge - Write Off"
@@ -149,7 +149,7 @@ jQuery(document).ready(function() {
     }
     if (pay_data["record_link"]) {
         let text = "Donation List";
-        if (pay_data["record_link"].startsWith("DonationUpdate")) text = "Donation Record";
+        if (pay_data["record_link"].includes("DonationUpdate")) text = "Donation Record";
         $(lnk_url).prop("href", pay_data["record_link"]).text(text);
     }
 
