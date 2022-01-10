@@ -57,7 +57,10 @@ const fields = {
 
 
 const event_types = {
+    //"event type name": [array of field ids from above],
+
     "Communications": ["214", "107", "91", "94"],
+    
     "Admin - Application Details": [
         //scopes
         "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", //"217", "181", "182", "216", "188", 
@@ -65,8 +68,8 @@ const event_types = {
         "75", "66", "69",
     ],
 
-    // "Adverse Action",
-    // "Initial Review",
+    // "Adverse Action": [],
+    // "Initial Review": [],
     // "Inspection": [],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
     
@@ -86,122 +89,52 @@ const event_types = {
 };
 
 
-const picker_config = {
+const datepicker_config = {
     "format": "mm/dd/yyyy", 
     "autoHide": true, 
-    "assumeNearbyYear": 20
+    "assumeNearbyYear": 20,
 };
 
 
 //unused so far
 const users = {
-"90": "Unassigned",
+    "90": "Unassigned",
 
-"16": "Jo Anne Shrum",
-"20": "Susan Perry",
-"21": "Gabrielle Daniels",
-"22": "Stephen Walker",
-"23": "Katie Starr",
-"24": "Jackie DeMinter",
-"25": "Mark Geistlinger",
-"29": "Alexandra W Petrovits",
-"35": "Lynne Haynor",
-"40": "Cori Skolaski",
-"70": "Ben Caldwell",
-"81": "Erik Gundersen",
-"196": "Stephanie Leahy",
-"197": "Kendra Volk ",
-"198": "Tracy Trahan",
-"199": "Curt Parr",
-"109": "Joe Pedretti",
-"139": "Kristen Adams",
-"178": "Kelley Belina",
-"189": "Terri Okrasinski",
-"211": "Karin Woods",
-"222": "Mike Tuszynski",
-"229": "Rebekah Phillips",
-"232": "Kelsey Barale",
-"241": "Sarah Forsythe",
-"248": "Sammy Clopton",
-"249": "Val Torres",
-"250": "Cathie Gotthardt",
-"251": "Liz Happ",
-"252": "Cate Eddy",
-"253": "Ryan Hunt",
-"260": "Jake Overgaard",
-"261": "Shannon Bly",
-"265": "Adam Clopton",
-"285": "Olive Reynolds",
-
-"4": "Mike Bruyere",
-"60": "Kelly Skoda",
-"37": "Rebecca Claypool",
-"14": "Jenny Cruse",
-"27": "Kim Wahl",
-"30": "Robert Caldwell ",
-"32": "Michael Crotser",
-"38": "Feliciana Puig",
-"47": "Wendy Paulsen",
-"49": "Jeremy Dobson ",
-"55": "Dennis Jipson - (Paper Inspector)",
-"61": "Rich Pierce - (Paper Inspector)",
-"65": "Gary LeMasters ",
-"72": "Jeane Myszka - (Paper Inspector)",
-"75": "Steve Thorne ",
-"117": "Matt Urch - (Paper Inspector)",
-"118": "Roberta Ducharme",
-"123": "Elijah Beach",
-"131": "Steve Kinder ",
-"134": "Zachary J. Heth ",
-"175": "Kevin Channell",
-"180": "Alan Armstrong ",
-"181": "Liz O'Donnell ",
-"190": "Myrrh-Anna Kienitz",
-"191": "Tracy Noel ",
-"192": "Mike Gessel - (Paper Inspector)",
-"194": "Kate Plachetka",
-"200": "Chuck Anderas",
-"201": "Sara Tedeschi ",
-"202": "Gino Whitaker",
-"203": "Staff Inspector",
-"205": "Annaliese Eberle",
-"208": "Elizabeth Anderas",
-"209": "Moira Hastings",
-"210": "Beth Stephenson",
-"213": "Terrance Layhew  ",
-"216": "Kathy Turner ",
-"217": "Glen Ellickson",
-"219": "Mariann Holm - (Paper Inspector)",
-"220": "Lynn Johansen",
-"225": "Amanda Birk",
-"227": "Margarito Cal ",
-"228": "Tom Wozniak ",
-"231": "Dusty Kline",
-"234": "Eric Campbell ",
-"235": "Liana Nichols ",
-"239": "Richard Ehlers ",
-"240": "Robert Alexander ",
-"242": "Pat Madden ",
-"244": "Bec Anderson ",
-"245": "Sam Karns ",
-"246": "Willow Lovecky",
-"247": "Cecilia Kouba",
-"254": "Reagan Hulbert ",
-"256": "Anne Drehfal ",
-"257": "Karen Lehto ",
-"259": "Mat Eddy ",
-"262": "Don Erb ",
-"266": "Justine Dobson ",
-"267": "Karen Mischel ",
-"268": "Keith Moehn ",
-"275": "Pam Erb ",
-"276": "Dean Dickel ",
-"277": "Chris Lent",
-"278": "Trish Clarkweiss ",
-"280": "Jodi Ehlers ",
-"281": "Ben Bisbach ",
-"282": "Andre Barnaud ",
-"287": "Jack Gross ",
+    "16": "Jodi Shrum",
+    "20": "Susan Perry",
+    "21": "Gabrielle Daniels",
+    "22": "Stephen Walker",
+    "23": "Katie Starr",
+    "24": "Jackie DeMinter",
+    "25": "Mark Geistlinger",
+    "29": "Alexandra W Petrovits",
+    "35": "Lynne Haynor",
+    "40": "Cori Skolaski",
+    "70": "Ben Caldwell",
+    "81": "Erik Gundersen",
+    "196": "Stephanie Leahy",
+    "197": "Kendra Volk ",
+    "198": "Tracy Trahan",
+    "199": "Curt Parr",
+    "109": "Joe Pedretti",
+    "139": "Kristen Adams",
+    "178": "Kelley Belina",
+    "189": "Terri Okrasinski",
+    "211": "Karin Woods",
+    "222": "Mike Tuszynski",
+    "229": "Rebekah Phillips",
+    "232": "Kelsey Barale",
+    "241": "Sarah Forsythe",
+    "248": "Sammy Clopton",
+    "249": "Val Torres",
+    "250": "Cathie Gotthardt",
+    "251": "Liz Happ",
+    "252": "Cate Eddy",
+    "253": "Ryan Hunt",
+    "260": "Jake Overgaard",
+    "261": "Shannon Bly",
+    "265": "Adam Clopton",
+    "285": "Olive Reynolds",
 };
 
 
@@ -282,7 +215,7 @@ jQuery(document).ready(function() {
     )
     .append(
         $("<tr></tr>")
-        .append($("<td></td>").append($("<input id='create_events_button' type='button' value='Create Events' style='border:1px solid black;' />").on("click", create_bulk_events)))
+        .append($("<td></td>").append($("<input type='button' value='Create Events' style='border:1px solid black;' />").on("click", create_bulk_events)))
         .append($("<td></td>").append("<label id='response' style='color:white'></label>").append("<label id='errors' style='color:white'></label>"))
     );
 
@@ -297,7 +230,7 @@ jQuery(document).ready(function() {
         .append(create_button_section)
     );
     //enable datepicker
-    $(txt_event_date).datepicker(picker_config); 
+    $(txt_event_date).datepicker(datepicker_config); 
     //create dynamic fields
     generate_event_fields();
 });
@@ -331,8 +264,11 @@ function generate_event_fields() {
             inp = $(`<input type='text' id='F${field_num}' class='form-control datepicker' data-toggle='datepicker' />`);
             date_fields.push(inp);
         }
-        else if (["text", "number", "checkbox"].includes(def["input"])) { 
-            inp = $(`<input type='${def["input"]}' id='F${field_num}' class='form-control' />`);
+        else if (def["input"] == "number") { 
+            inp = $(`<input type='number' id='F${field_num}' class='form-control' />`);
+        }
+        else if (def["input"] == "checkbox"]) { 
+            inp = $(`<input type='checkbox' id='F${field_num}' />`);
         }
         else { 
             inp = $(`<input type='text' id='F${field_num}' class='form-control' />`);
@@ -341,7 +277,7 @@ function generate_event_fields() {
         field_tds.push(td(def["name"], inp));
     }
 
-    //assemble
+    //assemble (2 inputs per row)
     let rows = [];
     for (let i = 0; i < field_tds.length; i += 2) {
         let row = $("<tr></tr>").append(field_tds[i]);
@@ -352,7 +288,7 @@ function generate_event_fields() {
 
     //enable datepickers
     for (let date_field of date_fields) {
-        $(date_field).datepicker(picker_config); 
+        $(date_field).datepicker(datepicker_config); 
     }
 }
 

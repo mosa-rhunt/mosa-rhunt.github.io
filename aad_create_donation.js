@@ -107,6 +107,7 @@ jQuery(document).ready(function() {
             type: "POST",
             data: donation_data,
             success: function(response) {
+                console.log(response);
                 $("#pay_created").prop("checked", true);
                 on_form_change();
             },
