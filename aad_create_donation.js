@@ -110,11 +110,11 @@ jQuery(document).ready(function() {
             data: donation_data,
             success: function(response) {
                 //response is the html as a string, and for some reason contains its own url in the js somewhere
-                let url_match = response.match(/location='(?<url>.*Donationnum=\d+&.*)';/g);
+                let url_match = String.valueOf(response).match(/location='(.*Donationnum=\d+&.*)';/g);
                 console.log(url_match);
                 console.log(response);
-                if (url_match.groups?.url) {
-                    $("#record_link").prop("href", url_match.groups.url).text("Donation Record");
+                if (url_match.groups?.[1]) {
+                    $("#record_link").prop("href", url_match.groups[1]).text("Donation Record");
                 }
                 else { //fallback
                     let url = "CustomerUpdate.asp?Page=Donations&Action=View&CustomerNum=" + $("#h_customerex").val();
