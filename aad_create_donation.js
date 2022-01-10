@@ -18,6 +18,7 @@ function on_form_change() {
 
     //populate json based on form inputs
     pay_data["pay_created"] = $("#pay_created").is(":checked");
+    pay_data["record_link"] = $("#record_link").prop("href");
     for (let field of fields) {
         pay_data[field] = $("#" + field).val();
     }
@@ -35,6 +36,7 @@ jQuery(document).ready(function() {
     let txt_check_num = $("<input type='text' id='check_num' class='form-control' />").on("change", on_form_change).on("keypress", on_form_change);
     let sel_pay_methods = $("<select id='pay_method' class='form-control'></select>").on("change", on_form_change);
     let sel_pay_frequency = $("<select id='pay_frequency' class='form-control'></select>").on("change", on_form_change);
+    let lnk_url = $("<a id='record_link' target='_blank'></a>");
     
     let methods = ["", "AMEX", "DISCOVER", "MASTERCARD", "VISA", "Cash", "Check", "Milk Check", "Invoice Me", "Other"];
     //also "Credit Card Offline", "Credit Memo", "Invoice Me", "Pay by Credit Card over Phone", "Pledge", "Pledge - Write Off"
@@ -106,9 +108,17 @@ jQuery(document).ready(function() {
             url: "DonationUpdate.asp",
             type: "POST",
             data: donation_data,
-            success: function(response, status, xhr) {
-                console.log(xhr);
-                console.log(response);
+            success: function(response) {
+                //response is the html as a string, and for some reason contains its own url in the js somewhere
+                let url_match = response.match(/location='(?<url>.*Donationnum=[\d]+.*)';/ig);
+                if (url_match.groups["url"]) {
+                    $("#record_link").prop("href", url_match.groups["url"]).text("Donation Record");
+                }
+                else { //fallback
+                    let url = "CustomerUpdate.asp?Page=Donations&Action=View&CustomerNum=" + $("#h_customerex").val();
+                    $("#record_link").prop("href", url).text("Donation List");
+                }
+
                 $("#pay_created").prop("checked", true);
                 on_form_change();
             },
@@ -128,12 +138,20 @@ jQuery(document).ready(function() {
     catch (e) {
         pay_data = {"pay_created": false};
     }
-    if (pay_data["pay_created"]) $(chk_pay_created).prop("checked", true);
+
     $(txt_income).val(pay_data["income"] || "");
     $(txt_pay_amount).val(pay_data["pay_amount"] || "");
     $(txt_pay_date).val(pay_data["pay_date"] || "");
     $(sel_pay_methods).val(pay_data["pay_method"] || "");
     $(sel_pay_frequency).val(pay_data["pay_frequency"] || "");
+    if (pay_data["pay_created"]) {
+        $(chk_pay_created).prop("checked", true);
+    }
+    if (pay_data["record_link"]) {
+        let text = "Donation List";
+        if (pay_data["record_link"].startsWith("DonationUpdate")) text = "Donation Record";
+        $(lnk_url).prop("href", pay_data["record_link"]).text(text);
+    }
 
     //now we add the UI
     function label(txt) { return $(`<label style='color:white'>${txt}</label>`); }
@@ -156,6 +174,9 @@ jQuery(document).ready(function() {
     .append("<br>")
     .append(table)
     .append(btn_save)
+    .append("<br>")
+    .append("<br>")
+    .append(lnk_url)
     .append("<br>")
     .append(label("Payment Created&nbsp;"))
     .append(chk_pay_created)
