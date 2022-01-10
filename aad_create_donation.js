@@ -13,7 +13,7 @@ function on_form_change() {
         for (let field of fields) {
             $("#" + field).removeProp("readonly").css("background-color", "").find("option:not(:selected)").removeProp("disabled");
         }
-        $("#create_donation").removeProp("disabled").show();
+        $("#create_donation").removeProp("disabled").css("background-color", "").show();
     }
 
     //populate json based on form inputs
@@ -100,13 +100,14 @@ jQuery(document).ready(function() {
             "@field.TributeName": "",
             "@field.HonorType": "", 
         };
-        $("#create_donation").prop("disabled", true);
+        $("#create_donation").prop("disabled", true).css("background-color", "#bbb");
 
         $.ajax({
             url: "DonationUpdate.asp",
             type: "POST",
             data: donation_data,
-            success: function(response) {
+            success: function(response, status, xhr) {
+                console.log(xhr);
                 console.log(response);
                 $("#pay_created").prop("checked", true);
                 on_form_change();
