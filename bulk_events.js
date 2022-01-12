@@ -557,10 +557,14 @@ function import_csv(csv_arrays) {
         if (/^opentext\d+$/i.test(header)) {
             config.push(header);
             invalid = false;
+            //also make sure field number is legit
+            if (!(header.match(/t(\d+)$/)[1] in fields)) invalid = true;
         }
         else if (/^\d+$/.test(header)) {
             config.push("opentext" + header);
             invalid = false;
+            //also make sure field number is legit
+            if (!(header in fields)) invalid = true;
         }
 
         if (invalid) unknown_headers.push(header);
@@ -692,10 +696,7 @@ function import_csv(csv_arrays) {
         for (let field in basic_event_fields) {
             record[field] = basic_event_fields[field];
         }
-        let client_id = record["@field.CustomerAllNum@comp.Events_Create"];
-
         // console.log(record);
-        // import_next_event();
     
         $.ajax({
             url: "EventUpdate.asp",
@@ -706,6 +707,7 @@ function import_csv(csv_arrays) {
                 //console.log(response);
             },
             error: function(response) {
+                let client_id = record["@field.CustomerAllNum@comp.Events_Create"];
                 let err = $("#errors").html();
                 $("#errors").html(`${err}error for ${client_id}<br>`);
             },
