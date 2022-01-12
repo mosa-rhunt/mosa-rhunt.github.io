@@ -641,19 +641,14 @@ function import_csv(csv_arrays) {
                 record["@field.AssignedTo@comp.Events_Create"] = value;
             }
             else {
-                try {
-                    let num = parseInt(field.match(/t(\d+)$/)[1]);
-                    let key = `@field.${field}`;
-                    if (num > 370) key += "@comp.EE3_C";
-                    else if (num > 250) key += "@comp.EE2_C";
-                    else if (num > 120) key += "@comp.EE_C";
-                    else key += "@comp.Events_Create";
+                let num = parseInt(field.match(/t(\d+)$/)[1]);
+                let key = `@field.${field}`;
+                if (num > 370) key += "@comp.EE3_C";
+                else if (num > 250) key += "@comp.EE2_C";
+                else if (num > 120) key += "@comp.EE_C";
+                else key += "@comp.Events_Create";
 
-                    record[key] = value;
-                }
-                catch {
-                    invalid = true;
-                }
+                record[key] = value;
             }
         } //for c
 
