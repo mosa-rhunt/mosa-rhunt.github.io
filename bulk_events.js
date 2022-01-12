@@ -12,47 +12,47 @@ const fields = {
     },
 
     //Scopes/specialties
-    "54": { "input": "checkbox", "name": "Farm" },
-    "58": { "input": "checkbox", "name": "Livestock" },
-    "56": { "input": "checkbox", "name": "Handler" },
-    "55": { "input": "checkbox", "name": "Greenhouse" },
-    "59": { "input": "checkbox", "name": "Maple Syrup" },
-    "60": { "input": "checkbox", "name": "Mushroom" },
-    "62": { "input": "checkbox", "name": "Sprout" },
-    "63": { "input": "checkbox", "name": "Wild Crop" },
-    "53": { "input": "checkbox", "name": "Apiculture" },
-    "61": { "input": "checkbox", "name": "Retail" },
-    "217": { "input": "checkbox", "name": "Livestock Sales Facility" },
-    "181": { "input": "checkbox", "name": "Grass-Fed Dairy" },
-    "182": { "input": "checkbox", "name": "Grass-Fed Meat" },
-    "216": { "input": "checkbox", "name": "Grass-Fed Dairy Handling" },
-    "188": { "input": "checkbox", "name": "Grass-Fed Meat Handling" },
+    "54": {"input":"checkbox", "name":"Farm"},
+    "58": {"input":"checkbox", "name":"Livestock"},
+    "56": {"input":"checkbox", "name":"Handler"},
+    "55": {"input":"checkbox", "name":"Greenhouse"},
+    "59": {"input":"checkbox", "name":"Maple Syrup"},
+    "60": {"input":"checkbox", "name":"Mushroom"},
+    "62": {"input":"checkbox", "name":"Sprout"},
+    "63": {"input":"checkbox", "name":"Wild Crop"},
+    "53": {"input":"checkbox", "name":"Apiculture"},
+    "61": {"input":"checkbox", "name":"Retail"},
+    "217": {"input":"checkbox", "name":"Livestock Sales Facility"},
+    "181": {"input":"checkbox", "name":"Grass-Fed Dairy"},
+    "182": {"input":"checkbox", "name":"Grass-Fed Meat"},
+    "216": {"input":"checkbox", "name":"Grass-Fed Dairy Handling"},
+    "188": {"input":"checkbox", "name":"Grass-Fed Meat Handling"},
 
     //Common fields
-    "69": { "name": "Sent On", "input": "date" },
-    "91": { "name": "Generic Text" },
-    "94": { "name": "Enclosures" },
-    "110": { "name": "cc: NOP Appeals Team", "input": "checkbox" },
-    "111": { "name": "cc: NOP Appeals Team - (w/out enclosures)", "input": "checkbox" },
-    "107": { "name": "Letter Date", "input": "date" },
-    // "": { "name": "" },
+    "69": {"name":"Sent On", "input":"date"},
+    "91": {"name":"Generic Text"},
+    "94": {"name":"Enclosures"},
+    "110": {"name":"cc: NOP Appeals Team", "input":"checkbox"},
+    "111": {"name":"cc: NOP Appeals Team - (w/out enclosures)", "input":"checkbox"},
+    "107": {"name":"Letter Date", "input":"date"},
+    // "": {"name":""},
 
     //New Client Outeach fields
-    "150": { "name": "Client's overall satisfaction" }, 
-    "215": { "name": "Client's Organic Certificate" }, 
-    "153": { "name": "Re-certification application" }, 
-    "156": { "name": "Any anticipated changes" }, 
-    "127": { "name": "Communication with MOSA" },
+    "150": {"name":"Client's overall satisfaction"}, 
+    "215": {"name":"Client's Organic Certificate"}, 
+    "153": {"name":"Re-certification application"}, 
+    "156": {"name":"Any anticipated changes"}, 
+    "127": {"name":"Communication with MOSA"},
 
     //AAD
-    "75": { "name": "Application Status", "input": "select", "options": ["Application Requested", "Application Received In Office", "Application Received Web", "Update application sent", "Initial Application Sent"] },
-    "66": { "name": "Reason for Sending", "input": "select", "options": ["Annual Update", "New Application", "Adding New OSP", "Significant Change to OSP"] },
-    // "": { "name": "" },
+    "75": {"name":"Application Status", "input":"select", "options":["Application Requested", "Application Received In Office", "Application Received Web", "Update application sent", "Initial Application Sent"]},
+    "66": {"name":"Reason for Sending", "input":"select", "options":["Annual Update", "New Application", "Adding New OSP", "Significant Change to OSP"]},
+    // "": {"name":""},
 
     //Communications
-    "214": { "name": "Subject Line" },
+    "214": {"name":"Subject Line"},
     
-    // "": { "name": "" },
+    // "": {"name":""},
 };
 
 
@@ -138,6 +138,38 @@ const users = {
 };
 
 
+const basic_event_fields = {
+    //empty fields
+    "sigFieldHolder": "",
+    "EventTypeChanged": "",
+    "FollowUpValue": "",
+    "FollowUpType": "",
+    "hidden_save_new2": "",
+    "copycontacts": "",
+    "copyevent": "",
+    "@field.Minutes@comp.Events_Create": "",
+    "@field.Result@comp.Events_Create": "",
+    "@field.DriveTime@comp.Events_Create": "",
+    "@field.Miles@comp.Events_Create": "",
+    //static fields
+    "Action": "Save",
+    "@CREATE@comp.Events_Create": "Save",
+    "@CREATE@comp.EE_C": "Save",
+    "@CREATE@comp.EE2_C": "Save",
+    "@CREATE@comp.EE3_C": "Save",
+    "@field.Reminder@comp.Events_Create": "0",
+    "@field.Attendees@comp.Events_Create": "1",
+    "@field.Access@comp.Events_Create": "Public",
+    "EventStartHour": "12",
+    "EventStartMinute": "00",
+    "EventStartAMPM": "PM",
+    "EventEndHour": "12",
+    "EventEndMinute": "00",
+    "EventEndAMPM": "PM",
+    "IF_CLOSE": "True",
+};
+
+
 function td(lbl, el, attr="") { 
     return $(`<td ${attr}></td>`).append(`<label style='color:white'>${lbl}</label>`).append("<br>").append(el); 
 }
@@ -215,8 +247,13 @@ jQuery(document).ready(function() {
     )
     .append(
         $("<tr></tr>")
-        .append($("<td></td>").append($("<input type='button' value='Create Events' style='border:1px solid black;' />").on("click", create_bulk_events)))
-        .append($("<td></td>").append("<label id='response' style='color:white'></label>").append("<label id='errors' style='color:white'></label>"))
+        .append(td("", $("<input type='button' value='Create Events' style='border:1px solid black;' />").on("click", create_bulk_events)))
+        .append(td("", $("<label id='response' style='color:white'></label>").append("<label id='errors' style='color:white'></label>")))
+    )
+    .append(
+        $("<tr></tr>")
+        .append(td("", $("<input type='button' value='Create from CSV' style='border:1px solid black;' onclick='$(\"#csv_file\").trigger(\"click\");' />")))
+        .append(td("", $("<input type='file' id='csv_file' style='opacity:0' />").on("change", parse_csv)))
     );
 
     //add to DOM
@@ -253,7 +290,7 @@ function generate_event_fields() {
             continue;
         }
 
-        let inp;    
+        let inp;
         if (def["input"] == "select") {
             inp = $(`<select id='F${field_num}' class='form-control'></select>`);
             for (let opt of def["options"]) {
@@ -267,12 +304,13 @@ function generate_event_fields() {
         else if (def["input"] == "number") { 
             inp = $(`<input type='number' id='F${field_num}' class='form-control' />`);
         }
-        else if (def["input"] == "checkbox"]) { 
+        else if (def["input"] == "checkbox") { 
             inp = $(`<input type='checkbox' id='F${field_num}' />`);
         }
         else { 
             inp = $(`<input type='text' id='F${field_num}' class='form-control' />`);
         }
+        $(inp).prop("title", `OpenText${field_num}`);
 
         field_tds.push(td(def["name"], inp));
     }
@@ -334,38 +372,6 @@ function create_bulk_events() {
 
     //assemble data
     let event_data = {};
-
-    const basic_event_fields = {
-        //empty fields
-        "sigFieldHolder": "",
-        "EventTypeChanged": "",
-        "FollowUpValue": "",
-        "FollowUpType": "",
-        "hidden_save_new2": "",
-        "copycontacts": "",
-        "copyevent": "",
-        "@field.Minutes@comp.Events_Create": "",
-        "@field.Result@comp.Events_Create": "",
-        "@field.DriveTime@comp.Events_Create": "",
-        "@field.Miles@comp.Events_Create": "",
-        //static fields
-        "Action": "Save",
-        "@CREATE@comp.Events_Create": "Save",
-        "@CREATE@comp.EE_C": "Save",
-        "@CREATE@comp.EE2_C": "Save",
-        "@CREATE@comp.EE3_C": "Save",
-        "@field.Reminder@comp.Events_Create": "0",
-        "@field.Attendees@comp.Events_Create": "1",
-        "@field.Access@comp.Events_Create": "Public",
-        "EventStartHour": "12",
-        "EventStartMinute": "00",
-        "EventStartAMPM": "PM",
-        "EventEndHour": "12",
-        "EventEndMinute": "00",
-        "EventEndAMPM": "PM",
-        "IF_CLOSE": "True", //if this isn't set then the page thinks it should reload after saving
-    };
-
     for (let field in basic_event_fields) {
         event_data[field] = basic_event_fields[field];
     }
@@ -459,4 +465,256 @@ function create_bulk_events() {
 
     //begin
     create_next_event();
+}
+
+
+//http://stackoverflow.com/a/1293163/2343
+function CSVToArray(strData, strDelimiter=",") {
+    // Create a regular expression to parse the CSV values.
+    var objPattern = new RegExp((
+        "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" + // Delimiters.
+        "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" + // Quoted fields.
+        "([^\"\\" + strDelimiter + "\\r\\n]*))" // Standard fields.
+    ), "gi");
+
+    // Create an array to hold our data with a default empty first row
+    var arrData = [[]];
+
+    // Create an array to hold our individual pattern matching groups
+    var arrMatches = null;
+
+    // Keep looping over the regular expression matches until we can no longer find a match.
+    while (arrMatches = objPattern.exec(strData)) {
+        var strMatchedDelimiter = arrMatches[1];
+
+        // Check to see if the given delimiter has a length (is not the start of string) and if it matches
+        // field delimiter. If id does not, then we know that this delimiter is a row delimiter.
+        if (strMatchedDelimiter.length && strMatchedDelimiter !== strDelimiter) {
+            // Since we have reached a new row of data, add an empty row to our data array.
+            arrData.push([]);
+        }
+
+        var strMatchedValue;
+        if (arrMatches[2]) {
+            // We found a quoted value. When we capture this value, unescape any double quotes.
+            strMatchedValue = arrMatches[2].replace(/\"\"/g, "\"");
+        } 
+        else { 
+            // non-quoted value.
+            strMatchedValue = arrMatches[3];
+        }
+
+        // Now that we have our value string, let's add it to the data array.
+        arrData[arrData.length - 1].push(strMatchedValue);
+    }
+
+    return arrData;
+}
+
+
+function parse_csv() {
+    let file = $("#csv_file")[0].files[0];
+    if (!file) return;
+    // console.log(file);
+
+    let reader = new FileReader();
+    reader.onload = function() {
+        import_csv(CSVToArray(reader.result));
+    };
+    reader.readAsText(file);
+    $("#csv_file").val(null);
+}
+
+
+function import_csv(csv_arrays) {
+    let config_fields = {
+        //field: [possible header values],
+        "client_id": ["id", "client", "client id", "client_id", "customerallnum", "customer all num"],
+        "event_name": ["name", "event name", "event_name"],
+        "event_type": ["type", "event type", "event_type"],
+        "event_date": ["date", "event date", "event_date"],
+        "event_description": ["description", "desc", "event description", "event_description"],
+        "event_status": ["status", "event status", "event_status"],
+        "open_closed": ["open", "closed", "open closed", "open_closed", "open/closed"],
+        "assigned_to": ["user", "user_id", "user id", "userid", "event assigned to", "event_assigned_to", "eventassignedto"],
+    };
+
+    let config = [];
+    let unknown_headers = [];
+
+    //read and validate header row, determine field order
+    for (let header of csv_arrays[0]) {
+        let invalid = true;
+        for (let field in config_fields) {
+            if (config_fields[field].includes(header.toLowerCase())) {
+                config.push(field);
+                delete config_fields[field];
+                invalid = false;
+                break;
+            }
+        }
+
+        if (/^opentext\d+$/i.test(header)) {
+            config.push(header);
+            invalid = false;
+        }
+        else if (/^\d+$/.test(header)) {
+            config.push("opentext" + header);
+            invalid = false;
+        }
+
+        if (invalid) unknown_headers.push(header);
+    }
+
+    //exit if headers were incorrect
+    let remaining_headers = Object.keys(config_fields);
+    if (remaining_headers.length > 0) {
+        alert("File is missing headers: " + remaining_headers.toString());
+        return;
+    }
+    if (unknown_headers.length > 0) {
+        alert("File contains unknown headers: " + unknown_headers.toString());
+        return;
+    }
+
+    //loop through csv lines and create objects
+    let new_records = [];
+    let invalid_count = 0;
+    for (let i = 1; i < csv_arrays.length; i++) {
+        let csv_line = csv_arrays[i];
+        let record = {};
+
+        //ensure field count matches
+        if (csv_line.length != config.length) {
+            invalid_count++;
+            continue;
+        }
+
+        //validate row fields
+        let invalid = false;
+        for (let c = 0; c < config.length; c++) {
+            let field = config[c];
+            let value = csv_line[c];
+
+            if (field == "client_id") {
+                if (!/^[1-9][0-9]{0,4}$/.test(value)) invalid = true;
+                record["@field.billable"] = value;
+                record["@field.CustomerAllNum@comp.Events_Create"] = value;
+            }
+            else if (field == "event_name") {
+                if (value.length == 0) invalid = true;
+                record["@field.Name@comp.Events_Create"] = value;
+            }
+            else if (field == "event_type") {
+                if (!Object.keys(event_types).includes(value)) invalid = true;
+                record["@field.Type@comp.Events_Create"] = value;
+            }
+            else if (field == "event_date") {
+                if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(value)) invalid = true;
+                record["@FIELD.EventDate@comp.Events_Create"] = value;
+            }
+            else if (field == "event_status") {
+                if (!["Complete", "Pending", "Void"].includes(value)) invalid = true;
+                record["@field.Status@comp.Events_Create" ] = value;
+            }
+            else if (field == "event_description") {
+                //validation not really needed here...
+                record["@field.Description@comp.Events_Create"] = value;
+            }
+            else if (field == "open_closed") {
+                if (!["Open", "Closed"].includes(value)) invalid = true;
+                record["@field.ReminderStatus@comp.Events_Create"] = value;
+            }
+            else if (field == "assigned_to") {
+                if (isNaN(value)) {
+                    if (!Object.values(users).includes(value)) {
+                        invalid = true;
+                    }
+                }
+                else if (!Object.keys(users).includes(value)) {
+                    invalid = true;
+                }
+                record["@field.AssignedTo@comp.Events_Create"] = value;
+            }
+            else {
+                try {
+                    let num = parseInt(field.match(/\d+/)[0]);
+                    let key = `@field.${field}`;
+                    if (num > 370) key += "@comp.EE3_C";
+                    else if (num > 250) key += "@comp.EE2_C";
+                    else if (num > 120) key += "@comp.EE_C";
+                    else key += "@comp.Events_Create";
+
+                    record[key] = value;
+                }
+                catch {
+                    invalid = true;
+                }
+            }
+        } //for c
+
+        if (invalid) invalid_count++;
+        else new_records.push(record);
+    } //for i
+
+    //final confirmation
+    if (new_records.length == 0) {
+        alert(`No records found in file. (${invalid_count} invalid)`)
+        return;
+    }
+    else if (!confirm(`Proceed with importing ${new_records.length} events? (${invalid_count} invalid)`)) {
+        return;
+    }
+
+    //UI stuff
+    $("#response").empty();
+    $("#errors").empty();
+    $("#bulk_event_table").find(":input").css("background-color", "#bbbbbb").prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
+
+    let total_records = new_records.length;
+
+    //finalize and send calls
+    function import_next_event() {
+        let count = total_records - new_records.length;
+        $("#response").text(`(${count}/${total_records})`);
+
+        let record = null;
+        if (new_records.length > 0) {
+            record = new_records.shift(); //grab record at beginning
+        }
+        else {
+            //re-enable form inputs
+            $("#bulk_event_table").find(":input").css("background-color", "").removeProp("disabled").find("option:not(:selected)").removeProp("disabled");
+            return;
+        }
+
+        //add in event data basics
+        for (let field in basic_event_fields) {
+            record[field] = basic_event_fields[field];
+        }
+        let client_id = record["@field.CustomerAllNum@comp.Events_Create"];
+
+        // console.log(record);
+        // import_next_event();
+    
+        $.ajax({
+            url: "EventUpdate.asp",
+            type: "POST",
+            data: record,
+            // async: false,
+            success: function(response) {
+                //console.log(response);
+            },
+            error: function(response) {
+                let err = $("#errors").html();
+                $("#errors").html(`${err}error for ${client_id}<br>`);
+            },
+            complete: function() {
+                import_next_event(); //effectively synchronous
+            }
+        });
+    }
+
+    //begin
+    import_next_event();
 }
