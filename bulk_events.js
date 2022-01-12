@@ -642,7 +642,7 @@ function import_csv(csv_arrays) {
             }
             else {
                 try {
-                    let num = parseInt(field.match(/\d+/)[0]);
+                    let num = parseInt(field.match(/t(\d+)$/)[1]);
                     let key = `@field.${field}`;
                     if (num > 370) key += "@comp.EE3_C";
                     else if (num > 250) key += "@comp.EE2_C";
