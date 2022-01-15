@@ -70,7 +70,9 @@ const event_types = {
 
     // "Adverse Action": [],
     // "Initial Review": [],
-    // "Inspection": [],
+    "Inspection": [
+        "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", //"217", "181", "182", "216", "188", 
+    ],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
     
     // "Complaint",
@@ -389,12 +391,12 @@ function create_bulk_events() {
         let def = fields[field_num];
         let num = parseInt(field_num);
 
-        let key = `@field.OpenText${field_num}`;
-        // if (num > 490) key += "@comp.EE4_C";
-        if (num > 370) key += "@comp.EE3_C";
-        else if (num > 250) key += "@comp.EE2_C";
-        else if (num > 120) key += "@comp.EE_C";
-        else key += "@comp.Events_Create";
+        let key = `@field.OpenText${field_num}@comp.`;
+        // if (num > 490) key += "EE4_C";
+        if (num > 370) key += "EE3_C";
+        else if (num > 250) key += "EE2_C";
+        else if (num > 120) key += "EE_C";
+        else key += "Events_Create";
         // if (def["contact_field"] === true) {
         //     key = `@field.OpenText${field_num}@key.CLIENT_ID@comp.Customers_Update`;
         // }
@@ -630,23 +632,21 @@ function import_csv(csv_arrays) {
                 record["@field.ReminderStatus@comp.Events_Create"] = value;
             }
             else if (field == "assigned_to") {
-                if (isNaN(value)) {
-                    if (!Object.values(users).includes(value)) {
-                        invalid = true;
-                    }
-                }
-                else if (!Object.keys(users).includes(value)) {
-                    invalid = true;
-                }
+                // if (isNaN(value)) {
+                //     if (!Object.values(users).includes(value)) {
+                //         invalid = true;
+                //     }
+                // }
+                if (!Object.keys(users).includes(value)) invalid = true;
                 record["@field.AssignedTo@comp.Events_Create"] = value;
             }
-            else {
+            else if (value) {
                 let num = parseInt(field.match(/t(\d+)$/)[1]);
-                let key = `@field.${field}`;
-                if (num > 370) key += "@comp.EE3_C";
-                else if (num > 250) key += "@comp.EE2_C";
-                else if (num > 120) key += "@comp.EE_C";
-                else key += "@comp.Events_Create";
+                let key = `@field.${field}@comp.`;
+                if (num > 370) key += "EE3_C";
+                else if (num > 250) key += "EE2_C";
+                else if (num > 120) key += "EE_C";
+                else key += "Events_Create";
 
                 record[key] = value;
             }
@@ -679,7 +679,7 @@ function import_csv(csv_arrays) {
 
         let record = null;
         if (new_records.length > 0) {
-            record = new_records.shift(); //grab record at beginning
+            record = new_records.shift();
         }
         else {
             //re-enable form inputs
