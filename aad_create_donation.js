@@ -161,7 +161,7 @@ jQuery(document).ready(function() {
     let row1 = $("<tr></tr>")
     .append(td("Payment Amount", txt_pay_amount))
     .append(td("Payment Date", txt_pay_date))
-    .append(td("Annual Income", txt_income));
+    .append(td("Total Organic Sales Amount", txt_income));
     let row2 = $("<tr></tr>")
     .append(td("Payment Frequency", sel_pay_frequency))
     .append(td("Payment Method", sel_pay_methods))
