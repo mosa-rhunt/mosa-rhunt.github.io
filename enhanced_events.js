@@ -31,7 +31,7 @@ $(document).ready(function() {
     .insertAfter("#wrap");
 
     //old code that might need to stick around??? related to stock statements
-    $(".chzn-select_span").next().next().attr("data-placeholder", "Choose a reason").css("width:400px;").addClass("chzn-select");
+    $(".chzn-select_span").next().next().attr("data-placeholder", "Choose a reason").css("width", "400px").addClass("chzn-select");
     if(!jQuery().chosen) {
         // the plugin is not loaded => load it:
         jQuery.getScript("js/chosen.jquery.min.js", function() {
