@@ -30,19 +30,16 @@ $(document).ready(function() {
     .append(save_and_close)
     .insertAfter("#wrap");
 
-    //old code that might need to stick around??? related to stock statements
-    $(".chzn-select_span").next().next().attr("data-placeholder", "Choose a reason").css("width", "400px").addClass("chzn-select");
-    if(!jQuery().chosen) {
-        // the plugin is not loaded => load it:
-        jQuery.getScript("js/chosen.jquery.min.js", function() {
-            $(".chzn-select").chosen({no_results_text: "No results matched"});
-
-        });
-    }
 });
 
 
 function enable_stock_statement_copy(dropdown_id, textbox_id) {
+    //old code that might need to stick around??? related to stock statements
+    $("#FOpenText" + dropdown_id).addClass("chzn-select_span").css("z-index", "20");
+    // .next().next().prop("data-placeholder", "Choose a reason").css("width", "400px").addClass("chzn-select");
+    // $(".chzn-select_span")
+    // if ($().chosen) $(".chzn-select").chosen({no_results_text: "No results matched"});
+
     let looky = $("<img src='images/search.gif' style='margin-right:10px' />").on("click", function() {
         let stock_statement = $("#FOpenText" + dropdown_id).val();
         $("#preview" + dropdown_id).text(stock_statement);
@@ -58,6 +55,6 @@ function enable_stock_statement_copy(dropdown_id, textbox_id) {
     let div = $("<div></div>")
     .append(looky)
     .append(add_button)
-    .append(`<div id='preview${dropdown_id}' style='width:500px'></div>`);
+    .append(`<div id='preview${dropdown_id}' style='width:500px; display:block'></div>`);
     $("#FOpenText" + dropdown_id).parent().after(div);
 }
