@@ -7,13 +7,13 @@ function on_form_change() {
         for (let field of fields) {
             $("#" + field).prop("readonly", true).css("background-color", "#bbb").find("option:not(:selected)").prop("disabled", true);
         }
-        $("#create_donation").hide();
+        $("#create_donation").prop("disabled", true).css("background-color", "#bbb");
     }
     else {
         for (let field of fields) {
             $("#" + field).removeProp("readonly").css("background-color", "").find("option:not(:selected)").removeProp("disabled");
         }
-        $("#create_donation").removeProp("disabled").css("background-color", "").show();
+        $("#create_donation").removeProp("disabled").css("background-color", "");
     }
 
     //populate json based on form inputs
@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
         $(sel_pay_frequency).append(`<option value='${freq}'>${freq}</option>`);
     }
 
-    let btn_save = $("<input type='button' id='create_donation' value='Create Payment' />").on("click", function() {
+    let btn_save = $("<input type='button' id='create_donation' value='Create Payment' style='border:1px solid black' />").on("click", function() {
         on_form_change(); //get latest data
         if (!pay_data["pay_amount"] 
         || !pay_data["pay_date"]
@@ -144,6 +144,7 @@ jQuery(document).ready(function() {
     $(txt_pay_date).val(pay_data["pay_date"] || "");
     $(sel_pay_methods).val(pay_data["pay_method"] || "");
     $(sel_pay_frequency).val(pay_data["pay_frequency"] || "");
+    $(txt_check_num).val(pay_data["check_num"] || "");
     if (pay_data["pay_created"]) {
         $(chk_pay_created).prop("checked", true);
     }
@@ -173,12 +174,12 @@ jQuery(document).ready(function() {
     .append(hidden)
     .append("<br>")
     .append(table)
-    .append(btn_save)
     .append("<br>")
+    .append(btn_save)
     .append("<br>")
     .append(lnk_url)
     .append("<br>")
-    .append(label("Payment Created&nbsp;"))
+    .append(label("Payment has been created&nbsp;"))
     .append(chk_pay_created)
     .append("<br><br>");
 
