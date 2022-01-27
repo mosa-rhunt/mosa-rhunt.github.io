@@ -34,12 +34,12 @@ $(document).ready(function() {
 
 
 function enable_stock_statement_copy(dropdown_id, textbox_id) {
-    //old code that might need to stick around??? related to stock statements
-    $("#FOpenText" + dropdown_id).addClass("chzn-select_span").css("z-index", "20");
-    // .next().next().prop("data-placeholder", "Choose a reason").css("width", "400px").addClass("chzn-select");
-    // $(".chzn-select_span")
-    // if ($().chosen) $(".chzn-select").chosen({no_results_text: "No results matched"});
+    //old code that might need to stick around???
+    $("#FOpenText" + dropdown_id).addClass("chzn-select").css("z-index", "20")
+    .next().next().addClass("chzn-select_span");
+    if ($().chosen) $(".chzn-select").chosen({no_results_text: "No results matched"});
 
+    //create interface and functionality
     let looky = $("<img src='images/search.gif' style='margin-right:10px' />").on("click", function() {
         let stock_statement = $("#FOpenText" + dropdown_id).val();
         $("#preview" + dropdown_id).text(stock_statement);

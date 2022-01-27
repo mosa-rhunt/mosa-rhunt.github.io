@@ -25,7 +25,7 @@ function on_form_change() {
     $("#FOpenText187").val(JSON.stringify(pay_data));
 }
 
-jQuery(document).ready(function() {
+$(document).ready(function() {
     let custom_field = $("#FOpenText187"); //text which gets replaced by hidden
     let field_name = $(custom_field).prop("name");
     let hidden = $(`<input type='hidden' id='FOpenText187' name='${field_name}' value='{}' />`);
