@@ -11,7 +11,7 @@
     float: left;
     border: 3px solid black;
     padding: 0px 7px;
-    font-size: 25pt;
+    font-size: 15pt;
     font-weight: bold;
 }
 
@@ -26,4 +26,8 @@ span.lbl {
 
 span.lbl b {
     font-weight: bold;
+    background-color: black;
+    color: white;
+    padding: 1px;
+    border-radius: 3px;
 }
