@@ -1,9 +1,21 @@
+
 $(document).ready(function() {
     define_section("Contact Information", ["1361", "1364", "1367"], "#04e762");
-    define_section("Inspection Details", ["1368", "1369"], "#f5b700");
+    define_section("Inspection Details", ["1368", "1369", "1370"], "#f5b700");
     // define_section("", [""], "#00a1e4");
     // define_section("", [""], "#dc0073");
     //https://coolors.co/palette/04e762-f5b700-00a1e4-dc0073-89fc00
+
+    //colorize event types
+    $("table.display1370").find("span.content1370").each(function() {
+        let event_type = $(this).text();
+        
+        if (["Adverse Action", "Complaint", "Surrender", "Timing Need"].includes(event_type)) $(this).addClass("et_bad");
+        else if (["Initial Review", "Initial Review - Additional"].includes(event_type)) $(this).addClass("et_initialreview");
+        else if (["Final Review", "Final Review - Additional"].includes(event_type)) $(this).addClass("et_finalreview");
+        else if (["Grass-Fed Certification", "Inspection", "Inspection - Additional", "Sub Contact Certification"].includes(event_type)) $(this).addClass("et_green");
+        else $(this).addClass("et_neutral");
+    });
 
     //highlight residue tests
     $(".display1369").each(function() {
@@ -52,9 +64,15 @@ function define_section(title, groups, color="#ccc", begin_open=true) {
         $("table.display" + group).css("border-left", "3px solid " + color).css("border-right", "3px solid " + color);
         //fix inner lists
         if ($("table.display" + group).length > 1) {
-            $($("table.display" + group)[1]).css("border-left", null).css("border-right", null).addClass("nested_table").find("td").removeClass();
+            let table = $("table.display" + group)[1]
+            $(table).css("border-left", "").css("border-right", "").addClass("nested_table").find("td").removeClass();
+            // $(table).find("span").removeClass();
         }
     }
+
+    //add bottom border to last in the group
+    $("table.display" + groups[groups.length - 1]).css("border-bottom", "3px solid " + color);
+
     //add to dom
     $("table.display" + groups[0]).before(heading);
     if (!begin_open) $(expando).trigger("click");

@@ -34,6 +34,29 @@
     background-color: #aaa;
 }
 
-.nested_table tbody tr:nth-child(odd) {
+.nested_table thead tr td {
+    font-weight: bold;
+}
+
+.nested_table tbody tr:nth-child(even) {
     background-color: #ddd;
 }
+
+/* Event Types */
+/* https://coolors.co/palette/7fb069-fffbbd-e6aa68-ca3c25-1d1a05 */
+.et_bad ,
+.et_neutral,
+.et_initialreview,
+.et_finalreview,
+.et_green {
+    font-size: 1em;
+    padding: 2px 4px;
+    margin: 0;
+    border-radius: 3px;
+}
+
+.et_initialreview { background-color: #fffbbd; }
+.et_finalreview { background-color: #e6aa68; }
+.et_green { background-color: #7fb069; }
+.et_bad { background-color: #ca3c25; }
+.et_neutral { background-color: #1d1a05; color: #fffbbd; }
