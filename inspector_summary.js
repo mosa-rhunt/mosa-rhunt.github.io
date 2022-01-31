@@ -9,7 +9,7 @@ $(document).ready(function() {
     $(".display1369").each(function() {
         if ($(this).text().includes("Yes")) {
             $(this).css("background", "#0c0");
-      }
+        }
     });
     //highlight additional FR
     $(".display1066").each(function() {
@@ -48,10 +48,12 @@ function define_section(title, groups, color="#ccc", begin_open=true) {
     let heading = $(`<div class=section_heading style='background-color:${color}'>${title}</div>`).append(expando);
 
     //set borders
-    for (let i = 0; i < groups.length; i++) {
-        let group = groups[i];
+    for (let group of groups) {
         $("table.display" + group).css("border-left", "3px solid " + color).css("border-right", "3px solid " + color);
-        if (i == groups.length - 1) $("table.display" + group).css("border-bottom", "3px solid " + color);
+        //fix inner lists
+        if ($("table.display" + group).length > 1) {
+            $($("table.display" + group)[1]).css("border-left", null).css("border-right", null).addClass("nested_table").find("td").removeClass();
+        }
     }
     //add to dom
     $("table.display" + groups[0]).before(heading);
