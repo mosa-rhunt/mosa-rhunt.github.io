@@ -1,0 +1,29 @@
+
+.section_heading {
+    width: auto;
+    display: block;
+    padding: 15px;
+    font-size: 20pt;
+    text-align: center;
+}
+
+.expand_button {
+    float: left;
+    border: 3px solid black;
+    padding: 0px 7px;
+    font-size: 25pt;
+    font-weight: bold;
+}
+
+span.heading {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+span.lbl {
+    display: block;
+}
+
+span.lbl b {
+    font-weight: bold;
+}
