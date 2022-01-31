@@ -24,7 +24,7 @@ function define_section(title, groups, color="#AEBD37") {
     let heading = $(`<div class=section_heading style='background-color:${color}'>${title}</div>`).append(expando);
 
     //set borders
-    for (let i = 0: i < groups.length; i++) {
+    for (let i = 0; i < groups.length; i++) {
         let group = groups[i];
         $("table.display" + group).css("border-left", "3px solid " + color).css("border-right", "3px solid " + color);
         if (i == groups.length - 1) $("table.display" + group).css("border-bottom", "3px solid " + color);
