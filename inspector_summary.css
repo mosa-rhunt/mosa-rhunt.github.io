@@ -15,19 +15,11 @@
     font-weight: bold;
 }
 
-span.heading {
+.lbl {
     font-weight: bold;
-    text-decoration: underline;
-}
-
-span.lbl {
-    display: block;
-}
-
-span.lbl b {
-    font-weight: bold;
-    background-color: black;
+    background-color: #555;
     color: white;
     padding: 1px;
+    margin-right: 3px;
     border-radius: 3px;
 }
