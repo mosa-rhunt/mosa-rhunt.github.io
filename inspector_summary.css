@@ -43,21 +43,28 @@
     background-color: #ddd;
 }
 
-/* Event Types */
-/* https://coolors.co/palette/7fb069-fffbbd-e6aa68-ca3c25-1d1a05 */
-.et_bad ,
+/* et = Event Types */
+.et_bad,
 .et_neutral,
 .et_initialreview,
 .et_finalreview,
-.et_green {
+.et_green,
+.attention,
+.neutral {
     font-size: 1em;
     padding: 2px 4px;
     margin: 0;
     border-radius: 3px;
 }
 
+/* https://coolors.co/palette/7fb069-fffbbd-e6aa68-ca3c25-1d1a05 */
 .et_initialreview { background-color: #fffbbd; }
 .et_finalreview { background-color: #e6aa68; }
 .et_green { background-color: #7fb069; }
 .et_bad { background-color: #ca3c25; }
 .et_neutral { background-color: #1d1a05; color: #fffbbd; }
+.et_additional { outline: 2px solid #000; }
+
+/* Residue tests  */
+.attention { background-color: #0c0; }
+.neutral { background-color: #ccc; }

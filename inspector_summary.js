@@ -3,42 +3,16 @@ This script rearranges and enhances the NewOrg print form for our Inspector Summ
 It's intimately linked with PrintFormNum 115
 */
 $(document).ready(function() {
-    //colorize event types
-    $("table.display1370").find("tbody > tr").each(function() {
-        let event_type_cell = $(this).find("td").css("padding", "5px 0").find("span")[2];
-        let event_type = $(event_type_cell).text();
-        
-        if (["Adverse Action", "Complaint", "Surrender", "Timing Need"].includes(event_type)) $(event_type_cell).addClass("et_bad");
-        else if (["Initial Review", "Initial Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_initialreview");
-        else if (["Final Review", "Final Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_finalreview");
-        else if (["Grass-Fed Certification", "Inspection", "Inspection - Additional", "Sub Contact Certification"].includes(event_type)) $(event_type_cell).addClass("et_green");
-        else $(event_type_cell).addClass("et_neutral");
-    });
-
     //fix cell widths so Description is extra wide
     $("table.display1371").last().find("thead td").each(function() {
         $(this).prop("width", "10%");
     })
     .last().prop("width", "60%");
 
-    //highlight residue tests
-    $(".display1369").each(function() {
-        if ($(this).text().includes("Yes")) {
-            $(this).css("background", "#0c0");
-        }
-    });
-    //highlight additional FR
-    $(".display1066").each(function() {
-        if ($(this).text().includes("Additional Final")) {
-            $(this).css("background", "#0c0");
-        }
-    });
-
     //Input Inventory link
     let querystring_dict = {};
     location.search.substr(1).split("&").forEach(function(item) { querystring_dict[item.split("=")[0]] = item.split("=")[1] });
     $("#ii_link").prop("href", "?PrintFormNum=105&Action=View&EventNum=" + querystring_dict["EventNum"]);
-    //Client's current Input Inventory <a id="ii_link" target="_blank">click here</a>
 });
 
 
@@ -84,16 +58,28 @@ function define_section(title, groups, color="#ccc", begin_open=true) {
 }
 
 
+function colorize_event_types(group_id, cell_index) {
+    $("table.display" + group_id).last().find("tbody > tr").each(function() {
+        let event_type_cell = $(this).find("td").css("padding", "5px 0").find("span")[cell_index];
+        let event_type = $(event_type_cell).text();
+        
+        if (["Adverse Action", "Complaint", "Surrender", "Timing Need"].includes(event_type)) $(event_type_cell).addClass("et_bad");
+        else if (["Initial Review", "Initial Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_initialreview");
+        else if (["Final Review", "Final Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_finalreview");
+        else if (["Grass-Fed Certification", "Inspection", "Inspection - Additional", "Sub Contact Certification"].includes(event_type)) $(event_type_cell).addClass("et_green");
+        else $(event_type_cell).addClass("et_neutral");
+        
+        if (event_type.includes("Additional")) $(event_type_cell).addClass("et_additional");
+    });
+}
+
+
 function download_files_in_zip(include_folders=false) {
     let checked_ids = $('input[name=idfile]:checked').map(() => this.value).get().join(",");
     if (checked_ids.length == 0) alert("Please select at least one file for download");
     else openWindow("downfiles" + (include_folders ? "2" : "") + ".asp?idfile=" + checked_ids, "", "");
 }
 
-
-// <input type="checkbox" onClick="toggle_checkboxes(this)" /> Select All 
-// <input TYPE=BUTTON VALUE="Download selected files as zip" NAME="" onclick="download_files_in_zip();">
-// <input TYPE=BUTTON VALUE="Download selected into zip w folders" NAME="" onclick="download_files_in_zip(true);">
 
 function toggle_checkboxes(source) {
     $("input[name=idfile]").prop("checked", source.checked);
