@@ -5,29 +5,28 @@ It's intimately linked with PrintFormNum 115
 
 $(document).ready(function() {
     define_section("Contact Information", ["1361", "1364", "1367"], "#04e762");
-    define_section("Inspection Details", ["1368", "1369", "1372"], "#f5b700");
-    define_section("Events and Letters", ["1373", "1374", "1371", "1370"], "#00a1e4");
+    define_section("Inspection Details", ["1368", "1369", "1372"], "#00a1e4");
+    define_section("Events and Letters", ["1373", "1374", "1371", "1370"], "#f5b700");
     // define_section("", [""], "#dc0073");
     //https://coolors.co/palette/04e762-f5b700-00a1e4-dc0073-89fc00
 
     //colorize event types
     $("table.display1370").find("tbody tr").each(function() {
-        let event_type_cell = $(this).find("td span")[2];
+        let event_type_cell = $(this).find("td").css("padding", "5px 0").find("span")[2];
         let event_type = $(event_type_cell).text();
         
         if (["Adverse Action", "Complaint", "Surrender", "Timing Need"].includes(event_type)) $(event_type_cell).addClass("et_bad");
         else if (["Initial Review", "Initial Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_initialreview");
         else if (["Final Review", "Final Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_finalreview");
         else if (["Grass-Fed Certification", "Inspection", "Inspection - Additional", "Sub Contact Certification"].includes(event_type)) $(event_type_cell).addClass("et_green");
-        else $(this).addClass("et_neutral");
+        else $(event_type_cell).addClass("et_neutral");
     });
 
-    let header_cells = $("table.display1371")[1].find("thead td").each(function() {
+    //fix cell widths so Description is extra wide
+    let header_cells = $($("table.display1371")[1]).find("thead td").each(function() {
         $(this).prop("width", "10%");
     });
-    //make description extra wide
-    $(header_cells)[4].prop("width", "60%");
-
+    $($(header_cells)[4]).prop("width", "60%");
 
     //highlight residue tests
     $(".display1369").each(function() {
@@ -73,20 +72,20 @@ function define_section(title, groups, color="#ccc", begin_open=true) {
 
     //set borders
     for (let group of groups) {
-        $("table.display" + group).css("border-left", "3px solid " + color).css("border-right", "3px solid " + color);
+        $("table.display" + group).first().css("border-left", "3px solid " + color).css("border-right", "3px solid " + color);
         //fix inner lists
         if ($("table.display" + group).length > 1) {
-            let table = $("table.display" + group)[1]
-            $(table).css("border-left", "").css("border-right", "").addClass("nested_table").find("td").removeClass();
+            $("table.display" + group)[1].addClass("nested_table").find("td").removeClass();
+            // $(table).css("border-left", "").css("border-right", "").addClass("nested_table").find("td").removeClass();
             // $(table).find("span").removeClass();
         }
     }
 
     //add bottom border to last in the group
-    $("table.display" + groups[groups.length - 1]).css("border-bottom", "3px solid " + color);
+    $("table.display" + groups[groups.length - 1]).first().css("border-bottom", "3px solid " + color);
 
     //add to dom
-    $("table.display" + groups[0]).before(heading);
+    $("table.display" + groups[0]).first().before(heading);
     if (!begin_open) $(expando).trigger("click");
 }
 
