@@ -70,5 +70,10 @@
 .et_additional { outline: 2px solid #1d1a05; }
 
 /* Residue tests  */
-.attention { background-color: #7fb069; font-weight: bold; outline: 2px solid #1d1a05; }
 .neutral { background-color: #ccc; }
+.attention { 
+    background-color: #7fb069; 
+    outline: 2px solid #1d1a05; 
+    font-weight: bold; 
+    padding: 2px 20px;
+}
