@@ -2,16 +2,9 @@
 This script rearranges and enhances the NewOrg print form for our Inspector Summary
 It's intimately linked with PrintFormNum 115
 */
-
 $(document).ready(function() {
-    define_section("Contact Information", ["1361", "1364", "1367"], "#04e762");
-    define_section("Inspection Details", ["1369", "1368", "1372"], "#00a1e4");
-    define_section("Events and Letters", ["1373", "1374", "1371", "1370"], "#f5b700");
-    // define_section("", [""], "#dc0073");
-    //https://coolors.co/palette/04e762-f5b700-00a1e4-dc0073-89fc00
-
     //colorize event types
-    $("table.display1370").find("tbody tr").each(function() {
+    $("table.display1370").find("tbody > tr").each(function() {
         let event_type_cell = $(this).find("td").css("padding", "5px 0").find("span")[2];
         let event_type = $(event_type_cell).text();
         
@@ -50,6 +43,7 @@ $(document).ready(function() {
 
 
 function define_section(title, groups, color="#ccc", begin_open=true) {
+    //called from the print form so that updates to the layout don't require updates to the code
     //title: string
     //groups: array of ids (numbers as strings) indicating which neworg blocks are included in the section
     //color: hex value for decoration
