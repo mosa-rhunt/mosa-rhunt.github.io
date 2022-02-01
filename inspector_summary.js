@@ -6,7 +6,7 @@ It's intimately linked with PrintFormNum 115
 $(document).ready(function() {
     define_section("Contact Information", ["1361", "1364", "1367"], "#04e762");
     define_section("Inspection Details", ["1368", "1369", "1372"], "#f5b700");
-    define_section("Events and Letters", ["1371", "1370"], "#00a1e4");
+    define_section("Events and Letters", ["1373", "1374", "1371", "1370"], "#00a1e4");
     // define_section("", [""], "#dc0073");
     //https://coolors.co/palette/04e762-f5b700-00a1e4-dc0073-89fc00
 
@@ -15,10 +15,10 @@ $(document).ready(function() {
         let event_type_cell = $(this).find("td span")[2];
         let event_type = $(event_type_cell).text();
         
-        if (["Adverse Action", "Complaint", "Surrender", "Timing Need"].includes(event_type)) $(this).addClass("et_bad");
-        else if (["Initial Review", "Initial Review - Additional"].includes(event_type)) $(this).addClass("et_initialreview");
-        else if (["Final Review", "Final Review - Additional"].includes(event_type)) $(this).addClass("et_finalreview");
-        else if (["Grass-Fed Certification", "Inspection", "Inspection - Additional", "Sub Contact Certification"].includes(event_type)) $(this).addClass("et_green");
+        if (["Adverse Action", "Complaint", "Surrender", "Timing Need"].includes(event_type)) $(event_type_cell).addClass("et_bad");
+        else if (["Initial Review", "Initial Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_initialreview");
+        else if (["Final Review", "Final Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_finalreview");
+        else if (["Grass-Fed Certification", "Inspection", "Inspection - Additional", "Sub Contact Certification"].includes(event_type)) $(event_type_cell).addClass("et_green");
         else $(this).addClass("et_neutral");
     });
 
