@@ -1,14 +1,15 @@
 
 $(document).ready(function() {
     define_section("Contact Information", ["1361", "1364", "1367"], "#04e762");
-    define_section("Inspection Details", ["1368", "1369", "1370"], "#f5b700");
-    // define_section("", [""], "#00a1e4");
+    define_section("Inspection Details", ["1368", "1369", "1372"], "#f5b700");
+    define_section("Events and Letters", ["1371", "1370"], "#00a1e4");
     // define_section("", [""], "#dc0073");
     //https://coolors.co/palette/04e762-f5b700-00a1e4-dc0073-89fc00
 
     //colorize event types
-    $("table.display1370").find("span.content1370").each(function() {
-        let event_type = $(this).text();
+    $("table.display1370").find("tbody tr").each(function() {
+        let event_type_cell = $(this).find("td span")[2];
+        let event_type = $(event_type_cell).text();
         
         if (["Adverse Action", "Complaint", "Surrender", "Timing Need"].includes(event_type)) $(this).addClass("et_bad");
         else if (["Initial Review", "Initial Review - Additional"].includes(event_type)) $(this).addClass("et_initialreview");
