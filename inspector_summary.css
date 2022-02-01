@@ -34,7 +34,7 @@
     background-color: #aaa;
 }
 
-.nested_table thead tr td {
+.nested_table thead span {
     font-weight: bold;
 }
 

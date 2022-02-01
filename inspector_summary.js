@@ -1,3 +1,7 @@
+/*
+This script rearranges and enhances the NewOrg print form for our Inspector Summary
+It's intimately linked with PrintFormNum 115
+*/
 
 $(document).ready(function() {
     define_section("Contact Information", ["1361", "1364", "1367"], "#04e762");
@@ -17,6 +21,13 @@ $(document).ready(function() {
         else if (["Grass-Fed Certification", "Inspection", "Inspection - Additional", "Sub Contact Certification"].includes(event_type)) $(this).addClass("et_green");
         else $(this).addClass("et_neutral");
     });
+
+    let header_cells = $("table.display1371")[1].find("thead td").each(function() {
+        $(this).prop("width", "10%");
+    });
+    //make description extra wide
+    $(header_cells)[4].prop("width", "60%");
+
 
     //highlight residue tests
     $(".display1369").each(function() {
