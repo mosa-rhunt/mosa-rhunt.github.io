@@ -5,7 +5,7 @@ It's intimately linked with PrintFormNum 115
 
 $(document).ready(function() {
     define_section("Contact Information", ["1361", "1364", "1367"], "#04e762");
-    define_section("Inspection Details", ["1368", "1369", "1372"], "#00a1e4");
+    define_section("Inspection Details", ["1369", "1368", "1372"], "#00a1e4");
     define_section("Events and Letters", ["1373", "1374", "1371", "1370"], "#f5b700");
     // define_section("", [""], "#dc0073");
     //https://coolors.co/palette/04e762-f5b700-00a1e4-dc0073-89fc00
@@ -23,10 +23,10 @@ $(document).ready(function() {
     });
 
     //fix cell widths so Description is extra wide
-    let header_cells = $($("table.display1371")[1]).find("thead td").each(function() {
+    $("table.display1371").last().find("thead td").each(function() {
         $(this).prop("width", "10%");
-    });
-    $($(header_cells)[4]).prop("width", "60%");
+    })
+    .last().prop("width", "60%");
 
     //highlight residue tests
     $(".display1369").each(function() {
@@ -75,7 +75,7 @@ function define_section(title, groups, color="#ccc", begin_open=true) {
         $("table.display" + group).first().css("border-left", "3px solid " + color).css("border-right", "3px solid " + color);
         //fix inner lists
         if ($("table.display" + group).length > 1) {
-            $("table.display" + group)[1].addClass("nested_table").find("td").removeClass();
+            $("table.display" + group).last().addClass("nested_table").find("td").removeClass();
             // $(table).css("border-left", "").css("border-right", "").addClass("nested_table").find("td").removeClass();
             // $(table).find("span").removeClass();
         }
