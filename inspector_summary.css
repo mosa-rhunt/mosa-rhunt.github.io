@@ -1,3 +1,6 @@
+@media print {
+    .noprint { display: none; }
+}
 
 .section_heading {
     width: auto;
@@ -66,5 +69,5 @@
 .et_additional { outline: 2px solid #000; }
 
 /* Residue tests  */
-.attention { background-color: #0c0; }
+.attention { background-color: #0c0; font-weight: bold; }
 .neutral { background-color: #ccc; }

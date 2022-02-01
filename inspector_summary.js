@@ -22,7 +22,7 @@ function define_section(title, groups, color="#ccc", begin_open=true) {
     //groups: array of ids (numbers as strings) indicating which neworg blocks are included in the section
     //color: hex value for decoration
     
-    let expando = $("<button type=button class=expand_button data-is_expanded=1>-</button>").on("click", function() {
+    let expando = $("<button type=button class='expand_button noprint' data-is_expanded=1>-</button>").on("click", function() {
         if (parseInt($(this).data("is_expanded"))) {
             for (let group of groups) {
                 $("table.display" + group).hide();
@@ -69,7 +69,7 @@ function colorize_event_types(group_id, cell_index) {
         else if (["Grass-Fed Certification", "Inspection", "Inspection - Additional", "Sub Contact Certification"].includes(event_type)) $(event_type_cell).addClass("et_green");
         else $(event_type_cell).addClass("et_neutral");
         
-        if (event_type.includes("Additional")) $(event_type_cell).addClass("et_additional");
+        if (event_type.includes("Additional") || event_type.includes("Grass-Fed")) $(event_type_cell).addClass("et_additional");
     });
 }
 
@@ -83,8 +83,4 @@ function download_files_in_zip(include_folders=false) {
 
 function toggle_checkboxes(source) {
     $("input[name=idfile]").prop("checked", source.checked);
-    // checkboxes = document.getElementsByName('idfile');
-    // for(var i=0, n=checkboxes.length;i<n;i++) {
-    //     checkboxes[i].checked = source.checked;
-    // }
 }
