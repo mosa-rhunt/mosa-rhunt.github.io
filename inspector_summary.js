@@ -44,8 +44,6 @@ function define_section(title, groups, color="#ccc", begin_open=true) {
         //fix inner lists
         if ($("table.display" + group).length > 1) {
             $("table.display" + group).last().addClass("nested_table").find("td").removeClass();
-            // $(table).css("border-left", "").css("border-right", "").addClass("nested_table").find("td").removeClass();
-            // $(table).find("span").removeClass();
         }
     }
 
@@ -75,7 +73,7 @@ function colorize_event_types(group_id, cell_index) {
 
 
 function download_files_in_zip(include_folders=false) {
-    let checked_ids = $('input[name=idfile]:checked').map(() => this.value).get().join(",");
+    let checked_ids = $("input[name=idfile]:checked").map(() => $(this).val()).get().join(",");
     if (checked_ids.length == 0) alert("Please select at least one file for download");
     else openWindow("downfiles" + (include_folders ? "2" : "") + ".asp?idfile=" + checked_ids, "", "");
 }
