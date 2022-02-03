@@ -152,7 +152,7 @@ function calculate_inspection_fees() {
         }
     } //end contract inspector
     inspFeeSummary += "-------<br/>";
-    inspFeeSummary += "Inspector total: $" + inspectorFee;
+    inspFeeSummary += "Inspector total: $" + parseFloat(inspectorFee).toFixed(2);
     
     //finalize client fee
     let clientType = $("#OpenText44").html().toString();
@@ -169,8 +169,7 @@ function calculate_inspection_fees() {
     if ($("#id_type option:selected").val() === "Inspection") clientFee -= inspectionDeposit; //won't happen for Inspection - Additional
     
     //round to 2 decimal points
-    inspectorFee = parseFloat(inspectorFee).toFixed(2);
-    clientFee = parseFloat(clientFee).toFixed(2);
+    // clientFee = parseFloat(clientFee).toFixed(2);
 
     $("#FOpenText80").val(inspectorFee);
     $("#FOpenText81").val(clientFee);
@@ -215,7 +214,7 @@ function updateLabels() {
         $("#Label177").html("Total Cost of Additional Paperwork Off-site");
         $("#Label180").html("Description: Itemized Additional Paperwork Off-Site");
     }
-    disableFormInputs();
+    disableFormInputs(); //in case the transportation fields need to get disabled
 }
 
 
@@ -226,6 +225,7 @@ function disableFormInputs() {
     let driveHoursAndRate = ["209", "210"];
     let staffDropdowns = ["6", "189", "95"];
     let residueAndExpedited = ["158", "159"];
+    // let contractorFees = ["116", "176", "179", "177", "180"]; //includes a few dupes from onSiteFields but w/e
 
     //re-enable all inputs
     for (let id of onSiteFields.concat(driveHoursAndRate)) {
