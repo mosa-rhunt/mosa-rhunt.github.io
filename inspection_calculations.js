@@ -122,25 +122,25 @@ function calculate_inspection_fees() {
             inspectorFee += driveTotal;
             inspFeeSummary += "Driving " + driveTimeHours + " hours @ " + driveTimeRate + ": $" + driveTotal + "<br/>";
         }
-        if (food > 0) {
-            inspectorFee += food;
-            inspFeeSummary += "Food: $" + food + "<br/>";
-        }
         if (lodging > 0) {
             inspectorFee += lodging;
             inspFeeSummary += "Lodging: $" + lodging + "<br/>";
         }
-        if (rentalCar > 0) {
-            inspectorFee += rentalCar;
-            inspFeeSummary += "Rental car: $" + rentalCar + "<br/>";
-        }
+        // if (food > 0) {
+        //     inspectorFee += food;
+        //     inspFeeSummary += "Food: $" + food + "<br/>";
+        // }
+        // if (rentalCar > 0) {
+        //     inspectorFee += rentalCar;
+        //     inspFeeSummary += "Rental car: $" + rentalCar + "<br/>";
+        // }
+        // if (airFare > 0) {
+        //     inspectorFee += airFare;
+        //     inspFeeSummary += "Air fare: $" + airFare + "<br/>";
+        // }
         if (residueTestTotal > 0) {
             inspectorFee += residueTestTotal;
             inspFeeSummary += "Residue test & postage: $" + residueTestTotal + "<br/>";
-        }
-        if (airFare > 0) {
-            inspectorFee += airFare;
-            inspFeeSummary += "Air fare: $" + airFare + "<br/>";
         }
         if (expeditedServiceFee > 0) {
             inspectorFee += expeditedServiceFee;
