@@ -20,9 +20,7 @@ $(document).ready(function() {
     $("#FOpenText212").attr("readonly", "readonly").css("background-color", "#bbb");
 
     //if it was obviously a staff inspector before, check that radio
-    if ($("#FOpenText6 option:selected").val() !== ""
-    || $("#FOpenText95 option:selected").val() !== ""
-    || $("#FOpenText189 option:selected").val() !== "") {
+    if ($("#FOpenText95 option:selected").val() !== "" || $("#FOpenText189 option:selected").val() !== "") {
         $("input:radio[value='staff']").prop("checked", true);
     }
 
