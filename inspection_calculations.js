@@ -81,14 +81,14 @@ function calculate_inspection_fees() {
             inspectorFee += otherFeesTotal;
             inspFeeSummary += "Other fees: $" + otherFeesTotal + "<br/>";
         }
+        if (lodging > 0) {
+            inspectorFee += lodging;
+            inspFeeSummary += "Lodging: $" + lodging + "<br/>";
+        }
         // if (usedMosaCC === "No") {
         //     if (food > 0) {
         //         inspectorFee += food;
         //         inspFeeSummary += "Food: $" + food + "<br/>";
-        //     }
-        //     if (lodging > 0) {
-        //         inspectorFee += lodging;
-        //         inspFeeSummary += "Lodging: $" + lodging + "<br/>";
         //     }
         //     if (rentalCar > 0) {
         //         inspectorFee += rentalCar;
@@ -118,7 +118,7 @@ function calculate_inspection_fees() {
             inspFeeSummary += "Additional off-site time: $" + additionalOffSiteTotal + "<br/>";
         }
         if (driveTimeHours > 0) {
-            let driveTotal = (driveTimeHours * driveTimeRate);
+            let driveTotal = driveTimeHours * driveTimeRate;
             inspectorFee += driveTotal;
             inspFeeSummary += "Driving " + driveTimeHours + " hours @ " + driveTimeRate + ": $" + driveTotal + "<br/>";
         }
@@ -156,16 +156,17 @@ function calculate_inspection_fees() {
     
     //finalize client fee
     let clientType = $("#OpenText44").html().toString();
-    let tierBaseFee = (clientType.includes("Handler") ? 400 : 300);
+    let inspectionDeposit = (clientType.includes("Handler") ? 400 : 300);
     if (inspectorType === "staff") {
-        let subtotal = inspectorFee + baseFee + additionalOnSiteTotal + additionalOffSiteTotal - personalPhone; //- personalComputer
+        let subtotal = inspectorFee - personalPhone; //- personalComputer
+        //baseFee + additionalOnSiteTotal + additionalOffSiteTotal
         clientFee = subtotal * 1.07;
     }
     else { //contracted
         let subtotal = inspectorFee - residueTestTotal - expeditedServiceFee;
         clientFee = subtotal * 1.07;
     }
-    if ($("#id_type option:selected").val() === "Inspection") clientFee -= tierBaseFee; //won't happen for Inspection - Additional
+    if ($("#id_type option:selected").val() === "Inspection") clientFee -= inspectionDeposit; //won't happen for Inspection - Additional
     
     //round to 2 decimal points
     inspectorFee = parseFloat(inspectorFee).toFixed(2);
