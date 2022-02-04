@@ -26,6 +26,23 @@ $(document).ready(function() {
 
     $("input:radio[name=inspector_type]").on("change", disableFormInputs);
     updateLabels();
+
+    
+    //Rearrange boxes event date boxes so it's more intuitive
+    let rows = $("table.fillerin div.row");
+    let divs = $(rows[3]).children("div");
+    let container = $("<div class='row'></div>").insertAfter("#OpenText78");
+
+    //move Event Start/End time
+    for (let i = 1; i < 4; i++) {
+        $(divs[i]).appendTo(container);
+    }
+    $(divs[4]).hide(); //minutes box
+    $(divs[0]).removeClass("col-lg-2").removeClass("col-md-2").addClass("col-lg-3").addClass("col-md-3");
+
+    $("label[for='Date']").text("Event Date (Office Use Only):");
+    $("label[for='Start']").text("Inspection Start Time:");
+    $("label[for='End']").text("Inspection End Time:"); 
 });
 
 
@@ -158,8 +175,7 @@ function calculate_inspection_fees() {
     let clientType = $("#OpenText44").html().toString();
     let inspectionDeposit = (clientType.includes("Handler") ? 400 : 300);
     if (inspectorType === "staff") {
-        let subtotal = inspectorFee - personalPhone; //- personalComputer
-        //baseFee + additionalOnSiteTotal + additionalOffSiteTotal
+        let subtotal = inspectorFee + baseFee + additionalOnSiteTotal + additionalOffSiteTotal - personalPhone; //- personalComputer
         clientFee = subtotal * 1.07;
     }
     else { //contracted
