@@ -185,7 +185,7 @@ function calculate_inspection_fees() {
     if ($("#id_type option:selected").val() === "Inspection") clientFee -= inspectionDeposit; //won't happen for Inspection - Additional
     
     //round to 2 decimal points
-    // clientFee = parseFloat(clientFee).toFixed(2);
+    clientFee = parseFloat(clientFee).toFixed(2);
 
     $("#FOpenText80").val(inspectorFee);
     $("#FOpenText81").val(clientFee);
