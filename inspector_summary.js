@@ -58,7 +58,7 @@ function define_section(title, groups, color="#ccc", begin_open=true) {
 
 function colorize_event_types(group_id, cell_index) {
     $("table.display" + group_id).last().find("tbody > tr").each(function() {
-        let event_type_cell = $(this).find("td").css("padding", "5px 0").find("span")[cell_index];
+        let event_type_cell = $(this).find("td").find("span")[cell_index];
         let event_type = $(event_type_cell).text();
         
         if (["Adverse Action", "Complaint", "Surrender", "Timing Need"].includes(event_type)) $(event_type_cell).addClass("et_bad");

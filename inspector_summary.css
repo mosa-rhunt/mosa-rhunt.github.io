@@ -35,6 +35,10 @@
     width: 100%;
 }
 
+.nested_table td {
+    padding: 5px 0;
+}
+
 .nested_table thead tr {
     background-color: #aaa;
 }
@@ -65,7 +69,7 @@
 .et_initialreview { background-color: #fffbbd; }
 .et_finalreview { background-color: #e6aa68; }
 .et_green { background-color: #7fb069; }
-.et_bad { background-color: #ca3c25; }
+.et_bad { background-color: #ca3c25; color: #fffbbd; }
 .et_neutral { background-color: #1d1a05; color: #fffbbd; }
 .et_additional { outline: 2px solid #1d1a05; }
 
