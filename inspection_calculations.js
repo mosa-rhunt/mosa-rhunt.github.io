@@ -94,10 +94,10 @@ function calculate_inspection_fees() {
             inspectorFee += personalPhone;
             inspFeeSummary += "Personal phone use: $" + personalPhone + "<br/>";
         }
-        if (otherFeesTotal > 0) {
-            inspectorFee += otherFeesTotal;
-            inspFeeSummary += "Other fees: $" + otherFeesTotal + "<br/>";
-        }
+        // if (otherFeesTotal > 0) {
+        //     inspectorFee += otherFeesTotal;
+        //     inspFeeSummary += "Other fees: $" + otherFeesTotal + "<br/>";
+        // }
         if (lodging > 0) {
             inspectorFee += lodging;
             inspFeeSummary += "Lodging: $" + lodging + "<br/>";
@@ -175,7 +175,7 @@ function calculate_inspection_fees() {
     let clientType = $("#OpenText44").html().toString();
     let inspectionDeposit = (clientType.includes("Handler") ? 400 : 300);
     if (inspectorType === "staff") {
-        let subtotal = inspectorFee + baseFee + additionalOnSiteTotal + additionalOffSiteTotal - personalPhone; //- personalComputer
+        let subtotal = inspectorFee + baseFee + additionalOnSiteTotal + additionalOffSiteTotal + otherFeesTotal - personalPhone; //- personalComputer
         clientFee = subtotal * 1.07;
     }
     else { //contracted
@@ -248,8 +248,7 @@ function disableFormInputs() {
         $("#FOpenText" + id).attr("readonly", null).css("background-color", "#fff");
     }
     for (let id of staffDropdowns) {
-        $("#FOpenText" + id).css("background-color", "#fff");
-        $("#FOpenText" + id + " option:not(:selected)").prop("disabled", false);
+        disable_dropdown(id);
     }
 
     //then we'll selectively disable inputs
@@ -260,8 +259,7 @@ function disableFormInputs() {
     }
     else {
         for (let id of staffDropdowns) {
-            $("#FOpenText" + id).css("background-color", "#bbb");
-            $("#FOpenText" + id + " option:not(:selected)").prop("disabled", true);
+            disable_dropdown(id);
         }
     }
 
@@ -271,7 +269,12 @@ function disableFormInputs() {
             $("#FOpenText" + id).attr("readonly", "readonly").css("background-color", "#bbb");
         }
         //mosa or personal car? 
-        $("#FOpenText95").css("background-color", "#bbb");
-        $("#FOpenText95 option:not(:selected)").prop("disabled", true);
+        disable_dropdown("95");
     }
+}
+
+
+function disable_dropdown(id) {
+    $("#FOpenText" + id).css("background-color", "#bbb");
+    $("#FOpenText" + id + " option:not(:selected)").prop("disabled", true);
 }
