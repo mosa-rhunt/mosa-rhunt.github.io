@@ -248,7 +248,8 @@ function disableFormInputs() {
         $("#FOpenText" + id).attr("readonly", null).css("background-color", "#fff");
     }
     for (let id of staffDropdowns) {
-        disable_dropdown(id);
+        $("#FOpenText" + id).css("background-color", "#fff");
+        $("#FOpenText" + id + " option:not(:selected)").prop("disabled", false);
     }
 
     //then we'll selectively disable inputs
@@ -259,7 +260,8 @@ function disableFormInputs() {
     }
     else {
         for (let id of staffDropdowns) {
-            disable_dropdown(id);
+            $("#FOpenText" + id).css("background-color", "#bbb");
+            $("#FOpenText" + id + " option:not(:selected)").prop("disabled", true);
         }
     }
 
@@ -269,12 +271,7 @@ function disableFormInputs() {
             $("#FOpenText" + id).attr("readonly", "readonly").css("background-color", "#bbb");
         }
         //mosa or personal car? 
-        disable_dropdown("95");
+        $("#FOpenText95").css("background-color", "#bbb");
+        $("#FOpenText95 option:not(:selected)").prop("disabled", true);
     }
-}
-
-
-function disable_dropdown(id) {
-    $("#FOpenText" + id).css("background-color", "#bbb");
-    $("#FOpenText" + id + " option:not(:selected)").prop("disabled", true);
 }
