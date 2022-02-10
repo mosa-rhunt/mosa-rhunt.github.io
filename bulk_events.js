@@ -58,19 +58,16 @@ const fields = {
     //AAD
     "75": {"name":"Application Status", "input":"select", "options":["Application Requested", "Application Received In Office", "Application Received Web", "Update application sent", "Initial Application Sent"]},
     "66": {"name":"Reason for Sending", "input":"select", "options":["Annual Update", "New Application", "Adding New OSP", "Significant Change to OSP"]},
-    // "": {"name":""},
 
     //Communications
     "214": {"name":"Subject Line"},
     
     //Adverse Action
-    "112": {"name":"Adverse Action Status", "input":"select", "options":["Certification", "Fees", "Paperwork", "Paperwork and Fees", "Certification; Fees", "Certification; Paperwork", "Certification; Paperwork and Fees"]},
-    "35": {"name":"Adverse Action Type", "input":"select", "options":["Noncompliance", "Noncompliance Resolution", "Noncompliance and Resolution", "Noncompliance/Proposed Suspension", "Proposed Revocation", "Proposed Suspension", "Suspension of Certification", "Settlement Agreement", "Revocation", "Noncompliance and Proposed Revocation", "Denial of Certification", "Rejection of Mediation", "Acceptance of Mediation"]},
-    "108": {"name":"Quarter", "input":"select", "options":["Q1", "Q2", "Q3", "Q4"]},
+    "112": {"name":"Adverse Action Status", "input":"select", "options":["", "Certification", "Fees", "Paperwork", "Paperwork and Fees", "Certification; Fees", "Certification; Paperwork", "Certification; Paperwork and Fees"]},
+    "35": {"name":"Adverse Action Type", "input":"select", "options":["", "Noncompliance", "Noncompliance Resolution", "Noncompliance and Resolution", "Noncompliance/Proposed Suspension", "Proposed Revocation", "Proposed Suspension", "Suspension of Certification", "Settlement Agreement", "Revocation", "Noncompliance and Proposed Revocation", "Denial of Certification", "Rejection of Mediation", "Acceptance of Mediation"]},
+    "108": {"name":"Quarter", "input":"select", "options":["", "Q1", "Q2", "Q3", "Q4"]},
     "144": {"name":"Adverse Action Letter Date", "input":"date"},
     "38": {"name":"Noncompliances"},
-    // "": {"name":""},
-
 
     // "": {"name":""},
 };
@@ -85,19 +82,16 @@ const event_types = {
         //scopes
         "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", //"217", "181", "182", "216", "188", 
         //other
-        "75", "66", "69",
+        "75", "66", "69"
     ],
 
-    "Adverse Action": [
-        "112", "35", "108", "71", "144", "38", "107", "91", "72"
-    ],
+    "Adverse Action": ["112", "35", "108", "71", "144", "38", "107", "91", "72"],
+    
     // "Initial Review": [],
-    "Inspection": [
-        "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", //"217", "181", "182", "216", "188", 
-    ],
-    "New Client Outreach": [
-        "150", "215", "153", "156", "127"
-    ],
+
+    "Inspection": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61"],
+
+    "New Client Outreach": ["150", "215", "153", "156", "127"],
     
     // "Complaint",
     // "Final Review",
