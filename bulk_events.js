@@ -1,4 +1,13 @@
-//Bulk event creation form. Used on ReportGeneral.asp?RptNum=462
+/*
+Bulk event creation form. Used on ReportGeneral.asp?RptNum=462
+
+Custom fields
+  1 - 120: Events
+121 - 250: EventsExtra
+251 - 370: EventsExtra2
+371 - 490: EventsExtra3
+*/
+
 
 const fields = {
     //prototype
@@ -35,6 +44,8 @@ const fields = {
     "110": {"name":"cc: NOP Appeals Team", "input":"checkbox"},
     "111": {"name":"cc: NOP Appeals Team - (w/out enclosures)", "input":"checkbox"},
     "107": {"name":"Letter Date", "input":"date"},
+    "72": {"name":"Due By", "input":"date"},
+    "71": {"name":"Info Received Date", "input":"date"},
     // "": {"name":""},
 
     //New Client Outeach fields
@@ -52,6 +63,15 @@ const fields = {
     //Communications
     "214": {"name":"Subject Line"},
     
+    //Adverse Action
+    "112": {"name":"Adverse Action Status", "input":"select", "options":["Certification", "Fees", "Paperwork", "Paperwork and Fees", "Certification; Fees", "Certification; Paperwork", "Certification; Paperwork and Fees"]},
+    "35": {"name":"Adverse Action Type", "input":"select", "options":["Noncompliance", "Noncompliance Resolution", "Noncompliance and Resolution", "Noncompliance/Proposed Suspension", "Proposed Revocation", "Proposed Suspension", "Suspension of Certification", "Settlement Agreement", "Revocation", "Noncompliance and Proposed Revocation", "Denial of Certification", "Rejection of Mediation", "Acceptance of Mediation"]},
+    "108": {"name":"Quarter", "input":"select", "options":["Q1", "Q2", "Q3", "Q4"]},
+    "144": {"name":"Adverse Action Letter Date", "input":"date"},
+    "38": {"name":"Noncompliances"},
+    // "": {"name":""},
+
+
     // "": {"name":""},
 };
 
@@ -68,12 +88,16 @@ const event_types = {
         "75", "66", "69",
     ],
 
-    // "Adverse Action": [],
+    "Adverse Action": [
+        "112", "35", "108", "71", "144", "38", "107", "91", "72"
+    ],
     // "Initial Review": [],
     "Inspection": [
         "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", //"217", "181", "182", "216", "188", 
     ],
-    "New Client Outreach": ["150", "215", "153", "156", "127"],
+    "New Client Outreach": [
+        "150", "215", "153", "156", "127"
+    ],
     
     // "Complaint",
     // "Final Review",
