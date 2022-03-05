@@ -80,7 +80,7 @@ const event_types = {
     "Communications": ["214", "107", "91", "94"],
     "Admin - Application Details": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "75", "66", "69"],
     "Adverse Action": ["112", "35", "71", "108", "144", "38", "107", "91", "72", "94", "110", "111"],
-    // "Initial Review": [],
+    "Initial Review": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "181", "182", "216", "188"],
     "Inspection": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61"],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
     
@@ -268,8 +268,6 @@ jQuery(document).ready(function() {
     );
 
     //add to DOM
-    // let script = $("#the_script"); //this file
-    // .append(script)
     $("#Search").parent().empty()
     .append(
         $("<table id='bulk_event_table' style='background-color:#607584; width:600px;'></table>")
