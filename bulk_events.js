@@ -595,6 +595,7 @@ function import_csv(csv_arrays) {
     //loop through csv lines and create objects
     let new_records = [];
     let no_id_count, no_name_count, no_date_count, no_type_count, no_status_count, no_open_count, no_user_count;
+    no_id_count = no_name_count = no_date_count = no_type_count = no_status_count = no_open_count = no_user_count = 0;
     for (let i = 1; i < csv_arrays.length; i++) {
         let csv_line = csv_arrays[i];
         let record = {};
