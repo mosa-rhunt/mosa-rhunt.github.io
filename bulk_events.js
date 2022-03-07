@@ -184,7 +184,7 @@ function td(lbl, el, attr="") {
 }
 
 
-jQuery(document).ready(function() {
+$(document).ready(function() {
     //Create UI
     let static_field_section = $("<thead></thead>");
     let dynamic_field_section = $("<tbody id='dynamic_field_section'></tbody>");
