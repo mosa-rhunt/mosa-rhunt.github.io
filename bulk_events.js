@@ -205,7 +205,7 @@ jQuery(document).ready(function() {
 
     let sel_assigned_to = $("<select id='assigned_to' class='form-control'></select>").append("<option value='90'>Unassigned</option>");
     for (let user in Object.entries(users).sort((a, b) => a[1].localeCompare(b[1]))) {
-        $(sel_assigned_to).append(`<option value='${user[0]}'>${users[1]}</option>`);
+        $(sel_assigned_to).append(`<option value='${user[0]}'>${user[1]}</option>`);
     }
 
     let sel_event_status = $("<select id='event_status' class='form-control'></select>");
