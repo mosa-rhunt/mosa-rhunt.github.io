@@ -107,10 +107,8 @@ const datepicker_config = {
 };
 
 
-//unused so far
 const users = {
     // "90": "Unassigned",
-
     "265": "Adam Clopton",
      "29": "Alexandra W Petrovits",
      "70": "Ben Caldwell",
@@ -204,7 +202,7 @@ jQuery(document).ready(function() {
     }
 
     let sel_assigned_to = $("<select id='assigned_to' class='form-control'></select>").append("<option value='90'>Unassigned</option>");
-    for (let user in Object.entries(users).sort((a, b) => a[1].localeCompare(b[1]))) {
+    for (let user of Object.entries(users).sort((a, b) => a[1].localeCompare(b[1]))) {
         $(sel_assigned_to).append(`<option value='${user[0]}'>${user[1]}</option>`);
     }
 
@@ -699,7 +697,7 @@ function import_csv(csv_arrays) {
         let count = total_records - new_records.length;
         $("#response").text(`(${count}/${total_records})`);
 
-        let record = null;
+        let record;
         if (new_records.length > 0) {
             record = new_records.shift();
         }
@@ -713,7 +711,6 @@ function import_csv(csv_arrays) {
         for (let field in basic_event_fields) {
             record[field] = basic_event_fields[field];
         }
-        // console.log(record);
     
         $.ajax({
             url: "EventUpdate.asp",
