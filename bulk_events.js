@@ -614,24 +614,24 @@ function import_csv(csv_arrays) {
             no_id = no_name = no_date = no_type = no_status = no_open = no_user = false;
 
             if (field == "client_id") {
-                if (!/^[1-9][0-9]{0,4}$/.test(value)) invalid = true;
+                if (!/^[1-9][0-9]{0,4}$/.test(value)) no_id = true;
                 record["@field.billable"] = value;
                 record["@field.CustomerAllNum@comp.Events_Create"] = value;
             }
             else if (field == "event_name") {
-                if (value.length == 0) invalid = true;
+                if (value.length == 0) no_name = true;
                 record["@field.Name@comp.Events_Create"] = value;
             }
             else if (field == "event_type") {
-                if (!Object.keys(event_types).includes(value)) invalid = true;
+                if (!Object.keys(event_types).includes(value)) no_type = true;
                 record["@field.Type@comp.Events_Create"] = value;
             }
             else if (field == "event_date") {
-                if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(value)) invalid = true;
+                if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(value)) no_date = true;
                 record["@FIELD.EventDate@comp.Events_Create"] = value;
             }
             else if (field == "event_status") {
-                if (!["Complete", "Pending", "Void"].includes(value)) invalid = true;
+                if (!["Complete", "Pending", "Void"].includes(value)) no_status = true;
                 record["@field.Status@comp.Events_Create" ] = value;
             }
             else if (field == "event_description") {
@@ -639,11 +639,11 @@ function import_csv(csv_arrays) {
                 record["@field.Description@comp.Events_Create"] = value;
             }
             else if (field == "open_closed") {
-                if (!["Open", "Closed"].includes(value)) invalid = true;
+                if (!["Open", "Closed"].includes(value)) no_open = true;
                 record["@field.ReminderStatus@comp.Events_Create"] = value;
             }
             else if (field == "assigned_to") {
-                if (!(value in users)) invalid = true;
+                if (!(value in users)) no_user = true;
                 record["@field.AssignedTo@comp.Events_Create"] = value;
             }
             else if (value) {
