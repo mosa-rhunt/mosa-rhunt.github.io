@@ -57,23 +57,36 @@ function define_section(title, groups, color="#ccc", begin_open=true) {
 
 
 function colorize_event_types(group_id, cell_index) {
+    let event_class_map = {
+        // "Admin - Application Details": "et_",
+        "Adverse Action": "et_bad",
+        // "Communications": "et_neutral",
+        "Complaint": "et_bad",
+        "Final Review": "et_finalreview",
+        "Final Review - Additional": "et_finalreview et_additional",
+        "Grass-Fed Certification": "et_green et_additional",
+        "Initial Review": "et_initialreview",
+        "Initial Review - Additional": "et_initialreview et_additional",
+        // "Inspection": "et_",
+        // "Inspection - Additional": "et_",
+        "Residue Test": "et_green",
+        // "Sub Contact Certification": "et_",
+        "Surrender": "et_bad",
+        "Timing Need": "et_bad",
+        "Transfers": "et_bad",
+    };
+
     $("table.display" + group_id).last().find("tbody > tr").each(function() {
         let event_type_cell = $(this).find("td").find("span")[cell_index];
         let event_type = $(event_type_cell).text();
-        
-        if (["Adverse Action", "Complaint", "Surrender", "Timing Need"].includes(event_type)) $(event_type_cell).addClass("et_bad");
-        else if (["Initial Review", "Initial Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_initialreview");
-        else if (["Final Review", "Final Review - Additional"].includes(event_type)) $(event_type_cell).addClass("et_finalreview");
-        else if (["Grass-Fed Certification", "Inspection", "Inspection - Additional", "Sub Contact Certification"].includes(event_type)) $(event_type_cell).addClass("et_green");
+        if (event_type in event_class_map) $(event_type_cell).addClass(event_class_map[event_type]);
         else $(event_type_cell).addClass("et_neutral");
-        
-        if (event_type.includes("Additional") || event_type.includes("Grass-Fed")) $(event_type_cell).addClass("et_additional");
     });
 }
 
 
 function download_files_in_zip(include_folders=false) {
-    let checked_ids = $("input[name=idfile]:checked").map(() => $(this).val()).get().join(",");
+    let checked_ids = $("input[name=idfile]:checked").map(function() { return $(this).val() }).get().join(",");
     if (checked_ids.length == 0) alert("Please select at least one file for download");
     else openWindow("downfiles" + (include_folders ? "2" : "") + ".asp?idfile=" + checked_ids, "", "");
 }
