@@ -80,7 +80,7 @@ const event_types = {
     "Communications": ["214", "107", "91", "94"],
     "Admin - Application Details": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "75", "66", "69"],
     "Adverse Action": ["112", "35", "71", "108", "144", "38", "107", "91", "72", "94", "110", "111"],
-    "Initial Review": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "181", "182", "216", "188"],
+    "Initial Review": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "181", "182", "216", "188", "217"],
     "Inspection": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61"],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
     
@@ -109,43 +109,43 @@ const datepicker_config = {
 
 //unused so far
 const users = {
-    "90": "Unassigned",
+    // "90": "Unassigned",
 
-    "16": "Jodi Shrum",
-    "20": "Susan Perry",
-    "21": "Gabrielle Daniels",
-    "22": "Stephen Walker",
-    "23": "Katie Starr",
-    "24": "Jackie DeMinter",
-    "25": "Mark Geistlinger",
-    "29": "Alexandra W Petrovits",
-    "35": "Lynne Haynor",
-    "40": "Cori Skolaski",
-    "70": "Ben Caldwell",
-    "81": "Erik Gundersen",
-    "196": "Stephanie Leahy",
-    "197": "Kendra Volk ",
-    "198": "Tracy Trahan",
-    "199": "Curt Parr",
-    "109": "Joe Pedretti",
-    "139": "Kristen Adams",
-    "178": "Kelley Belina",
-    "189": "Terri Okrasinski",
-    "211": "Karin Woods",
-    "222": "Mike Tuszynski",
-    "229": "Rebekah Phillips",
-    "232": "Kelsey Barale",
-    "241": "Sarah Forsythe",
-    "248": "Sammy Clopton",
-    "249": "Val Torres",
-    "250": "Cathie Gotthardt",
-    "251": "Liz Happ",
-    "252": "Cate Eddy",
-    "253": "Ryan Hunt",
-    "260": "Jake Overgaard",
-    "261": "Shannon Bly",
     "265": "Adam Clopton",
+     "29": "Alexandra W Petrovits",
+     "70": "Ben Caldwell",
+    "252": "Cate Eddy",
+    "250": "Cathie Gotthardt",
+     "40": "Cori Skolaski",
+    "199": "Curt Parr",
+     "81": "Erik Gundersen",
+     "21": "Gabrielle Daniels",
+     "24": "Jackie DeMinter",
+    "260": "Jake Overgaard",
+     "16": "Jodi Shrum",
+    "109": "Joe Pedretti",
+    "211": "Karin Woods",
+     "23": "Katie Starr",
+    "178": "Kelley Belina",
+    "232": "Kelsey Barale",
+    "197": "Kendra Volk ",
+    "139": "Kristen Adams",
+    "251": "Liz Happ",
+     "35": "Lynne Haynor",
+     "25": "Mark Geistlinger",
+    "222": "Mike Tuszynski",
     "285": "Olive Reynolds",
+    "229": "Rebekah Phillips",
+    "253": "Ryan Hunt",
+    "248": "Sammy Clopton",
+    "241": "Sarah Forsythe",
+    "261": "Shannon Bly",
+    "196": "Stephanie Leahy",
+     "22": "Stephen Walker",
+     "20": "Susan Perry",
+    "189": "Terri Okrasinski",
+    "198": "Tracy Trahan",
+    "249": "Val Torres",
 };
 
 
@@ -186,13 +186,6 @@ function td(lbl, el, attr="") {
 }
 
 
-// jQuery(document).ready(create_initial_form);
-// function create_initial_form() {
-//     if ($("#Search").length == 0) {
-//         console.log("No search form yet");
-//         setTimeout(create_initial_form, 500);
-//         return;
-//     }
 jQuery(document).ready(function() {
     //Create UI
     let static_field_section = $("<thead></thead>");
@@ -208,6 +201,11 @@ jQuery(document).ready(function() {
     let sel_event_type = $("<select id='event_type' class='form-control'></select>").on("change", generate_event_fields);
     for (let event_type in event_types) {
         $(sel_event_type).append(`<option value='${event_type}'>${event_type}</option>`);
+    }
+
+    let sel_assigned_to = $("<select id='assigned_to' class='form-control'></select>").append("<option value='90'>Unassigned</option>");
+    for (let user in Object.entries(users).sort((a, b) => a[1].localeCompare(b[1]))) {
+        $(sel_assigned_to).append(`<option value='${user[0]}'>${users[1]}</option>`);
     }
 
     let sel_event_status = $("<select id='event_status' class='form-control'></select>");
@@ -237,13 +235,17 @@ jQuery(document).ready(function() {
     )
     .append(
         $("<tr></tr>")
-        .append(td("Event Description", txt_event_desc))
         .append(td("Event Date", txt_event_date))
+        .append(td("Assigned To", sel_assigned_to))
     )
     .append(
         $("<tr></tr>")
         .append(td("Event Status", sel_event_status))
         .append(td("Open/Closed", sel_event_open))
+    )
+    .append(
+        $("<tr></tr>")
+        .append(td("Event Description", txt_event_desc, "colspan=2"))
     )
     .append(
         $("<tr></tr>")
@@ -348,6 +350,7 @@ function create_bulk_events() {
     let event_type = $("#event_type").val();
     let event_open = $("#event_open").val();
     let event_status = $("#event_status").val();
+    let assigned_to = $("#assigned_to").val();
 
     //required fields
     if (!Object.keys(event_types).includes(event_type)) {
@@ -370,6 +373,10 @@ function create_bulk_events() {
         alert("Date is invalid");
         return;
     }
+    if (!(assigned_to in users)) {
+        alert("User is not valid?");
+        return;
+    }
     // if (!event_desc && !confirm("Do you wish to leave the description blank?")) {
     //     return;
     // }
@@ -385,7 +392,7 @@ function create_bulk_events() {
         event_data[field] = basic_event_fields[field];
     }
 
-    event_data["@field.AssignedTo@comp.Events_Create"] = "90"; //90 = "Unassigned"
+    event_data["@field.AssignedTo@comp.Events_Create"] = assigned_to;
     event_data["@field.Name@comp.Events_Create"] = event_name;
     event_data["@field.Description@comp.Events_Create"] = event_desc;
     event_data["@FIELD.EventDate@comp.Events_Create"] = event_date;
@@ -538,14 +545,14 @@ function parse_csv() {
 function import_csv(csv_arrays) {
     let config_fields = {
         //field: [possible header values],
-        "client_id": ["id", "client", "client id", "client_id", "customerallnum", "customer all num"],
+        "client_id": ["id", "client", "client id", "client_id", "customerallnum", "customer all num", "customer_all_num", "customer num", "customer_num", "customernum"],
         "event_name": ["name", "event name", "event_name"],
         "event_type": ["type", "event type", "event_type"],
         "event_date": ["date", "event date", "event_date"],
         "event_description": ["description", "desc", "event description", "event_description"],
         "event_status": ["status", "event status", "event_status"],
-        "open_closed": ["open", "closed", "open closed", "open_closed", "open/closed"],
-        "assigned_to": ["user", "user_id", "user id", "userid", "event assigned to", "event_assigned_to", "eventassignedto"],
+        "open_closed": ["open", "closed", "open closed", "open_closed", "open/closed", "openclosed"],
+        "assigned_to": ["user", "user_id", "user id", "userid", "event assigned to", "event_assigned_to", "assigned_to", "assigned to"],
     };
 
     let config = [];
@@ -563,17 +570,12 @@ function import_csv(csv_arrays) {
             }
         }
 
-        if (/^opentext\d+$/i.test(header)) {
+        //confirm that custom fields say opentext### (or just ###) and that the number is valid
+        if ((/^opentext\d+$/i.test(header) || /^\d+$/.test(header)) 
+        && (header.match(/\d+/)[0] in fields)) {
+            if (!header.toLowerCase().startsWith("opentext")) header = "opentext" + header;
             config.push(header);
             invalid = false;
-            //also make sure field number is legit
-            if (!(header.match(/t(\d+)$/)[1] in fields)) invalid = true;
-        }
-        else if (/^\d+$/.test(header)) {
-            config.push("opentext" + header);
-            invalid = false;
-            //also make sure field number is legit
-            if (!(header in fields)) invalid = true;
         }
 
         if (invalid) unknown_headers.push(header);
@@ -592,7 +594,7 @@ function import_csv(csv_arrays) {
 
     //loop through csv lines and create objects
     let new_records = [];
-    let invalid_count = 0;
+    let no_id_count, no_name_count, no_date_count, no_type_count, no_status_count, no_open_count, no_user_count;
     for (let i = 1; i < csv_arrays.length; i++) {
         let csv_line = csv_arrays[i];
         let record = {};
@@ -603,11 +605,12 @@ function import_csv(csv_arrays) {
             continue;
         }
 
-        //validate row fields
-        let invalid = false;
+        //validate and assign row fields
+        let no_id, no_name, no_date, no_type, no_status, no_open, no_user;
         for (let c = 0; c < config.length; c++) {
             let field = config[c];
             let value = csv_line[c];
+            no_id = no_name = no_date = no_type = no_status = no_open = no_user = false;
 
             if (field == "client_id") {
                 if (!/^[1-9][0-9]{0,4}$/.test(value)) invalid = true;
@@ -639,12 +642,7 @@ function import_csv(csv_arrays) {
                 record["@field.ReminderStatus@comp.Events_Create"] = value;
             }
             else if (field == "assigned_to") {
-                // if (isNaN(value)) {
-                //     if (!Object.values(users).includes(value)) {
-                //         invalid = true;
-                //     }
-                // }
-                if (!Object.keys(users).includes(value)) invalid = true;
+                if (!(value in users)) invalid = true;
                 record["@field.AssignedTo@comp.Events_Create"] = value;
             }
             else if (value) {
@@ -659,16 +657,32 @@ function import_csv(csv_arrays) {
             }
         } //for c
 
-        if (invalid) invalid_count++;
+        if (no_id) no_id_count++;
+        else if (no_name) no_name_count++;
+        else if (no_date) no_date_count++;
+        else if (no_type) no_type_count++;
+        else if (no_status) no_status_count++;
+        else if (no_open) no_open_count++;
+        else if (no_user) no_user_count++;
         else new_records.push(record);
     } //for i
 
+    let invalid_count = no_id_count + no_name_count + no_date_count + no_type_count + no_status_count + no_open_count + no_user_count;
+    let invalid_message = "";
+    if (no_id_count) invalid_message += `(${no_id_count} without id)`;
+    if (no_name_count) invalid_message += `(${no_name_count} without name)`;
+    if (no_date_count) invalid_message += `(${no_date_count} without date)`;
+    if (no_type_count) invalid_message += `(${no_type_count} without type)`;
+    if (no_status_count) invalid_message += `(${no_status_count} without status)`;
+    if (no_open_count) invalid_message += `(${no_open_count} without open/closed)`;
+    if (no_user_count) invalid_message += `(${no_user_count} without user)`;
+
     //final confirmation
     if (new_records.length == 0) {
-        alert(`No records found in file. (${invalid_count} invalid)`)
+        alert(`No valid records found in file. (${invalid_count} invalid)`)
         return;
     }
-    else if (!confirm(`Proceed with importing ${new_records.length} events? (${invalid_count} invalid)`)) {
+    else if (!confirm(`Proceed with importing ${new_records.length} events? \nIgnored ${invalid_count} ${invalid_message}`)) {
         return;
     }
 
