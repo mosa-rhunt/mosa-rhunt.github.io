@@ -108,7 +108,7 @@ const datepicker_config = {
 
 
 const users = {
-    // "90": "Unassigned",
+     "90": " Unassigned",
     "265": "Adam Clopton",
      "29": "Alexandra W Petrovits",
      "70": "Ben Caldwell",
@@ -201,7 +201,7 @@ $(document).ready(function() {
         $(sel_event_type).append(`<option value='${event_type}'>${event_type}</option>`);
     }
 
-    let sel_assigned_to = $("<select id='assigned_to' class='form-control'></select>").append("<option value='90'>Unassigned</option>");
+    let sel_assigned_to = $("<select id='assigned_to' class='form-control'></select>");
     for (let user of Object.entries(users).sort((a, b) => a[1].localeCompare(b[1]))) {
         $(sel_assigned_to).append(`<option value='${user[0]}'>${user[1]}</option>`);
     }
@@ -576,13 +576,13 @@ function import_csv(csv_arrays) {
                 if (value.length == 0) no_name = true;
                 record["@field.Name@comp.Events_Create"] = value;
             }
-            else if (field == "event_type") {
-                if (!Object.keys(event_types).includes(value)) no_type = true;
-                record["@field.Type@comp.Events_Create"] = value;
-            }
             else if (field == "event_date") {
                 if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(value)) no_date = true;
                 record["@FIELD.EventDate@comp.Events_Create"] = value;
+            }
+            else if (field == "event_type") {
+                if (!Object.keys(event_types).includes(value)) no_type = true;
+                record["@field.Type@comp.Events_Create"] = value;
             }
             else if (field == "event_status") {
                 if (!["Complete", "Pending", "Void"].includes(value)) no_status = true;
