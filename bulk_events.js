@@ -482,50 +482,6 @@ function create_bulk_events() {
 }
 
 
-//http://stackoverflow.com/a/1293163/2343
-function CSVToArray(strData, strDelimiter=",") {
-    // Create a regular expression to parse the CSV values.
-    var objPattern = new RegExp((
-        "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" + // Delimiters.
-        "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" + // Quoted fields.
-        "([^\"\\" + strDelimiter + "\\r\\n]*))" // Standard fields.
-    ), "gi");
-
-    // Create an array to hold our data with a default empty first row
-    var arrData = [[]];
-
-    // Create an array to hold our individual pattern matching groups
-    var arrMatches = null;
-
-    // Keep looping over the regular expression matches until we can no longer find a match.
-    while (arrMatches = objPattern.exec(strData)) {
-        var strMatchedDelimiter = arrMatches[1];
-
-        // Check to see if the given delimiter has a length (is not the start of string) and if it matches
-        // field delimiter. If id does not, then we know that this delimiter is a row delimiter.
-        if (strMatchedDelimiter.length && strMatchedDelimiter !== strDelimiter) {
-            // Since we have reached a new row of data, add an empty row to our data array.
-            arrData.push([]);
-        }
-
-        var strMatchedValue;
-        if (arrMatches[2]) {
-            // We found a quoted value. When we capture this value, unescape any double quotes.
-            strMatchedValue = arrMatches[2].replace(/\"\"/g, "\"");
-        } 
-        else { 
-            // non-quoted value.
-            strMatchedValue = arrMatches[3];
-        }
-
-        // Now that we have our value string, let's add it to the data array.
-        arrData[arrData.length - 1].push(strMatchedValue);
-    }
-
-    return arrData;
-}
-
-
 function parse_csv() {
     let file = $("#csv_file")[0].files[0];
     if (!file) return;
@@ -592,24 +548,24 @@ function import_csv(csv_arrays) {
 
     //loop through csv lines and create objects
     let new_records = [];
-    let no_id_count, no_name_count, no_date_count, no_type_count, no_status_count, no_open_count, no_user_count;
-    no_id_count = no_name_count = no_date_count = no_type_count = no_status_count = no_open_count = no_user_count = 0;
+    let no_id_count, no_name_count, no_date_count, no_type_count, no_status_count, no_open_count, no_user_count, field_count_mismatch;
+    no_id_count = no_name_count = no_date_count = no_type_count = no_status_count = no_open_count = no_user_count = field_count_mismatch = 0;
     for (let i = 1; i < csv_arrays.length; i++) {
         let csv_line = csv_arrays[i];
         let record = {};
 
         //ensure field count matches
         if (csv_line.length != config.length) {
-            invalid_count++;
+            field_count_mismatch++;
             continue;
         }
 
-        //validate and assign row fields
+        //validate and assign data from row to record fields
         let no_id, no_name, no_date, no_type, no_status, no_open, no_user;
+        no_id = no_name = no_date = no_type = no_status = no_open = no_user = false;
         for (let c = 0; c < config.length; c++) {
             let field = config[c];
             let value = csv_line[c];
-            no_id = no_name = no_date = no_type = no_status = no_open = no_user = false;
 
             if (field == "client_id") {
                 if (!/^[1-9][0-9]{0,4}$/.test(value)) no_id = true;
@@ -666,7 +622,7 @@ function import_csv(csv_arrays) {
         else new_records.push(record);
     } //for i
 
-    let invalid_count = no_id_count + no_name_count + no_date_count + no_type_count + no_status_count + no_open_count + no_user_count;
+    let invalid_count = no_id_count + no_name_count + no_date_count + no_type_count + no_status_count + no_open_count + no_user_count + field_count_mismatch;
     let invalid_message = "";
     if (no_id_count) invalid_message += `(${no_id_count} without id)`;
     if (no_name_count) invalid_message += `(${no_name_count} without name)`;
@@ -675,6 +631,7 @@ function import_csv(csv_arrays) {
     if (no_status_count) invalid_message += `(${no_status_count} without status)`;
     if (no_open_count) invalid_message += `(${no_open_count} without open/closed)`;
     if (no_user_count) invalid_message += `(${no_user_count} without user)`;
+    if (field_count_mismatch) invalid_message += `(${field_count_mismatch} without correct field count)`;
 
     //final confirmation
     if (new_records.length == 0) {
@@ -733,4 +690,48 @@ function import_csv(csv_arrays) {
 
     //begin
     import_next_event();
+}
+
+
+function CSVToArray(strData, strDelimiter=",") {
+    //http://stackoverflow.com/a/1293163/2343
+    // Create a regular expression to parse the CSV values.
+    var objPattern = new RegExp((
+        "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" + // Delimiters.
+        "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" + // Quoted fields.
+        "([^\"\\" + strDelimiter + "\\r\\n]*))" // Standard fields.
+    ), "gi");
+
+    // Create an array to hold our data with a default empty first row
+    var arrData = [[]];
+
+    // Create an array to hold our individual pattern matching groups
+    var arrMatches = null;
+
+    // Keep looping over the regular expression matches until we can no longer find a match.
+    while (arrMatches = objPattern.exec(strData)) {
+        var strMatchedDelimiter = arrMatches[1];
+
+        // Check to see if the given delimiter has a length (is not the start of string) and if it matches
+        // field delimiter. If id does not, then we know that this delimiter is a row delimiter.
+        if (strMatchedDelimiter.length && strMatchedDelimiter !== strDelimiter) {
+            // Since we have reached a new row of data, add an empty row to our data array.
+            arrData.push([]);
+        }
+
+        var strMatchedValue;
+        if (arrMatches[2]) {
+            // We found a quoted value. When we capture this value, unescape any double quotes.
+            strMatchedValue = arrMatches[2].replace(/\"\"/g, "\"");
+        } 
+        else { 
+            // non-quoted value.
+            strMatchedValue = arrMatches[3];
+        }
+
+        // Now that we have our value string, let's add it to the data array.
+        arrData[arrData.length - 1].push(strMatchedValue);
+    }
+
+    return arrData;
 }
