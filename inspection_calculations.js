@@ -68,9 +68,9 @@ function calculate_inspection_fees() {
         lodging = fee("12"),
         otherFeesTotal = fee("178"),
         //staff inspector fields
-        // usedMosaCC = $("#FOpenText6 option:selected").val(),
-        // usedMosaCar = $("#FOpenText95 option:selected").val(),
         // personalComputer = ($("#FOpenText173 option:selected").val() == "Yes" ? 10 : 0),
+        // usedMosaCC = $("#FOpenText6 option:selected").val(),
+        usedMosaCar = $("#FOpenText95 option:selected").val(),
         personalPhone = ($("#FOpenText189 option:selected").val() == "Yes" ? 5 : 0),
         inspectorType = $("input:radio[name='inspector_type']:checked").val(),
         //totals/summaries
@@ -82,10 +82,10 @@ function calculate_inspection_fees() {
     //calculate inspector fee, and build summary strings
     inspFeeSummary = "Inspector Fees<br/>";
     if (inspectorType === "staff") {
-        // if (usedMosaCar === "Personal car") {
+        if (usedMosaCar === "Personal car") {
             inspectorFee += mileageCost;
             inspFeeSummary += "Mileage @ " + mileageRate + " for " + miles + " miles: $" + mileageCost + "<br/>";
-        // }
+        }
         // if (personalComputer > 0) {
         //     let computerFee = 10;
         //     inspFeeSummary += "Personal computer use: $" + personalComputer + "<br/>";
