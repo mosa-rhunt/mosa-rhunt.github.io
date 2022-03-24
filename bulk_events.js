@@ -555,6 +555,7 @@ function import_csv(csv_arrays) {
         let record = {};
 
         //ensure field count matches
+        if (csv_line.length < 2) continue;
         if (csv_line.length != config.length) {
             field_count_mismatch++;
             continue;
