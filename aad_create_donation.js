@@ -51,7 +51,7 @@ $(document).ready(function() {
 
     let btn_save = $("<input type='button' id='create_donation' value='Create Payment' style='border:1px solid black' />").on("click", function() {
         on_form_change(); //get latest data
-        if (!pay_data["pay_amount"] 
+        if (!pay_data["pay_amount"]
         || !pay_data["pay_date"]
         || !pay_data["pay_method"]
         || !pay_data["pay_frequency"]

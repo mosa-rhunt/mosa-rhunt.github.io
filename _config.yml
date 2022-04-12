@@ -1,1 +1,4 @@
-theme: jekyll-theme-minimal
+theme: jekyll-theme-slate
+title: MOSA Data Wiki
+description: Technical details about how our data relates
+show_downloads: false
