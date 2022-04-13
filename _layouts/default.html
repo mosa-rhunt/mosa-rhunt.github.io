@@ -6,7 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,maximum-scale=2">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-
+    <style type="text/css">
+      .inner_section { position: relative; max-width: 700px; padding: 20px 10px; margin: 0 auto; }
+      .sidebar { display: inline-block; width: 195px; margin-left: -200px; vertical-align: top; }
+      .article { display: inline-block; max-width: 700px; }
+    </style>
 {% seo %}
     {% include head-custom.html %}
   </head>
@@ -15,9 +19,9 @@
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
-        <header class="inner">
+        <header class="inner_section">
           {% if site.github.is_project_page %}
-            <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
+            <!-- <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a> -->
           {% endif %}
 
           <h1 id="project_title">{{ site.title | default: site.github.repository_name }}</h1>
@@ -34,14 +38,26 @@
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        {{ content }}
+      <section id="main_content" class="inner_section">
+        <div class="sidebar">
+          {% for group in site.data.sidebar.nav %}
+            <h3>{{ group.grouptitle }}</h3>
+            <ul>
+            {% for page in group.pages %}
+              <li><a href="{{ page.url }}">{{ page.pagetitle }}</a></li>
+            {% endfor %}
+            </ul>
+          {% endfor %}
+        </div>
+        <div class="article">
+          {{ content }}
+        </div>
       </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
-      <footer class="inner">
+      <footer class="inner_section">
         {% if site.github.is_project_page %}
         <p class="copyright">{{ site.title | default: site.github.repository_name }} maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
         {% endif %}
