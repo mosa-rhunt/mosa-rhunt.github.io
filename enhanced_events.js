@@ -34,6 +34,11 @@ $(document).ready(function() {
 
 
 function enable_stock_statement_copy(dropdown_id, textbox_id) {
+    if ($("#FOpenText" + textbox_id).length == 0) {
+        console.log(`Textbox ${textbox_id} not found`);
+        return;
+    }
+
     //old code that might need to stick around???
     $("#FOpenText" + dropdown_id).addClass("chzn-select").css("z-index", "20")
     .next().next().addClass("chzn-select_span");
