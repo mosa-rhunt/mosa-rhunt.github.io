@@ -33,7 +33,7 @@ $(document).ready(function() {
 });
 
 
-function enable_stock_statement_copy(dropdown_id, textbox_id) {
+function enable_stock_statement_copy(dropdown_id, textbox_id, sep1="<br>", sep2="<br>") {
     if ($("#FOpenText" + textbox_id).length == 0) {
         console.log(`Textbox ${textbox_id} not found`);
         return;
@@ -53,7 +53,7 @@ function enable_stock_statement_copy(dropdown_id, textbox_id) {
     let add_button = $("<button type=button >Add</button>").on("click", function() {
         let stock_statement = $("#FOpenText" + dropdown_id).val();
         let old_text = nicEditors.findEditor("FOpenText" + textbox_id).getContent();
-        let new_text = old_text + "<br>" + stock_statement + "<br>";
+        let new_text = old_text + sep1 + stock_statement + sep2;
         nicEditors.findEditor("FOpenText" + textbox_id).setContent(new_text);
     });
 
