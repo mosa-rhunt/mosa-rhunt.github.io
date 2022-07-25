@@ -56,7 +56,7 @@ function calculate_inspection_fees() {
         additionalOnSiteTotal = fee("176"),
         additionalOffSiteTotal = fee("177"),
         miles = fee("27"),
-        mileageRate = 0.585,
+        mileageRate = 0.625,
         mileageCost = miles * mileageRate,
         driveTimeHours = fee("209"),
         driveTimeRate = fee("210"),
