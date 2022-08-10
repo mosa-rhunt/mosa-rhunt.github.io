@@ -52,11 +52,13 @@ function fee(id) {
 
 
 function calculate_inspection_fees() {
+    let inspection_date = new Date(fee("78")), jul_1 = new Date("07/01/2022");
+    let mileageRate = inspection_date > jul_1 ? 0.625 : 0.585;
+
     let baseFee = fee("116"),
         additionalOnSiteTotal = fee("176"),
         additionalOffSiteTotal = fee("177"),
         miles = fee("27"),
-        mileageRate = 0.625,
         mileageCost = miles * mileageRate,
         driveTimeHours = fee("209"),
         driveTimeRate = fee("210"),
