@@ -73,7 +73,7 @@ function enable_stock_statement_copy(dropdown_id, textbox_id, sep1="<br>", sep2=
 
 
 
-
+/*
 
 //prepopulate events based on MosaPrepopulate parameter
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
@@ -131,7 +131,7 @@ jQuery(document).ready(function() {
         else jQuery("#btnSave").trigger("click");
     };
 
-    /* 
+     
     //==|| STATUSES ||==//
     Certification
     Fees
@@ -143,7 +143,7 @@ jQuery(document).ready(function() {
     
     //==|| TYPES ||==//
 
-    */
+    
 
     if (val.startsWith("PaperworkAndFees")) {
         jQuery("#FOpenText112").val("Paperwork and Fees"); //AA status
@@ -441,3 +441,4 @@ const DroughtLetter =
 
 
 
+*/
