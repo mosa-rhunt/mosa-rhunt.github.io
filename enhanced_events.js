@@ -30,6 +30,36 @@ $(document).ready(function() {
     .append(save_and_close)
     .insertAfter("#wrap");
 
+
+    //prepopulate
+    let parameters = {};
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        parameters[key] = value; //decodeURIComponent(value)
+    });
+
+    let val = parameters["MosaPrepopulate"];
+    if (!val) return;
+
+    if (val == "AnnualInspection") {
+        $("#event").val(year + " Annual"); //event title
+
+        let today = $("#EventDate").val(); //upon event creation neworg uses today for the event date
+        $("#FOpenText77").val(today); //File Sent to Inspector
+
+        //increment day so it can't conflict with IR
+        let eventDate = new Date(today); //don't even need to use today since js would assume that...
+        eventDate.setDate(eventDate.getDate() + 1); //increment
+        let d = eventDate.getDate(); 
+        let m = eventDate.getMonth() + 1; //Month from 0 to 11
+        let y = eventDate.getFullYear();
+        let newDate = m + "/" + d + "/" + y;
+        $("#EventDate").val(newDate);
+
+        let inspector_id = $("select[name*=OpenText1052]").val();
+        $("select[name*=AssignedTo]").val(inspector_id);
+
+        $("input[type=button][value*=Close]").trigger("click");
+    }
 });
 
 
@@ -73,8 +103,8 @@ function enable_stock_statement_copy(dropdown_id, textbox_id, sep1="<br>", sep2=
 
 
 
-/*
 
+/*
 //prepopulate events based on MosaPrepopulate parameter
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
 //EventUpdate.asp?Action=Create&new=New+Event&MosaPrepopulate=DroughtLetter&EventTypeNum=54&%40where.CustomerNum%40op.EQ=12145
