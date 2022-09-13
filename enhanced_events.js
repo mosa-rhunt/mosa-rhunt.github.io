@@ -37,30 +37,36 @@ $(document).ready(function() {
         parameters[key] = value; //decodeURIComponent(value)
     });
 
-    let val = parameters["MosaPrepopulate"];
-    if (!val) return;
+    let year = (new Date()).getFullYear();
+    let prepopulate_parameter = parameters["MosaPrepopulate"];
+    if (!prepopulate_parameter) return;
 
-    if (val == "AnnualInspection") {
+    if (prepopulate_parameter == "AnnualInspection") {
         $("#event").val(year + " Annual"); //event title
 
         let today = $("#EventDate").val(); //upon event creation neworg uses today for the event date
         $("#FOpenText77").val(today); //File Sent to Inspector
 
         //increment day so it can't conflict with IR
-        let eventDate = new Date(today); //don't even need to use today since js would assume that...
-        eventDate.setDate(eventDate.getDate() + 1); //increment
-        let d = eventDate.getDate(); 
-        let m = eventDate.getMonth() + 1; //Month from 0 to 11
-        let y = eventDate.getFullYear();
-        let newDate = m + "/" + d + "/" + y;
-        $("#EventDate").val(newDate);
+        let event_date = new Date();
+        event_date.setDate(event_date.getDate() + 1); //increment
+        let d = event_date.getDate(); 
+        let m = event_date.getMonth() + 1; //Month from 0 to 11
+        let y = event_date.getFullYear();
+        let new_date = m + "/" + d + "/" + y;
+        $("#EventDate").val(new_date);
 
         let inspector_id = $("select[name*=OpenText1052]").val();
         $("select[name*=AssignedTo]").val(inspector_id);
 
-        $("input[type=button][value*=Close]").trigger("click");
+        save_event();
     }
 });
+
+
+function save_event() {
+    $("input[type=button][value*=Close]").trigger("click");
+}
 
 
 function enable_stock_statement_copy(dropdown_id, textbox_id, sep1="<br>", sep2="<br>") {
