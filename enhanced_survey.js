@@ -11,6 +11,6 @@ $(document).ready(function() {
     //replace "Page #1" with section header, so the sticky header has better info
     $(".header").each(function() {
         let title = $(this).text();
-        $(this).closest("table.outer").prev("div.nav-container").find("p.text").empty().text(title);
+        $(this).closest("table.outer").prev("div.nav-container").find("p.text").empty().text(title).css("padding", "8px").css("font-size", "12pt");
     });
 });
