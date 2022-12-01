@@ -21,6 +21,7 @@ $(document).ready(function() {
         for (let file_type of download_file_types) {
             if ($(this).text().endsWith(file_type)) {
                 $(this).prop("download", true);
+                break;
             }
         }
     });
