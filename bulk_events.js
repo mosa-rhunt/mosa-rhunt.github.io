@@ -525,7 +525,7 @@ function import_csv(csv_arrays) {
         }
 
         //confirm that custom fields say opentext### (or just ###) and that the number is valid
-        if ((/^opentext\d+$/i.test(header) || /^\d+$/.test(header)) 
+        if ((/^(opentext)?\d+$/i.test(header))
         && (header.match(/\d+/)[0] in fields)) {
             if (!header.toLowerCase().startsWith("opentext")) header = "opentext" + header;
             config.push(header);
@@ -636,7 +636,7 @@ function import_csv(csv_arrays) {
 
     //final confirmation
     if (new_records.length == 0) {
-        alert(`No valid records found in file. (${invalid_count} invalid)`)
+        alert(`No valid records found in file. ${invalid_message}`)
         return;
     }
     else if (!confirm(`Proceed with importing ${new_records.length} events? \nIgnored ${invalid_count} ${invalid_message}`)) {
