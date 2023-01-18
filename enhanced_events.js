@@ -31,11 +31,30 @@ $(document).ready(function() {
     .insertAfter("#wrap");
 
 
-    //prepopulate
+    //code to prepopulate events based on MosaPrepopulate querystring
     let parameters = {};
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
         parameters[key] = value; //decodeURIComponent(value)
     });
+
+
+    let textsUpdated = 0, textsRequired = 0;
+    let setNicEditText = function(id, text, first=true) {
+        if (first) textsRequired++;
+        let editor = nicEditors.findEditor(id);
+        if (editor) {
+            editor.setContent(text);
+            textsUpdated++;
+        }
+        else {
+            setTimeout(function() { setNicEditText(id, text, false); }, 500);
+        }
+    };
+
+    let autosaveEvent = function() {
+        if (textsUpdated < textsRequired) setTimeout(function() { autosaveEvent(); }, 500);
+        else jQuery("#btnSave").trigger("click");
+    };
 
     let year = (new Date()).getFullYear();
     let prepopulate_parameter = parameters["MosaPrepopulate"];
