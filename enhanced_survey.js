@@ -1,5 +1,9 @@
 $(document).ready(function() {
-    if (window.location.toString().includes("FormQuestionsPrint.asp") || window.location.href.includes("FormQuestionsPrint.asp")) return;
+    if (!window.location.href.includes("FormQuestions.asp")) return; //only show in the "edit" version
+    
+    $("table.text").find("p.text")
+    .append("<span class='NoPrint' style='color:red; display:block; margin:20px 0;'><b>IMPORTANT:</b> Please click the Save Changes button below to save your entries before closing this window. You can return to complete or edit the OSP later.</span>")
+    .append("<input type='button' value='Save Changes' class='menu' onclick='SaveForm()'>");
 
     //save button at bottom
     $("a.menu").each(function() {
