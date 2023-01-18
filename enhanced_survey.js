@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    if (window.location.includes("FormQuestionsPrint.asp") || window.location.href.includes("FormQuestionsPrint.asp")) return;
+    if (window.location.toString().includes("FormQuestionsPrint.asp") || window.location.href.includes("FormQuestionsPrint.asp")) return;
 
     //save button at bottom
     $("a.menu").each(function() {
