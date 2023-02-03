@@ -200,37 +200,37 @@ function updateLabels() {
     if (inspectionType.endsWith("Onsite/Traditional Inspection")) {
         $("#Label116").html("Base Contract Fee for Traditional Inspection");
         $("#Label176").html("Total Cost of Additional Time On-site for Traditional Inspection");
-        $("#Label179").html("Description: Itemized Additional Time On-Site for Traditional Inspection");
+        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site for Traditional Inspection");
         $("#Label177").html("Total Cost of Additional Paperwork Off-site for Traditional Inspection");
-        $("#Label180").html("Description: Itemized Additional Paperwork Off-Site for Traditional Inspection");
+        $("#Label180").html("Description: REQUIRED Itemized Additional Paperwork Off-Site for Traditional Inspection");
     }
     else if (inspectionType.endsWith("Hybrid Inspection")) {
         $("#Label116").html("Base Contract Fee for Hybrid Inspection");
         $("#Label176").html("Total Cost of Additional Time On-site for Hybrid Inspection");
-        $("#Label179").html("Description: Itemized Additional Time On-Site for Hybrid Inspection");
+        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site for Hybrid Inspection");
         $("#Label177").html("Total Cost of Additional Paperwork Off-site for Hybrid Inspection");
-        $("#Label180").html("Description: Itemized Additional Paperwork Off-Site for Hybrid Inspection");
+        $("#Label180").html("Description: REQUIRED Itemized Additional Paperwork Off-Site for Hybrid Inspection");
     }
     else if (inspectionType.endsWith("Virtual-Only")) {
         $("#Label116").html("Base Contract Fee");
         $("#Label176").html("Total Cost of Additional Time On-site");
-        $("#Label179").html("Description: Itemized Additional Time On-Site");
+        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site");
         $("#Label177").html("Total Cost of Virtual Only Inspection");
-        $("#Label180").html("Description: Itemized # of hours at contracted hourly rate for Virtual Only Inspection");
+        $("#Label180").html("Description: REQUIRED Itemized # of hours at contracted hourly rate for Virtual Only Inspection");
     }
     else if (inspectionType.endsWith("Desk Audit")) {
         $("#Label116").html("Base Contract Fee");
         $("#Label176").html("Total Cost of Additional Time On-site");
-        $("#Label179").html("Description: Itemized Additional Time On-Site");
+        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site");
         $("#Label177").html("Total Cost of Desk Audit Inspection");
-        $("#Label180").html("Description: Itemized # of hours at contracted hourly rate for Desk Audit Inspection");
+        $("#Label180").html("Description: REQUIRED Itemized # of hours at contracted hourly rate for Desk Audit Inspection");
     }
     else { //Additional inspection where the dropdown doesn't even exist
         $("#Label116").html("Base Contract Fee");
         $("#Label176").html("Total Cost of Additional Time On-site");
-        $("#Label179").html("Description: Itemized Additional Time On-Site");
+        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site");
         $("#Label177").html("Total Cost of Additional Paperwork Off-site");
-        $("#Label180").html("Description: Itemized Additional Paperwork Off-Site");
+        $("#Label180").html("Description: REQUIRED Itemized Additional Paperwork Off-Site");
     }
     disableFormInputs(); //in case the transportation fields need to get disabled
 }
