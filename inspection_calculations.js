@@ -54,7 +54,7 @@ function fee(id) {
 function calculate_inspection_fees() {
     let inspectionDate = new Date($("#FOpenText78").val()), jul1 = new Date("07/01/2022");
     // let mileageRate = inspectionDate > jul1 ? 0.625 : 0.585;
-    let mileageRate = 0.655; //2023
+    let mileageRate = inspectionDate.getFullYear() == 2023 ? 0.655 : 0.625;
 
     let baseFee = fee("116"),
         additionalOnSiteTotal = fee("176"),
