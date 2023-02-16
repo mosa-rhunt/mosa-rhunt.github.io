@@ -32,7 +32,7 @@ $(document).ready(function() {
     let chk_pay_created = $("<input type='checkbox' id='pay_created' />").on("change", on_form_change);
     let txt_income = $("<input type='text' id='income' class='form-control' />").on("change", on_form_change).on("keypress", on_form_change);
     let txt_pay_amount = $("<input type='text' id='pay_amount' class='form-control' />").on("change", on_form_change).on("keypress", on_form_change);
-    let txt_pay_date = $("<input type='text' id='pay_date' class='form-control datepicker' data-toggle='datepicker' onblur='checkDate(this)' />").on("change", on_form_change).on("keypress", on_form_change);
+    let txt_pay_date = $("<input type='text' id='pay_date' class='form-control datepicker' data-toggle='datepicker' onkeydown='testForEnter()' onkeyup='shortCut(this,event.keyCode)' onblur='checkDate(this)' />").on("change", on_form_change).on("keypress", on_form_change);
     let txt_check_num = $("<input type='text' id='check_num' class='form-control' />").on("change", on_form_change).on("keypress", on_form_change);
     let sel_pay_methods = $("<select id='pay_method' class='form-control'></select>").on("change", on_form_change);
     let sel_pay_frequency = $("<select id='pay_frequency' class='form-control'></select>").on("change", on_form_change);
@@ -82,17 +82,18 @@ $(document).ready(function() {
             "@field.CardExpiration@comp.Donations_Create": "", //card expiration
             "@field.CardId@comp.Donations_Create": "", //cc security code
             "@field.DonationNumPledge@comp.Donations_Create": "", //link to pledge
+            "Link": "",
             
             "@field.OpenText1": "", //Income Range
             "@field.OpenText2": pay_data["pay_frequency"],
             "@field.OpenText3": "", //Invoice Numbers
-            "@field.OpenText4": "", //Allow Recurring
+            "@field.OpenText4": "No", //Allow Recurring
             "@field.OpenText5": "", //?
             // "@field.OpenText6": "", //unused
             "@field.OpenText7": pay_data["income"], 
             "@field.OpenText8": "", //Producer Type
             "@field.OpenText9": "", //Invoice Event?
-            "@field.OpenText10": "" + (new Date().getFullYear()),
+            "@field.OpenText10": (new Date().getFullYear()).toString(),
 
             "@field.HonorCustomerAllNum": "",
             "@field.HonorName": "",
