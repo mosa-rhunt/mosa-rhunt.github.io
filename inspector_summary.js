@@ -102,7 +102,8 @@ $(document).ready(function() {
     //Input Inventory link
     let querystring_dict = {};
     location.search.substr(1).split("&").forEach(function(item) { querystring_dict[item.split("=")[0]] = item.split("=")[1] });
-    $("#ii_link").prop("href", "?PrintFormNum=105&Action=View&EventNum=" + querystring_dict["EventNum"]);
+    $("#ii_link").prop("href", "?PrintFormNum=105&Action=View&EventNum=" + querystring_dict["EventNum"]); //Input Inventory
+    $("#ni_link").prop("href", "?PrintFormNum=104&Action=View&EventNum=" + querystring_dict["EventNum"]); //NOIPA Inventory
 });
 
 
