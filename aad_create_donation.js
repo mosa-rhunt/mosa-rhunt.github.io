@@ -143,9 +143,14 @@ $(document).ready(function() {
     $(txt_income).val(pay_data["income"] || "");
     $(txt_pay_amount).val(pay_data["pay_amount"] || "");
     $(txt_pay_date).val(pay_data["pay_date"] || "");
-    $(sel_pay_methods).val(pay_data["pay_method"] || "");
     $(sel_pay_frequency).val(pay_data["pay_frequency"] || "");
     $(txt_check_num).val(pay_data["check_num"] || "");
+    if (["AMEX", "DISCOVER", "MASTERCARD", "VISA"].includes(pay_data["pay_method"])) {
+        $(sel_pay_methods).val("Credit Card");
+    }
+    else {
+        $(sel_pay_methods).val(pay_data["pay_method"] || "");
+    }
     if (pay_data["pay_created"]) {
         $(chk_pay_created).prop("checked", true);
     }
