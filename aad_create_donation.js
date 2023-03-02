@@ -38,7 +38,7 @@ $(document).ready(function() {
     let sel_pay_frequency = $("<select id='pay_frequency' class='form-control'></select>").on("change", on_form_change);
     let lnk_url = $("<a id='record_link' target='_blank' style='font-weight:bold'></a>");
     
-    let methods = ["", "AMEX", "DISCOVER", "MASTERCARD", "VISA", "Cash", "Check", "Milk Check", "Invoice Me", "Other"];
+    let methods = ["", "Credit Card", "Cash", "Check", "Milk Check", "Invoice Me", "Other"];
     //also "Credit Card Offline", "Credit Memo", "Invoice Me", "Pay by Credit Card over Phone", "Pledge", "Pledge - Write Off"
     for (let method of methods) {
         $(sel_pay_methods).append(`<option value='${method}'>${method}</option>`);
@@ -71,7 +71,7 @@ $(document).ready(function() {
             "@field.CustomerSubNum": "",
 
             "@field.CreateDate@comp.Donations_Create": pay_data["pay_date"],
-            "@field.Type@comp.Donations_Create": pay_data["pay_method"],
+            "@field.Type@comp.Donations_Create": (pay_data["pay_method"] == "Credit Card" ? "Cash" : pay_data["pay_method"]),
             "@field.Amount@comp.Donations_Create": pay_data["pay_amount"],
             "@field.Description@comp.Donations_Create": "",
             "@field.Source@comp.Donations_Create": "Certification Fee Mail",
