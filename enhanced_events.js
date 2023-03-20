@@ -30,6 +30,15 @@ $(document).ready(function() {
     .append(save_and_close)
     .insertAfter("#wrap");
 
+    //ensure fancy text boxes resize with window
+    $(window).on("resize", function() {
+        let textboxes = $(".nicEdit-main").css("width", "100%").parent();
+        let toolbars = $(textboxes).prev();
+        let max_w = window.innerWidth * 0.9;
+        $(textboxes).css("width", "100%").css("max-width", max_w);
+        $(toolbars).css("width", "100%").css("max-width", max_w);
+    });
+
 
     //code to prepopulate events based on MosaPrepopulate querystring
     let parameters = {};

@@ -25,4 +25,9 @@ $(document).ready(function() {
             }
         }
     });
+
+    //make it so form/surveys can again open in separate tabs
+    $("a[target='SurveyUpdate']").each(function() {
+        $(this).prop("target", "_blank");
+    });
 });
