@@ -121,13 +121,13 @@ const fields = {
 
 const event_types = {
     //"event type name": [array of field ids from above],
-    //scopes "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", // "217", "142", "181", "182", "216", "188", 
+    //scopes "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142" //, "181", "182", "216", "188"
 
     "Communications": ["214", "107", "91", "94"],
-    "Admin - Application Details": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "75", "66", "69"],
+    "Admin - Application Details": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "75", "66", "69"],
     "Adverse Action": ["112", "35", "71", "108", "144", "38", "107", "91", "72", "94", "110", "111"],
-    "Initial Review": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "181", "182", "216", "188", "217", "142"],
-    "Inspection": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61"],
+    "Initial Review": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142"],
+    "Inspection": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "181", "182", "216", "188"],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
     "Timing Need": ["124", "128", "126"],
     "Grass-Fed Certification": ["181", "182", "216", "188", "202"],
@@ -253,12 +253,12 @@ $(document).ready(function() {
     }
 
     let sel_event_status = $("<select id='event_status' class='form-control'></select>");
-    for (let event_status of ["Complete", "Pending", "Void"]) {
+    for (let event_status of ["Pending", "Complete", "Void"]) {
         $(sel_event_status).append(`<option value='${event_status}'>${event_status}</option>`);
     }
 
     let sel_event_open = $("<select id='event_open' class='form-control'></select>");
-    for (let event_open of ["Closed", "Open"]) {
+    for (let event_open of ["Open", "Closed"]) {
         $(sel_event_open).append(`<option value='${event_open}'>${event_open}</option>`);
     }
 
