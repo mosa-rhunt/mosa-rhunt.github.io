@@ -32,6 +32,7 @@ const fields = {
     "53": {"input":"checkbox", "name":"Apiculture"},
     "61": {"input":"checkbox", "name":"Retail"},
     "217": {"input":"checkbox", "name":"Livestock Sales Facility"},
+    "142": {"input":"checkbox", "name":"Non-Processing Handler"},
     "181": {"input":"checkbox", "name":"Grass-Fed Dairy"},
     "182": {"input":"checkbox", "name":"Grass-Fed Meat"},
     "216": {"input":"checkbox", "name":"Grass-Fed Dairy Handling"},
@@ -120,12 +121,12 @@ const fields = {
 
 const event_types = {
     //"event type name": [array of field ids from above],
-    //scopes "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", // "217", "181", "182", "216", "188", 
+    //scopes "54", "58", "56", "55", "59", "60", "62", "63", "53", "61", // "217", "142", "181", "182", "216", "188", 
 
     "Communications": ["214", "107", "91", "94"],
     "Admin - Application Details": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "75", "66", "69"],
     "Adverse Action": ["112", "35", "71", "108", "144", "38", "107", "91", "72", "94", "110", "111"],
-    "Initial Review": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "181", "182", "216", "188", "217"],
+    "Initial Review": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "181", "182", "216", "188", "217", "142"],
     "Inspection": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61"],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
     "Timing Need": ["124", "128", "126"],
