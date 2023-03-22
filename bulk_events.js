@@ -64,11 +64,60 @@ const fields = {
     
     //Adverse Action
     "112": {"name":"Adverse Action Status", "input":"select", "options":["", "Certification", "Fees", "Paperwork", "Paperwork and Fees", "Certification; Fees", "Certification; Paperwork", "Certification; Paperwork and Fees"]},
-    "35": {"name":"Adverse Action Type", "input":"select", "options":["", "Noncompliance", "Noncompliance Resolution", "Noncompliance and Resolution", "Noncompliance/Proposed Suspension", "Proposed Revocation", "Proposed Suspension", "Suspension of Certification", "Settlement Agreement", "Revocation", "Noncompliance and Proposed Revocation", "Denial of Certification", "Rejection of Mediation", "Acceptance of Mediation", "Grass Fed Noncompliance"]},
     "108": {"name":"Quarter", "input":"select", "options":["", "Q1", "Q2", "Q3", "Q4"]},
     "144": {"name":"Adverse Action Letter Date", "input":"date"},
     "38": {"name":"Noncompliances"},
+    "35": {"name":"Adverse Action Type", "input":"select", "options":[
+        "",
+        "Noncompliance",
+        "Noncompliance Resolution",
+        "Noncompliance and Resolution",
+        "Noncompliance/Proposed Suspension",
+        "Proposed Revocation",
+        "Proposed Suspension",
+        "Suspension of Certification",
+        "Settlement Agreement",
+        "Revocation",
+        "Noncompliance and Proposed Revocation",
+        "Denial of Certification",
+        "Rejection of Mediation",
+        "Acceptance of Mediation",
+        "Grass Fed Noncompliance"
+    ]},
 
+    //Timing Needs
+    "124": {"name":"Timing Need start date", "input":"date"},
+    "128": {"name":"Timing Need deadline", "input":"date"},
+    "126": {"name":"Reason for Timing Need", "input":"select", "options":[
+        "",
+        "Client question",
+        "Client request",
+        "Compliance issue",
+        "Final Review deadline",
+        "Initial Review deadline",
+        "Inspection deadline",
+        "Inspection dept request",
+        "Inspection: special circumstance",
+        "New client",
+        "New client - Expedited service",
+        "New facilities",
+        "New label",
+        "New land",
+        "New product",
+        "New scope/ OSP",
+        "Review: special circumstance",
+        "Seasonal client need",
+        "Staff request",
+        "Third party deadline",
+    ]},
+
+    //GrassFed Certification
+    "202": {"name":"Grass-Fed Certificate Expiration Date", "input":"date"},
+    "181": {"name":"Grass-Fed Dairy", "input":"checkbox"},
+    "182": {"name":"Grass-Fed Meat", "input":"checkbox"},
+    "216": {"name":"Grass-Fed Dairy Handler", "input":"checkbox"},
+    "188": {"name":"Grass-Fed Meat Handler", "input":"checkbox"},
+    
     // "": {"name":""},
 };
 
@@ -83,19 +132,19 @@ const event_types = {
     "Initial Review": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "181", "182", "216", "188", "217"],
     "Inspection": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61"],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
+    "Timing Need": ["124", "128", "126"],
+    "Grass-Fed Certification": ["181", "182", "216", "188", "202"],
     
     // "Complaint",
     // "Final Review",
     // "Final Review - Additional",
     // "Financial Transaction",
-    // "Grass-Fed Certification",
     // "Initial Review - Additional",
     // "Inspection - Additional",
     // "NewOrg System Notice",
     // "Staff Reminder",
     // "Sub Contact Certification",
     // "Surrender",
-    // "Timing Need",
     // "Transfers",
 };
 
