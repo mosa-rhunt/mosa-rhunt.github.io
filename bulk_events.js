@@ -309,6 +309,10 @@ $(document).ready(function() {
     )
     .append(
         $("<tr></tr>")
+        .append(td("CSV Template", "<span style='color:white'>Use this <a href='https://docs.google.com/spreadsheets/d/1x9v1L0SWG1F0VLuNVTxIyJUPivfI4Ur4iERPxVaz4LU/edit#gid=818828852' style='font-weight:bold' target='_blank'>template document</a> to create CSVs where each event has its own data.</span>", "colspan=2"))
+    )
+    .append(
+        $("<tr></tr>")
         .append(td("", $("<input type='button' value='Create from CSV' style='border:1px solid black;' onclick='$(\"#csv_file\").trigger(\"click\");' />")))
         .append(td("", $("<input type='file' id='csv_file' style='opacity:0' />").on("change", parse_csv)))
     );
