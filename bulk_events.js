@@ -113,10 +113,6 @@ const fields = {
 
     //GrassFed Certification
     "202": {"name":"Grass-Fed Certificate Expiration Date", "input":"date"},
-    "181": {"name":"Grass-Fed Dairy", "input":"checkbox"},
-    "182": {"name":"Grass-Fed Meat", "input":"checkbox"},
-    "216": {"name":"Grass-Fed Dairy Handler", "input":"checkbox"},
-    "188": {"name":"Grass-Fed Meat Handler", "input":"checkbox"},
     
     // "": {"name":""},
 };
