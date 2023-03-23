@@ -304,7 +304,7 @@ $(document).ready(function() {
     )
     .append(
         $("<tr></tr>")
-        .append(td("", $("<input type='button' value='Create Events' style='border:1px solid black;' />").on("click", create_bulk_events)))
+        .append(td("", $("<input type='button' value='Create Events' style='border:1px solid black; margin-bottom:10px' />").on("click", create_bulk_events)))
         .append(td("", $("<label id='response' style='color:white'></label>").append("<label id='errors' style='color:white'></label>")))
     )
     .append(
