@@ -41,7 +41,7 @@ $(document).ready(function() {
         "Inputs",
         "InspectionReports",
         "Livestocklist",
-        "Mapsandflow charts",
+        "Mapsandflowcharts",
         "MOSATermsandConditionsAgreement",
         "Other",
         "Pest/wastemanagement",
@@ -53,23 +53,30 @@ $(document).ready(function() {
         "Seed/plantingstockinformation",
     ];
 
-    const expand_all = $("<a href='#' style='margin:0 10px'>Expand All</a>").on("click", function() {
-        let elements = [];
+    const expand_all = $("<a href='#' style='margin-right:10px'>Expand All</a>").on("click", function() {
+        let true_elements = [];
+        let false_elements = [];
         for (let file_type of file_types) {
-            elements.push("FileType" + file_type);
-            elements.push("HideType" + file_type);
+            true_elements.push("FileType" + file_type);
+            true_elements.push("HideType" + file_type);
+            false_elements.push("ShowType" + file_type);
+            js_session("File" + file_type); //NewOrg function, dunno what this does tbh
         }
-        HM_f_ToggleElementList(true, elements, "id"); //NewOrg function 
-        // HM_f_ToggleElementList(true,['FileTypeProductprofiles&amp;labels','HideTypeProductprofiles&amp;labels'],'id'); 
-        // js_session('FileProductprofiles&amp;labels'); //dunno what this does
+        HM_f_ToggleElementList(true, true_elements, "id"); //NewOrg function 
+        HM_f_ToggleElementList(false, false_elements, "id"); 
     });
 
-    const collapse_all = $("<a href='#' style='margin:0 10px'>Collapse All</a>").on("click", function() {
-        let elements = [];
+    const collapse_all = $("<a href='#' style='margin-right:10px'>Collapse All</a>").on("click", function() {
+        let true_elements = [];
+        let false_elements = [];
         for (let file_type of file_types) {
-            elements.push("ShowType" + file_type);
+            true_elements.push("ShowType" + file_type);
+            false_elements.push("FileType" + file_type);
+            false_elements.push("HideType" + file_type);
+            js_sessionfalse("File" + file_type);
         }
-        HM_f_ToggleElementList(false, elements, "id"); 
+        HM_f_ToggleElementList(true, true_elements, "id");
+        HM_f_ToggleElementList(false, false_elements, "id"); 
     });
 
     //add to DOM
