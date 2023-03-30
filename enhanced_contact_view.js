@@ -53,7 +53,7 @@ $(document).ready(function() {
         "Seed/plantingstockinformation",
     ];
 
-    const expand_all = $("<a href='#' style='margin-right:10px'>Expand All</a>").on("click", function() {
+    const expand_all = $("<a href='#filetop' style='margin-right:10px'>Expand All</a>").on("click", function() {
         let true_elements = [];
         let false_elements = [];
         for (let file_type of file_types) {
@@ -66,7 +66,7 @@ $(document).ready(function() {
         HM_f_ToggleElementList(false, false_elements, "id"); 
     });
 
-    const collapse_all = $("<a href='#' style='margin-right:10px'>Collapse All</a>").on("click", function() {
+    const collapse_all = $("<a href='#filetop' style='margin-right:10px'>Collapse All</a>").on("click", function() {
         let true_elements = [];
         let false_elements = [];
         for (let file_type of file_types) {
@@ -80,5 +80,5 @@ $(document).ready(function() {
     });
 
     //add to DOM
-    $("a[href*='Files=History']").parent().prepend(collapse_all).prepend(expand_all);
+    $("a[href*='Files=History']").prop("id", "filetop").parent().prepend(collapse_all).prepend(expand_all);
 });
