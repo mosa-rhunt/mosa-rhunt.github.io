@@ -46,7 +46,7 @@ $(document).ready(function() {
         "Other",
         "Pest/wastemanagement",
         "PrivateLabel",
-        "Productprofiles&amp;labels",
+        "Productprofiles&labels",
         "Rations",
         "Regulatorycompliances",
         "Releaseofinformation",
@@ -60,7 +60,7 @@ $(document).ready(function() {
             true_elements.push("FileType" + file_type);
             true_elements.push("HideType" + file_type);
             false_elements.push("ShowType" + file_type);
-            js_session("File" + file_type); //NewOrg function, dunno what this does tbh
+            // js_session("File" + file_type); //NewOrg function, dunno what this does tbh
         }
         HM_f_ToggleElementList(true, true_elements, "id"); //NewOrg function 
         HM_f_ToggleElementList(false, false_elements, "id"); 
@@ -70,10 +70,10 @@ $(document).ready(function() {
         let true_elements = [];
         let false_elements = [];
         for (let file_type of file_types) {
-            true_elements.push("ShowType" + file_type);
             false_elements.push("FileType" + file_type);
             false_elements.push("HideType" + file_type);
-            js_sessionfalse("File" + file_type);
+            true_elements.push("ShowType" + file_type);
+            // js_sessionfalse("File" + file_type);
         }
         HM_f_ToggleElementList(true, true_elements, "id");
         HM_f_ToggleElementList(false, false_elements, "id"); 
