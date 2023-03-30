@@ -30,4 +30,48 @@ $(document).ready(function() {
     $("a[target='SurveyUpdate']").each(function() {
         $(this).prop("target", "_blank");
     });
+
+    //add collapse- and expand-all functions on Files tab
+    let file_types = [
+        "AdverseAction",
+        "Audittrail",
+        "Fieldinformation",
+        "Generalsanitation",
+        "Ingredients,Certificates&Non-GMODocuments",
+        "Inputs",
+        "InspectionReports",
+        "Livestocklist",
+        "Mapsandflow charts",
+        "MOSATermsandConditionsAgreement",
+        "Other",
+        "Pest/wastemanagement",
+        "PrivateLabel",
+        "Productprofiles&amp;labels",
+        "Rations",
+        "Regulatorycompliances",
+        "Releaseofinformation",
+        "Seed/plantingstockinformation",
+    ];
+
+    const expand_all = $("<a href='#' style='margin:0 10px'>Expand All</a>").on("click", function() {
+        let elements = [];
+        for (let file_type of file_types) {
+            elements.push("FileType" + file_type);
+            elements.push("HideType" + file_type);
+        }
+        HM_f_ToggleElementList(true, elements, "id"); //NewOrg function 
+        // HM_f_ToggleElementList(true,['FileTypeProductprofiles&amp;labels','HideTypeProductprofiles&amp;labels'],'id'); 
+        // js_session('FileProductprofiles&amp;labels'); //dunno what this does
+    });
+
+    const collapse_all = $("<a href='#' style='margin:0 10px'>Collapse All</a>").on("click", function() {
+        let elements = [];
+        for (let file_type of file_types) {
+            elements.push("ShowType" + file_type);
+        }
+        HM_f_ToggleElementList(false, elements, "id"); 
+    });
+
+    //add to DOM
+    $("a[href*='Files=History']").parent().prepend(collapse_all).prepend(expand_all);
 });
