@@ -34,7 +34,7 @@ $(document).ready(function() {
     }
 
     //add collapse- and expand-all functions on Files tab
-    if (window.location.toString.includes("Page=Files")) {
+    if (window.location.toString().includes("Page=Files")) {
         let file_types = [
             "AdverseAction",
             "Audittrail",
