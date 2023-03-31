@@ -27,58 +27,62 @@ $(document).ready(function() {
     });
 
     //make it so form/surveys can again open in separate tabs
-    $("a[target='SurveyUpdate']").each(function() {
-        $(this).prop("target", "_blank");
-    });
+    if (window.location.includes("Page=Forms")) {
+        $("a[target='SurveyUpdate']").each(function() {
+            $(this).prop("target", "_blank");
+        });
+    }
 
     //add collapse- and expand-all functions on Files tab
-    let file_types = [
-        "AdverseAction",
-        "Audittrail",
-        "Fieldinformation",
-        "Generalsanitation",
-        "Ingredients,Certificates&Non-GMODocuments",
-        "Inputs",
-        "InspectionReports",
-        "Livestocklist",
-        "Mapsandflowcharts",
-        "MOSATermsandConditionsAgreement",
-        "Other",
-        "Pest/wastemanagement",
-        "PrivateLabel",
-        "Productprofiles&labels",
-        "Rations",
-        "Regulatorycompliances",
-        "Releaseofinformation",
-        "Seed/plantingstockinformation",
-    ];
+    if (window.location.includes("Page=Files")) {
+        let file_types = [
+            "AdverseAction",
+            "Audittrail",
+            "Fieldinformation",
+            "Generalsanitation",
+            "Ingredients,Certificates&Non-GMODocuments",
+            "Inputs",
+            "InspectionReports",
+            "Livestocklist",
+            "Mapsandflowcharts",
+            "MOSATermsandConditionsAgreement",
+            "Other",
+            "Pest/wastemanagement",
+            "PrivateLabel",
+            "Productprofiles&labels",
+            "Rations",
+            "Regulatorycompliances",
+            "Releaseofinformation",
+            "Seed/plantingstockinformation",
+        ];
 
-    const expand_all = $("<a href='#filetop' style='margin-right:15px'>Expand All</a>").on("click", function() {
-        let true_elements = [];
-        let false_elements = [];
-        for (let file_type of file_types) {
-            true_elements.push("FileType" + file_type);
-            true_elements.push("HideType" + file_type);
-            false_elements.push("ShowType" + file_type);
-            // js_session("File" + file_type); //NewOrg function, dunno what this does tbh
-        }
-        HM_f_ToggleElementList(true, true_elements, "id"); //NewOrg function 
-        HM_f_ToggleElementList(false, false_elements, "id"); 
-    });
+        const expand_all = $("<a href='#filetop' style='margin-right:15px'>Expand All</a>").on("click", function() {
+            let true_elements = [];
+            let false_elements = [];
+            for (let file_type of file_types) {
+                true_elements.push("FileType" + file_type);
+                true_elements.push("HideType" + file_type);
+                false_elements.push("ShowType" + file_type);
+                // js_session("File" + file_type); //NewOrg function, dunno what this does tbh
+            }
+            HM_f_ToggleElementList(true, true_elements, "id"); //NewOrg function 
+            HM_f_ToggleElementList(false, false_elements, "id"); 
+        });
 
-    const collapse_all = $("<a href='#filetop' style='margin-right:15px'>Collapse All</a>").on("click", function() {
-        let true_elements = [];
-        let false_elements = [];
-        for (let file_type of file_types) {
-            false_elements.push("FileType" + file_type);
-            false_elements.push("HideType" + file_type);
-            true_elements.push("ShowType" + file_type);
-            // js_sessionfalse("File" + file_type);
-        }
-        HM_f_ToggleElementList(true, true_elements, "id");
-        HM_f_ToggleElementList(false, false_elements, "id"); 
-    });
+        const collapse_all = $("<a href='#filetop' style='margin-right:15px'>Collapse All</a>").on("click", function() {
+            let true_elements = [];
+            let false_elements = [];
+            for (let file_type of file_types) {
+                false_elements.push("FileType" + file_type);
+                false_elements.push("HideType" + file_type);
+                true_elements.push("ShowType" + file_type);
+                // js_sessionfalse("File" + file_type);
+            }
+            HM_f_ToggleElementList(true, true_elements, "id");
+            HM_f_ToggleElementList(false, false_elements, "id"); 
+        });
 
-    //add to DOM
-    $("a[href*='Page=Files']").prop("id", "filetop").parent().prop("align", null).prepend(collapse_all).prepend(expand_all);
+        //add to DOM
+        $("a[href*='Page=Files']").prop("id", "filetop").parent().prop("align", null).prepend(collapse_all).prepend(expand_all);
+    }
 });
