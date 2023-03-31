@@ -27,14 +27,14 @@ $(document).ready(function() {
     });
 
     //make it so form/surveys can again open in separate tabs
-    if (window.location.includes("Page=Forms")) {
+    if (window.location.toString().includes("Page=Forms")) {
         $("a[target='SurveyUpdate']").each(function() {
             $(this).prop("target", "_blank");
         });
     }
 
     //add collapse- and expand-all functions on Files tab
-    if (window.location.includes("Page=Files")) {
+    if (window.location.toString.includes("Page=Files")) {
         let file_types = [
             "AdverseAction",
             "Audittrail",
