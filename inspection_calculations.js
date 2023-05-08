@@ -4,7 +4,7 @@ and to manipulate form elements when Inspector Type
 is changed from Contractor to Staff
 */
 
-
+const grey = "#777!important";
 $(document).ready(function() {
     //label setup
     let nums = ["176", "177", "179", "180"];
@@ -15,9 +15,9 @@ $(document).ready(function() {
     $("#FOpenText213").on("change", updateLabels); //inspection type dropdown
 
     //Legacy fields (Food, Rental car, Air fare) disabled
-    $("#FOpenText32").attr("readonly", "readonly").css("background-color", "#bbb");
-    $("#FOpenText211").attr("readonly", "readonly").css("background-color", "#bbb");
-    $("#FOpenText212").attr("readonly", "readonly").css("background-color", "#bbb");
+    $("#FOpenText32").attr("readonly", "readonly").css("background-color", grey);
+    $("#FOpenText211").attr("readonly", "readonly").css("background-color", grey);
+    $("#FOpenText212").attr("readonly", "readonly").css("background-color", grey);
 
     //if it was obviously a staff inspector before, check that radio
     if ($("#FOpenText95 option:selected").val() !== "" || $("#FOpenText189 option:selected").val() !== "") {
@@ -258,12 +258,12 @@ function disableFormInputs() {
     //then we'll selectively disable inputs
     if (inspectorType === "staff") {
         for (let id of driveHoursAndRate.concat(residueAndExpedited)) {
-            $("#FOpenText" + id).attr("readonly", "readonly").css("background-color", "#bbb");
+            $("#FOpenText" + id).attr("readonly", "readonly").css("background-color", grey);
         }
     }
     else {
         for (let id of staffDropdowns) {
-            $("#FOpenText" + id).css("background-color", "#bbb");
+            $("#FOpenText" + id).css("background-color", grey);
             $("#FOpenText" + id + " option:not(:selected)").prop("disabled", true);
         }
     }
@@ -271,10 +271,10 @@ function disableFormInputs() {
     //disable transportation related fields for virtual inspections
     if (inspectionType.endsWith("Virtual-Only") || inspectionType.endsWith("Desk Audit")) {
         for (let id of onSiteFields.concat(driveHoursAndRate)) {
-            $("#FOpenText" + id).attr("readonly", "readonly").css("background-color", "#bbb");
+            $("#FOpenText" + id).attr("readonly", "readonly").css("background-color", grey);
         }
         //mosa or personal car? 
-        $("#FOpenText95").css("background-color", "#bbb");
+        $("#FOpenText95").css("background-color", grey);
         $("#FOpenText95 option:not(:selected)").prop("disabled", true);
     }
 }
