@@ -241,7 +241,7 @@ $(document).ready(function() {
     let create_button_section = $("<tfoot></tfoot>");
 
     //static event fields
-    let txt_client_ids = $("<textarea id='client_ids' cols=90 rows=4></textarea>"); 
+    let txt_client_ids = $("<textarea id='client_ids' style='background:#fff!important' cols=90 rows=4></textarea>"); 
     let txt_event_name = $("<input type='text' id='event_name' class='form-control' style='background:#fff!important' />");
     let txt_event_desc = $("<input type='text' id='event_desc' class='form-control' style='background:#fff!important' />");
     let txt_event_date = $("<input type='text' id='event_date' class='form-control' style='background:#fff!important' datepicker data-toggle='datepicker' />");
@@ -251,7 +251,7 @@ $(document).ready(function() {
         $(sel_event_type).append(`<option value='${event_type}'>${event_type}</option>`);
     }
 
-    let sel_assigned_to = $("<select id='assigned_to' class='form-control'></select>");
+    let sel_assigned_to = $("<select id='assigned_to' class='form-control' style='background:#fff!important'></select>");
     for (let user of Object.entries(users).sort((a, b) => a[1].localeCompare(b[1]))) {
         $(sel_assigned_to).append(`<option value='${user[0]}'>${user[1]}</option>`);
     }
