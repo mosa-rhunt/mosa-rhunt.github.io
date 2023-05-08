@@ -1,13 +1,14 @@
 let pay_data = {};
+const disabled_grey = "#777!important";
 
 function on_form_change() {
     let fields = ["income", "pay_amount", "pay_date", "pay_method", "pay_frequency", "check_num"];
     //enable or disable the form
     if ($("#pay_created").prop("checked")) {
         for (let field of fields) {
-            $("#" + field).prop("readonly", true).css("background-color", "#bbb").find("option:not(:selected)").prop("disabled", true);
+            $("#" + field).prop("readonly", true).css("background-color", disabled_grey).find("option:not(:selected)").prop("disabled", true);
         }
-        $("#create_donation").prop("disabled", true).css("background-color", "#bbb");
+        $("#create_donation").prop("disabled", true).css("background-color", disabled_grey);
     }
     else {
         for (let field of fields) {
@@ -103,7 +104,7 @@ $(document).ready(function() {
             "@field.TributeName": "",
             "@field.HonorType": "", 
         };
-        $("#create_donation").prop("disabled", true).css("background-color", "#bbb");
+        $("#create_donation").prop("disabled", true).css("background-color", disabled_grey);
 
         $.ajax({
             url: "DonationUpdate.asp",
@@ -161,7 +162,7 @@ $(document).ready(function() {
     }
 
     //now we add the UI
-    function label(txt) { return $(`<label style='color:white'>${txt}</label>`); }
+    function label(txt) { return $(`<label style=''>${txt}</label>`); }
     function td(lbl, el) { return $("<td></td>").append(label(lbl)).append("<br>").append(el); }
     
     let row1 = $("<tr></tr>")
