@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
 
     //add to DOM
-    $("<div style='position:fixed; left:1200px; top:50%; background-color:#72899A; padding:15px; border:1px solid black; border-radius:5px'></div>")
+    $("<div style='position:fixed; left:1200px; top:50%; background-color:#6fa2c9; padding:15px; border:1px solid black; border-radius:5px'></div>")
     .append(label)
     .append("<br>")
     .append(save)

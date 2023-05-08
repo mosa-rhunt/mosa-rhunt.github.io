@@ -227,6 +227,8 @@ const basic_event_fields = {
 };
 
 
+const disabled_grey = "#999!important";
+
 function td(lbl, el, attr="") { 
     return $(`<td ${attr}></td>`).append(`<label style='color:white'>${lbl}</label>`).append("<br>").append(el); 
 }
@@ -240,11 +242,11 @@ $(document).ready(function() {
 
     //static event fields
     let txt_client_ids = $("<textarea id='client_ids' cols=90 rows=4></textarea>"); 
-    let txt_event_name = $("<input type='text' id='event_name' class='form-control' />");
-    let txt_event_desc = $("<input type='text' id='event_desc' class='form-control' />");
-    let txt_event_date = $("<input type='text' id='event_date' class='form-control datepicker' data-toggle='datepicker' />");
+    let txt_event_name = $("<input type='text' id='event_name' class='form-control' style='background:#fff!important' />");
+    let txt_event_desc = $("<input type='text' id='event_desc' class='form-control' style='background:#fff!important' />");
+    let txt_event_date = $("<input type='text' id='event_date' class='form-control' style='background:#fff!important' datepicker data-toggle='datepicker' />");
 
-    let sel_event_type = $("<select id='event_type' class='form-control'></select>").on("change", generate_event_fields);
+    let sel_event_type = $("<select id='event_type' class='form-control' style='background:#fff!important'></select>").on("change", generate_event_fields);
     for (let event_type in event_types) {
         $(sel_event_type).append(`<option value='${event_type}'>${event_type}</option>`);
     }
@@ -254,12 +256,12 @@ $(document).ready(function() {
         $(sel_assigned_to).append(`<option value='${user[0]}'>${user[1]}</option>`);
     }
 
-    let sel_event_status = $("<select id='event_status' class='form-control'></select>");
+    let sel_event_status = $("<select id='event_status' class='form-control' style='background:#fff!important'></select>");
     for (let event_status of ["Pending", "Complete", "Void"]) {
         $(sel_event_status).append(`<option value='${event_status}'>${event_status}</option>`);
     }
 
-    let sel_event_open = $("<select id='event_open' class='form-control'></select>");
+    let sel_event_open = $("<select id='event_open' class='form-control' style='background:#fff!important'></select>");
     for (let event_open of ["Open", "Closed"]) {
         $(sel_event_open).append(`<option value='${event_open}'>${event_open}</option>`);
     }
@@ -353,23 +355,23 @@ function generate_event_fields() {
 
         let inp;
         if (def["input"] == "select") {
-            inp = $(`<select id='F${field_num}' class='form-control'></select>`);
+            inp = $(`<select id='F${field_num}' class='form-control' style='background:#fff!important'></select>`);
             for (let opt of def["options"]) {
                 $(inp).append(`<option value='${opt}'>${opt}</option>`);
             }
         }
         else if (def["input"] == "date") {
-            inp = $(`<input type='text' id='F${field_num}' class='form-control datepicker' data-toggle='datepicker' />`);
+            inp = $(`<input type='text' id='F${field_num}' class='form-control' style='background:#fff!important' datepicker data-toggle='datepicker' />`);
             date_fields.push(inp);
         }
         else if (def["input"] == "number") { 
-            inp = $(`<input type='number' id='F${field_num}' class='form-control' />`);
+            inp = $(`<input type='number' id='F${field_num}' class='form-control' style='background:#fff!important' />`);
         }
         else if (def["input"] == "checkbox") { 
             inp = $(`<input type='checkbox' id='F${field_num}' />`);
         }
         else { 
-            inp = $(`<input type='text' id='F${field_num}' class='form-control' />`);
+            inp = $(`<input type='text' id='F${field_num}' class='form-control' style='background:#fff!important' />`);
         }
         $(inp).prop("title", `OpenText${field_num}`);
 
@@ -475,7 +477,7 @@ function create_bulk_events() {
     //UI stuff
     $("#response").empty();
     $("#errors").empty();
-    $("#bulk_event_table").find(":input").css("background-color", "#bbbbbb").prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
+    $("#bulk_event_table").find(":input").css("background-color", disabled_grey).prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
     let index = -1; //gets incremented immediately
 
     //finalize and send calls
@@ -698,7 +700,7 @@ function import_csv(csv_arrays) {
     //UI stuff
     $("#response").empty();
     $("#errors").empty();
-    $("#bulk_event_table").find(":input").css("background-color", "#bbbbbb").prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
+    $("#bulk_event_table").find(":input").css("background-color", disabled_grey).prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
 
     let total_records = new_records.length;
 
