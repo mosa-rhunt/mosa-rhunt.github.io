@@ -9,9 +9,9 @@ $(document).ready(function() {
     //label setup
     let nums = ["176", "177", "179", "180"];
     for (let num of nums) {
-        $("#OpenText" + num).find("span").prop("id", "Label" + num).css("color", "white").remove("font");
+        $("#OpenText" + num).find("span").prop("id", "Label" + num).remove("font");
     }
-    $("#tdFees > label > span").prop("id", "Label116").css("color", "white").remove("font");
+    $("#tdFees > label > span").prop("id", "Label116").remove("font");
     $("#FOpenText213").on("change", updateLabels); //inspection type dropdown
 
     //Legacy fields (Food, Rental car, Air fare) disabled
