@@ -43,14 +43,12 @@ $(document).ready(function() {
     //HIGHLIGHT FIELDS BASED ON PRINTFORM SELECTION
     $("#FileName").on("change", function() {
         //blank all
-        $("div[id^='OpenText']").find("font").css("background-color", null);
+        $("div[id^='OpenText']").find("font").css("background-color", "");
         //selectively highlight labels
         let match = $(this).val().match(/PrintFormNum=(\d+)/i);
-        console.log(match);
         if (match && match[1] in printform_field_dict) {
             for (let field_id of printform_field_dict[match[1]]) {
-                console.log(field_id);
-                $("#OpenText" + field_id).find("font").css("background-color", "#ff0");
+                $("#OpenText" + field_id).find("font").first().css("background-color", "#ff0");
             }
         }
     });
