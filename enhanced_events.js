@@ -40,6 +40,22 @@ $(document).ready(function() {
     });
 
 
+    //HIGHLIGHT FIELDS BASED ON PRINTFORM SELECTION
+    $("#FileName").on("change", function() {
+        //blank all
+        $("div[id^='OpenText']").find("font").css("background-color", null);
+        //selectively highlight labels
+        let match = $(this).val().match(/PrintFormNum=(\d+)/i);
+        console.log(match);
+        if (match && match[1] in printform_field_dict) {
+            for (let field_id of printform_field_dict[match[1]]) {
+                console.log(field_id);
+                $("#OpenText" + field_id).find("font").css("background-color", "#ff0");
+            }
+        }
+    });
+
+
     //code to prepopulate events based on MosaPrepopulate querystring
     let parameters = {};
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -124,3 +140,20 @@ function enable_stock_statement_copy(dropdown_id, textbox_id, sep1="<br>", sep2=
     .append(`<div id='preview${dropdown_id}' style='width:500px; display:block'></div>`);
     $("#FOpenText" + dropdown_id).parent().after(div);
 }
+
+
+const printform_field_dict = {
+    // "printform_id": ["field_ids"],
+    "171": ["144", "219", "38", "220", "52"], //combined notice
+    "169": ["223"], //denial of certification
+    "173": ["91", "107", "214"], //followup letter
+    "23": ["91", "107", "214"], //generic letter
+    "170": ["144", "231", "72"], //nonc reminder
+    "121": ["144", "160", "38"], //nonc resolution
+    "120": ["144", "72", "38", "52"], //notice of nonc
+    "165": ["221", "222", "38"], //prop susp - broken settlement
+    "164": ["144", "221"], //prop susp - unresolved nonc
+    "168": ["227"], //settlement agreement
+    "166": ["223"], //suspension of certification
+    "": [""], //
+};
