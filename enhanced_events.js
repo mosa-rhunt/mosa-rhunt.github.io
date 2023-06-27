@@ -40,6 +40,17 @@ $(document).ready(function() {
     });
 
 
+    //settlement agreement (if exists)
+    $("#OpenText227").append(
+        $("<button type=button>Settlement Agreement Template</button>").on("click", function() {
+            let ed = editors["FOpenText227"];
+            let view_fragment = ed.data.processor.toView(settlement_agreement_template);
+            let model_fragment = ed.data.toModel(view_fragment);
+            ed.model.insertContent(model_fragment, ed.model.document.selection);
+        })
+    );
+
+
     //HIGHLIGHT FIELDS BASED ON PRINTFORM SELECTION
     $("#FileName").on("change", function() {
         //blank all
@@ -154,5 +165,28 @@ const printform_field_dict = {
     "164": ["144", "221"], //prop susp - unresolved nonc
     "168": ["227"], //settlement agreement
     "166": ["223"], //suspension of certification
+    "2": ["9", "72", "101", "94"], //IR MIN
+    "81": ["9", "133", "72", "94"], //IR MIN Reminder
+    "3": ["70", "101", "39", "94"], //IR Notification
+    "4": ["40", "9", "39", "94"], //IR Resolution
     "": [""], //
 };
+
+const settlement_agreement_template = `
+<p>THIS SETTLEMENT AGREEMENT is entered into by Midwest Organic Services Association (MOSA), and <span style='background: #ff0;'>___name of operation__. (additional language for corporations/non individuals): , and anyone responsibly connected with __name of operation__ </span></p>
+<p>MOSA and <span style='background: #ff0;'>__name of operation___</span> and have decided to compromise and settle the issues among them related to alleged violations of the Organic Foods Production Act of 1990 (7 U.S.C. §§ 6501 et seq.) (OFPA), and USDA organic regulations (7 C.F.R. §§ 205 et seq.).</p>
+<p>Accordingly, the parties agree to the following: </p>
+<p>1. MOSA agrees not to suspend the organic certification for <span style='background: #ff0;'>___name of operation_____________</span> for failure to adequately respond to the Notice of Noncompliance (dated <span style='background: #ff0;'>________</span>) which gave rise to this agreement. </p>
+<p><i><span style='color:#f00'>(Above is all boilerplate taken from NOP training samples. Variables include the operation name, which should be consistent with their legal status information - contact and business name or sole proprietor - and the date of the noncompliance notice or notices - sometimes a settlement can pull several issues into one conclusion.)</span></i></p>
+<p>2. <span style='background: #ff0;'>____name of operation_____________</span> agrees to the following: </p>
+<p>A. <span style='background: #ff0;'>____name of operation_____________</span> agrees that failure to comply with the settlement agreement shall automatically void paragraph 1 above, and that MOSA may thereafter institute the proposed suspension. </p>
+<p>B. <span style='background: #ff0;'>_____name of operation____________</span> agrees to<span style='background: #ff0;'> __specific terms, could be a sub list of terms (ie: 2) B. i, ii, iii___)_</span></p>
+<p><i><span style='color:#f00'>(Terms listed above can be creative and can be rather prescriptive, must be compliant with the standards, and often may include something beyond usual compliance expectations, such as extra inspections at client expense, or submitting certain documents by certain timeframes.)</span></i></p>
+<p>This agreement will become effective upon being signed by all persons named below, and the terms shall remain in effect for a period of three years from the date of signing. </p>
+<p><i><span style='color:#f00'>(An end date is needed. Two or three years is typical. )</span></i></p>
+<br><p>________________________ Date: _________ </p>
+<p><span style='background: #ff0;'>Name , Organization</span></p>
+<br><br><p>_______________________Date: _________ </p>
+<p>Shelby Wheeler, Compliance Manager </p>
+<p><i><span style='color:#f00'>(Note - the printed settlement agreement includes no letter date nor enclosures or cc: NOP. If a proposed settlement and acceptance of mediation are written from one event - an option - then these parts of the acceptance letter should be adjusted before printing.)</span></i></p>
+`;
