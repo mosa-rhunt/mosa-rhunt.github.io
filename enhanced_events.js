@@ -137,12 +137,13 @@ function enable_stock_statement_copy(dropdown_id, textbox_id, sep1_or_transform=
     });
 
     let add_button = $("<button type=button>Add</button>").on("click", function() {
+        let stock_statement_title = $("#FOpenText" + dropdown_id).find(":selected").text();
         let stock_statement = $("#FOpenText" + dropdown_id).val();
         let old_text = nicEditors.findEditor("FOpenText" + textbox_id).getContent();
         
         let new_text = "";
         if (typeof sep1_or_transform == "function") {
-            new_text = sep1_or_transform(stock_statement) || "";
+            new_text = sep1_or_transform(stock_statement, stock_statement_title) || "";
         }
         else if (typeof sep1_or_transform == "string") {
             new_text = sep1_or_transform + stock_statement + sep2;
