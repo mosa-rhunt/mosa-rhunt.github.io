@@ -145,7 +145,7 @@ function enable_stock_statement_copy(dropdown_id, textbox_id, sep1_or_transform=
             new_text = sep1_or_transform(stock_statement) || "";
         }
         else if (typeof sep1_or_transform == "string") {
-            new_text = sep1 + stock_statement + sep2;
+            new_text = sep1_or_transform + stock_statement + sep2;
         }
 
         nicEditors.findEditor("FOpenText" + textbox_id).setContent(old_text + new_text);
