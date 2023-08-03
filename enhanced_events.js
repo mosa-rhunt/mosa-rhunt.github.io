@@ -43,12 +43,25 @@ $(document).ready(function() {
     //settlement agreement (if exists)
     $("#OpenText227").append(
         $("<button type=button>Settlement Agreement Template</button>").on("click", function() {
-            let ed = editors["FOpenText227"];
-            let view_fragment = ed.data.processor.toView(settlement_agreement_template);
-            let model_fragment = ed.data.toModel(view_fragment);
-            ed.model.insertContent(model_fragment, ed.model.document.selection);
+            //new editor
+            // let ed = editors["FOpenText227"];
+            // let view_fragment = ed.data.processor.toView(settlement_agreement_template);
+            // let model_fragment = ed.data.toModel(view_fragment);
+            // ed.model.insertContent(model_fragment, ed.model.document.selection);
+
+            //old editor
+            let old_text = nicEditors.findEditor("FOpenText227").getContent();
+            nicEditors.findEditor("FOpenText227").setContent(old_text + settlement_agreement_template);
         })
     );
+
+    //mediation notice (if exists)
+    // $("#OpenText227").append(
+    //     $("<button type=button>Mediation Notice Template</button>").on("click", function() {
+    //         let old_text = nicEditors.findEditor("FOpenText227").getContent();
+    //         nicEditors.findEditor("FOpenText227").setContent(old_text + settlement_agreement_template);
+    //     })
+    // );
 
 
     //HIGHLIGHT FIELDS BASED ON PRINTFORM SELECTION
