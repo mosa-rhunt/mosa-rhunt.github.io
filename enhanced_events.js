@@ -259,7 +259,7 @@ If you have any questions or concerns, please contact us right away.
 
 const mediation_rejected_template = `
 <p>
-We have considered your request for mediation, in response to the Notice of Proposed Suspension (or Revocation) dated OpenText221. We have decided to reject mediation. We have rejected mediation because OpenText228
+We have considered your request for mediation, in response to the Notice of Proposed Suspension (or Revocation) dated OpenText221. We have decided to reject mediation. We have rejected mediation because OpenText228.
 </p><p>
 If you so choose, you may file an appeal pursuant to §205.681. Your appeal must be filed within 30 days of your receiving this written notification of Rejection of Mediation. The appeal should be submitted in writing to: Administrator, USDA, AMS, c/o NOP Appeals Team, 1400 Independence Ave SW., Room 2648-So., Stop 0268, Washington, D.C. 20250-0268. Alternatively, you can submit your appeal via email to <a href="mailto:NOPAppeals@usda.gov">NOPAppeals@usda.gov</a>.
 </p><p>
