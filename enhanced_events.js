@@ -61,7 +61,7 @@ $(document).ready(function() {
                 let ot228 = $("#FOpenText228").val() || "REASON FOR REJECTION";
                 new_text = mediation_rejected_template.replace("OpenText221", ot221).replace("OpenText223", ot223).replace("OpenText228", ot228);
             }
-            nicEditors.findEditor("FOpenText227").setContent(old_text + new_text);
+            nicEditors.findEditor("FOpenText232").setContent(old_text + new_text);
         })
     );
 
