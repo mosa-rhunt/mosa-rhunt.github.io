@@ -67,11 +67,24 @@ $(document).ready(function() {
 
     //highlight fields based on printform selection
     $("#FileName").on("change", function() {
-        //blank all
+        //reset to normal
+        $("div[id^='OpenText']").show();
         $("div[id^='OpenText']").find("font").css("background-color", "");
-        //selectively highlight labels
+
+        //determine selected letter
         let match = $(this).val().match(/PrintFormNum=(\d+)/i);
-        if (match && match[1] in printform_field_dict) {
+        if (!(match && match[1] in printform_field_dict)) return;
+
+        if ($("#id_type").val() == "Noncompliance") {
+            //hide all
+            $("div[id^='OpenText']").hide();
+            //selectively show divs
+            for (let field_id of printform_field_dict[match[1]]) {
+                $("#OpenText" + field_id).show();
+            }
+        }
+        else {
+            //selectively highlight labels
             for (let field_id of printform_field_dict[match[1]]) {
                 $("#OpenText" + field_id).find("font").first().css("background-color", "#ff0");
             }
@@ -178,6 +191,13 @@ function enable_stock_statement_copy(dropdown_id, textbox_id, sep1_or_transform=
     .append(add_button)
     .append(`<div id='preview${dropdown_id}' style='width:500px; display:block'></div>`);
     $("#FOpenText" + dropdown_id).parent().after(div);
+
+    const nonc_fields = [
+        ["37", "65"],
+        ["219", "112", "108", "230", "144", "72", "231", "71", "160", "52", "163", "23", "38"],
+        ["214", "107", "91"],
+        [""],
+    ]
 }
 
 
@@ -187,15 +207,15 @@ const printform_field_dict = {
     "169": ["223"], //denial of certification
     "173": ["91", "107", "214"], //followup letter
     "23": ["91", "107", "214"], //generic letter
-    "174": ["230", "72"], //fees nonc Letter
+    "174": ["230", "72", "38"], //fees nonc Letter
     "167": ["221", "223", "224", "225", "226", "228", "232"], //mediation notice
     "170": ["144", "231", "72"], //nonc reminder
     "121": ["144", "160", "38"], //nonc resolution
-    "120": ["144", "72", "38", "52"], //notice of nonc
-    "165": ["221", "222", "38"], //prop susp - broken settlement
-    "164": ["144", "221"], //prop susp - unresolved nonc
+    "120": ["144", "72", "38", "52", "74"], //notice of nonc
+    "165": ["221", "222", "121", "74"], //prop susp - broken settlement
+    "164": ["144", "221", "121", "74"], //prop susp - unresolved nonc
     "168": ["227"], //settlement agreement
-    "166": ["223"], //suspension of certification
+    "166": ["223", "167"], //suspension of certification
     "2": ["9", "72", "101", "94"], //IR MIN
     "81": ["9", "133", "72", "94"], //IR MIN Reminder
     "3": ["70", "101", "39", "94"], //IR Notification
