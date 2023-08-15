@@ -207,19 +207,19 @@ const printform_field_dict = {
     "169": ["223"], //denial of certification
     "173": ["91", "107", "214"], //followup letter
     "23": ["91", "107", "214"], //generic letter
-    "174": ["230", "72", "38", "94"], //fees nonc Letter
-    "167": ["221", "223", "224", "225", "226", "228", "232", "94"], //mediation notice
-    "170": ["144", "231", "72", "94"], //nonc reminder
-    "121": ["144", "160", "38", "94"], //nonc resolution
+    "174": ["230", "72", "38", "109", "94"], //fees nonc Letter
+    "167": ["221", "223", "224", "225", "226", "228", "232", "109", "94"], //mediation notice
+    "170": ["144", "231", "72", "109", "94"], //nonc reminder
+    "121": ["144", "160", "38", "109", "94"], //nonc resolution
     "120": ["144", "72", "38", "52", "74"], //notice of nonc
     "165": ["221", "222", "121", "74"], //prop susp - broken settlement
     "164": ["144", "221", "121", "74"], //prop susp - unresolved nonc
     "168": ["227"], //settlement agreement
     "166": ["223", "167"], //suspension of certification
-    "2": ["9", "72", "101", "94"], //IR MIN
-    "81": ["9", "133", "72", "94"], //IR MIN Reminder
-    "3": ["70", "101", "39", "94"], //IR Notification
-    "4": ["40", "9", "39", "94"], //IR Resolution
+    "2": ["9", "72", "101", "109", "94"], //IR MIN
+    "81": ["9", "133", "72", "109", "94"], //IR MIN Reminder
+    "3": ["70", "101", "39", "109", "94"], //IR Notification
+    "4": ["40", "9", "39", "109", "94"], //IR Resolution
     "": [""], //
 };
 
