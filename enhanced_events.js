@@ -207,10 +207,10 @@ const printform_field_dict = {
     "169": ["223"], //denial of certification
     "173": ["91", "107", "214"], //followup letter
     "23": ["91", "107", "214"], //generic letter
-    "174": ["230", "72", "38"], //fees nonc Letter
-    "167": ["221", "223", "224", "225", "226", "228", "232"], //mediation notice
-    "170": ["144", "231", "72"], //nonc reminder
-    "121": ["144", "160", "38"], //nonc resolution
+    "174": ["230", "72", "38", "94"], //fees nonc Letter
+    "167": ["221", "223", "224", "225", "226", "228", "232", "94"], //mediation notice
+    "170": ["144", "231", "72", "94"], //nonc reminder
+    "121": ["144", "160", "38", "94"], //nonc resolution
     "120": ["144", "72", "38", "52", "74"], //notice of nonc
     "165": ["221", "222", "121", "74"], //prop susp - broken settlement
     "164": ["144", "221", "121", "74"], //prop susp - unresolved nonc
