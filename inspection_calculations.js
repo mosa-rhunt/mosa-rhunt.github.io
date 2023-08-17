@@ -80,17 +80,19 @@ function calculate_inspection_fees() {
         inspectorFee = 0,
         clientFee = 0,
         inspectorFeeItemized = ["<b>Inspector Fees:</b>"],
-        clientFeeItemized = ["<b>Inspector Fees:</b>"];
+        clientFeeItemized = ["<b>Client Fees:</b>"];
 
     function addInspectorFee(name, amount) {
         if (amount == 0) return;
+        amount = Math.round(amount * 100) / 100;
         inspectorFee += amount;
-        inspectorFeeItemized.push(`${name}: $${amount}`);
+        inspectorFeeItemized.push(`${name}: <span style="display:inline-block;width:60px;">$${amount}</span>`);
     }
     function addClientFee(name, amount) {
         if (amount == 0) return;
+        amount = Math.round(amount * 100) / 100;
         clientFee += amount;
-        clientFeeItemized.push(`${name}: $${amount}`);
+        clientFeeItemized.push(`${name}: <span style="display:inline-block;width:60px;">$${amount}</span>`);
     }
     
     //add up fees
@@ -138,9 +140,7 @@ function calculate_inspection_fees() {
         let inspectionDeposit = (clientType.includes("Handler") ? -400 : -300);
         addClientFee("- Inspection Deposit", inspectionDeposit);
     }
-    //7% admin fee
-    let adminFee = parseFloat(clientFee * 0.07).toFixed(2);
-    addClientFee("Admin 7% fee", adminFee);
+    addClientFee("Admin 7% fee", clientFee * 0.07);
     //total
     clientFee = parseFloat(clientFee).toFixed(2);
     clientFeeItemized.push("========");
