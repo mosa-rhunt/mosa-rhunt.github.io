@@ -20,14 +20,13 @@ $(document).ready(function() {
     $("#FOpenText212").attr("readonly", "readonly").css("background-color", grey);
 
     //if it was obviously a staff inspector before, check that radio
-    if ($("#FOpenText95 option:selected").val() !== "" || $("#FOpenText189 option:selected").val() !== "") {
+    if ($("#FOpenText95 option:selected").val() != "" || $("#FOpenText189 option:selected").val() != "") {
         $("input:radio[value='staff']").prop("checked", true);
     }
 
     $("input:radio[name=inspector_type]").on("change", disableFormInputs);
     updateLabels();
 
-    
     //Rearrange boxes event date boxes so it's more intuitive
     let rows = $("table.fillerin div.row");
     let divs = $(rows[3]).children("div");
@@ -46,153 +45,110 @@ $(document).ready(function() {
 });
 
 
-function fee(id) {
-    return parseFloat($("#FOpenText" + id).val()) || 0;
-}
-
-
 function calculate_inspection_fees() {
-    let inspectionDate = new Date($("#FOpenText78").val()), jul1 = new Date("07/01/2022");
-    // let mileageRate = inspectionDate > jul1 ? 0.625 : 0.585;
-    let mileageRate = inspectionDate.getFullYear() == 2023 ? 0.655 : 0.625;
+    function fee(id) {
+        return parseFloat($("#FOpenText" + id).val()) || 0;
+    }
+
+    let inspectionDate = new Date($("#FOpenText78").val()); //, jul1 = new Date("07/01/2022");
+    //let mileageRate = inspectionDate > jul1 ? 0.625 : 0.585;
 
     let baseFee = fee("116"),
         additionalOnSiteTotal = fee("176"),
         additionalOffSiteTotal = fee("177"),
-        miles = fee("27"),
-        mileageCost = miles * mileageRate,
-        driveTimeHours = fee("209"),
-        driveTimeRate = fee("210"),
         residueTestTotal = fee("158"),
         expeditedServiceFee = fee("159"),
-        // food = fee("32"),
-        // rentalCar = fee("211"),
-        // airFare = fee("212"),
         lodging = fee("12"),
         otherFeesTotal = fee("178"),
+        
+        miles = fee("27"),
+        mileageRate = (inspectionDate.getFullYear() == 2023 ? 0.655 : 0.625),
+        mileageTotal = miles * mileageRate,
+        
+        driveTimeHours = fee("209"),
+        driveTimeRate = fee("210"),
+        driveTotal = driveTimeHours * driveTimeRate,
+
         //staff inspector fields
         // personalComputer = ($("#FOpenText173 option:selected").val() == "Yes" ? 10 : 0),
         // usedMosaCC = $("#FOpenText6 option:selected").val(),
         usedMosaCar = $("#FOpenText95 option:selected").val(),
         personalPhone = ($("#FOpenText189 option:selected").val() == "Yes" ? 5 : 0),
         inspectorType = $("input:radio[name='inspector_type']:checked").val(),
+
         //totals/summaries
         inspectorFee = 0,
         clientFee = 0,
-        inspFeeSummary = "",
-        clientFeeSummary = ""; //unused now...
+        inspectorFeeItemized = ["<b>Inspector Fees:</b>"],
+        clientFeeItemized = ["<b>Inspector Fees:</b>"];
+
+    function addInspectorFee(name, amount) {
+        if (amount == 0) return;
+        inspectorFee += amount;
+        inspectorFeeItemized.push(`${name}: $${amount}`);
+    }
+    function addClientFee(name, amount) {
+        if (amount == 0) return;
+        clientFee += amount;
+        clientFeeItemized.push(`${name}: $${amount}`);
+    }
     
-    //calculate inspector fee, and build summary strings
-    inspFeeSummary = "Inspector Fees<br/>";
-    if (inspectorType === "staff") {
-        if (usedMosaCar === "Personal car") {
-            inspectorFee += mileageCost;
-            inspFeeSummary += "Mileage @ " + mileageRate + " for " + miles + " miles: $" + mileageCost + "<br/>";
-        }
-        // if (personalComputer > 0) {
-        //     let computerFee = 10;
-        //     inspFeeSummary += "Personal computer use: $" + personalComputer + "<br/>";
-        // }
-        if (personalPhone > 0) {
-            inspectorFee += personalPhone;
-            inspFeeSummary += "Personal phone use: $" + personalPhone + "<br/>";
-        }
-        // if (otherFeesTotal > 0) {
-        //     inspectorFee += otherFeesTotal;
-        //     inspFeeSummary += "Other fees: $" + otherFeesTotal + "<br/>";
-        // }
-        if (lodging > 0) {
-            inspectorFee += lodging;
-            inspFeeSummary += "Lodging: $" + lodging + "<br/>";
-        }
-        // if (usedMosaCC === "No") {
-        //     if (food > 0) {
-        //         inspectorFee += food;
-        //         inspFeeSummary += "Food: $" + food + "<br/>";
-        //     }
-        //     if (rentalCar > 0) {
-        //         inspectorFee += rentalCar;
-        //         inspFeeSummary += "Rental car: $" + rentalCar + "<br/>";
-        //     }
-        //     if (residueTestTotal > 0) {
-        //         inspectorFee += residueTestTotal;
-        //         inspFeeSummary += "Residue test & postage: $" + residueTestTotal + "<br/>";
-        //     }
-        //     if (airFare > 0) {
-        //         inspectorFee += airFare;
-        //         inspFeeSummary += "Air fare: $" + airFare + "<br/>";
-        //     }
-        // } //end personal cc
+    //add up fees
+    if (inspectorType == "staff") {
+        if (usedMosaCar == "Personal car") addInspectorFee(`Mileage @ $${mileageRate} for ${miles} miles`, mileageTotal);
+        addInspectorFee("Lodging", lodging);
+        addInspectorFee("Personal phone use", personalPhone);
+
+        addClientFee("Base inspection fee", baseFee);
+        addClientFee("Additional on-site time", additionalOnSiteTotal);
+        addClientFee("Additional off-site time", additionalOffSiteTotal);
+        addClientFee(`Mileage @ $${mileageRate} for ${miles} miles`, mileageTotal);
+        addClientFee("Lodging", lodging);
+        addClientFee("Other fees", otherFeesTotal);
     }
     else { //contract inspector
-        if (baseFee > 0) {
-            inspectorFee += baseFee;
-            inspFeeSummary += "Base inspection fee: $" + baseFee + "<br/>";
-        }
-        if (additionalOnSiteTotal > 0) {
-            inspectorFee += additionalOnSiteTotal;
-            inspFeeSummary += "Additional on-site time: $" + additionalOnSiteTotal + "<br/>";
-        }
-        if (additionalOffSiteTotal > 0) {
-            inspectorFee += additionalOffSiteTotal;
-            inspFeeSummary += "Additional off-site time: $" + additionalOffSiteTotal + "<br/>";
-        }
-        if (driveTimeHours > 0) {
-            let driveTotal = driveTimeHours * driveTimeRate;
-            inspectorFee += driveTotal;
-            inspFeeSummary += "Driving " + driveTimeHours + " hours @ " + driveTimeRate + ": $" + driveTotal + "<br/>";
-        }
-        if (lodging > 0) {
-            inspectorFee += lodging;
-            inspFeeSummary += "Lodging: $" + lodging + "<br/>";
-        }
-        // if (food > 0) {
-        //     inspectorFee += food;
-        //     inspFeeSummary += "Food: $" + food + "<br/>";
-        // }
-        // if (rentalCar > 0) {
-        //     inspectorFee += rentalCar;
-        //     inspFeeSummary += "Rental car: $" + rentalCar + "<br/>";
-        // }
-        // if (airFare > 0) {
-        //     inspectorFee += airFare;
-        //     inspFeeSummary += "Air fare: $" + airFare + "<br/>";
-        // }
-        if (residueTestTotal > 0) {
-            inspectorFee += residueTestTotal;
-            inspFeeSummary += "Residue test & postage: $" + residueTestTotal + "<br/>";
-        }
-        if (expeditedServiceFee > 0) {
-            inspectorFee += expeditedServiceFee;
-            inspFeeSummary += "Expedited service fee: $" + expeditedServiceFee + "<br/>";
-        }
-        if (otherFeesTotal > 0) {
-            inspectorFee += otherFeesTotal;
-            inspFeeSummary += "Other fees: $" + otherFeesTotal + "<br/>";
-        }
-    } //end contract inspector
-    inspFeeSummary += "-------<br/>";
-    inspFeeSummary += "Inspector total: $" + parseFloat(inspectorFee).toFixed(2);
-    
-    //finalize client fee
-    let clientType = $("#OpenText44").html().toString();
-    let inspectionDeposit = (clientType.includes("Handler") ? 400 : 300);
-    if (inspectorType === "staff") {
-        let subtotal = inspectorFee + baseFee + additionalOnSiteTotal + additionalOffSiteTotal + otherFeesTotal - personalPhone; //- personalComputer
-        clientFee = subtotal * 1.07;
-    }
-    else { //contracted
-        let subtotal = inspectorFee - residueTestTotal - expeditedServiceFee;
-        clientFee = subtotal * 1.07;
-    }
-    if ($("#id_type option:selected").val() === "Inspection") clientFee -= inspectionDeposit; //won't happen for Inspection - Additional
-    
-    //round to 2 decimal points
-    clientFee = parseFloat(clientFee).toFixed(2);
+        addInspectorFee("Base inspection fee", baseFee);
+        addInspectorFee("Additional on-site time", additionalOnSiteTotal);
+        addInspectorFee("Additional off-site time", additionalOffSiteTotal);
+        addInspectorFee(`Driving @ $${driveTimeRate} for ${driveTimeHours} hours`, driveTotal);
+        addInspectorFee("Lodging", lodging);
+        addInspectorFee("Residue test & postage", residueTestTotal);
+        addInspectorFee("Expedited service fee", expeditedServiceFee);
+        addInspectorFee("Other fees", otherFeesTotal);
 
+        addClientFee("Base inspection fee", baseFee);
+        addClientFee("Additional on-site time", additionalOnSiteTotal);
+        addClientFee("Additional off-site time", additionalOffSiteTotal);
+        addClientFee(`Driving @ $${driveTimeRate} for ${driveTimeHours} hours`, driveTotal);
+        addClientFee("Lodging", lodging);
+        // addClientFee("Residue test & postage", residueTestTotal);
+        // addClientFee("Expedited service fee", expeditedServiceFee);
+        addClientFee("Other fees", otherFeesTotal);
+    } 
+
+    //finalize inspector fees
+    inspectorFee = parseFloat(inspectorFee).toFixed(2);
+    inspectorFeeItemized.push("========");
+    inspectorFeeItemized.push(`Inspector total: $${inspectorFee}`);
     $("#FOpenText80").val(inspectorFee);
+    
+    //finalize client fees, beginning with inspection depsosit (only for annual inspection, not for additionals)
+    if ($("#id_type option:selected").val() == "Inspection") {
+        let clientType = $("#OpenText44").html().toString();
+        let inspectionDeposit = (clientType.includes("Handler") ? -400 : -300);
+        addClientFee("- Inspection Deposit", inspectionDeposit);
+    }
+    //7% admin fee
+    let adminFee = parseFloat(clientFee * 0.07).toFixed(2);
+    addClientFee("Admin 7% fee", adminFee);
+    //total
+    clientFee = parseFloat(clientFee).toFixed(2);
+    clientFeeItemized.push("========");
+    clientFeeItemized.push(`Client total: $${clientFee}`);
     $("#FOpenText81").val(clientFee);
-    $("#feeCalc").html(inspFeeSummary); // + "<br/><br/>" + clientFeeSummary);
+    
+    //display summary lines
+    $("#feeCalc").html(inspectorFeeItemized.join("<br/>") + "<br/><br/>" + clientFeeItemized.join("<br/>"));
 }
 
 
@@ -256,7 +212,7 @@ function disableFormInputs() {
     }
 
     //then we'll selectively disable inputs
-    if (inspectorType === "staff") {
+    if (inspectorType == "staff") {
         for (let id of driveHoursAndRate.concat(residueAndExpedited)) {
             $("#FOpenText" + id).attr("readonly", "readonly").css("background-color", grey);
         }
