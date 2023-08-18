@@ -66,9 +66,10 @@ const fields = {
     //Adverse Action / Noncompliance
     "112": {"name":"Adverse Action Status", "input":"select", "options":["", "Certification", "Fees", "Paperwork", "Paperwork and Fees", "Certification; Fees", "Certification; Paperwork", "Certification; Paperwork and Fees"]},
     "108": {"name":"Quarter", "input":"select", "options":["", "Q1", "Q2", "Q3", "Q4"]},
-    "144": {"name":"Adverse Action Letter Date", "input":"date"},
+    "144": {"name":"Noncompliance Letter Date", "input":"date"},
     "38": {"name":"Noncompliances"},
     "52": {"name":"Summary of Noncompliance"},
+    "230": {"name":"Required Fees type"},
     "35": {"name":"Adverse Action Type", "input":"select", "options":[
         "",
         "Noncompliance",
@@ -126,8 +127,8 @@ const event_types = {
 
     "Communications": ["214", "107", "91", "94"],
     "Admin - Application Details": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "75", "66", "69"],
-    "Adverse Action": ["112", "35", "144", "108", "52", "38", "107", "91", "72", "94", "110", "111"],
-    "Noncompliance": ["112", "35", "144", "108", "52", "38", "107", "91", "72", "94", "110", "111"],
+    // "Adverse Action": ["112", "35", "144", "108", "52", "38", "107", "91", "72", "94", "110", "111"],
+    "Noncompliance": ["112", "108", "144", "72", "230", "52", "107", "38", "91", "94"],
     "Initial Review": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142"],
     "Inspection": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "181", "182", "216", "188"],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
