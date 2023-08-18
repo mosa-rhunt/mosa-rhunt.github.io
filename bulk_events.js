@@ -228,7 +228,7 @@ const basic_event_fields = {
 };
 
 
-const disabled_grey = "#999!important";
+
 
 function td(lbl, el, attr="") { 
     return $(`<td ${attr}></td>`).append(`<label style='color:white'>${lbl}</label>`).append("<br>").append(el); 
@@ -478,7 +478,7 @@ function create_bulk_events() {
     //UI stuff
     $("#response").empty();
     $("#errors").empty();
-    $("#bulk_event_table").find(":input").css("background-color", disabled_grey).prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
+    $("#bulk_event_table").find(":input").css("background-color", "#999999ff!important").prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
     let index = -1; //gets incremented immediately
 
     //finalize and send calls
@@ -489,7 +489,7 @@ function create_bulk_events() {
         //check to see if it reached the end
         if (index >= client_ids.length) {
             //re-enable form inputs
-            $("#bulk_event_table").find(":input").css("background-color", "").removeProp("disabled").find("option:not(:selected)").removeProp("disabled");
+            $("#bulk_event_table").find(":input").css("background-color", "#ffffffff!important").removeProp("disabled").find("option:not(:selected)").removeProp("disabled");
             return;
         }
 
@@ -701,7 +701,7 @@ function import_csv(csv_arrays) {
     //UI stuff
     $("#response").empty();
     $("#errors").empty();
-    $("#bulk_event_table").find(":input").css("background-color", disabled_grey).prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
+    $("#bulk_event_table").find(":input").css("background-color", "#999999ff!important").prop("disabled", true).find("option:not(:selected)").prop("disabled", true);
 
     let total_records = new_records.length;
 
@@ -716,7 +716,7 @@ function import_csv(csv_arrays) {
         }
         else {
             //re-enable form inputs
-            $("#bulk_event_table").find(":input").css("background-color", "").removeProp("disabled").find("option:not(:selected)").removeProp("disabled");
+            $("#bulk_event_table").find(":input").css("background-color", "#ffffffff!important").removeProp("disabled").find("option:not(:selected)").removeProp("disabled");
             return;
         }
 
