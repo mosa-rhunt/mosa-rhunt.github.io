@@ -134,14 +134,14 @@ function calculate_inspection_fees() {
     inspectorFeeItemized.push(`Inspector total: $${inspectorFee}`);
     $("#FOpenText80").val(inspectorFee);
     
-    //finalize client fees, beginning with inspection depsosit (only for annual inspection, not for additionals)
+    //finalize client fees
+    //inspection depsosit (only for annual inspection, not for additionals)
     if ($("#id_type option:selected").val() == "Inspection") {
         let clientType = $("#OpenText44").html().toString();
         let inspectionDeposit = (clientType.includes("Handler") ? -400 : -300);
         addClientFee("- Inspection Deposit", inspectionDeposit);
     }
-    addClientFee("Admin 7% fee", clientFee * 0.07);
-    //total
+    if (inspectorType == "staff") addClientFee("Admin 7% fee", clientFee * 0.07);
     clientFee = parseFloat(clientFee).toFixed(2);
     clientFeeItemized.push("========");
     clientFeeItemized.push(`Client total: $${clientFee}`);
