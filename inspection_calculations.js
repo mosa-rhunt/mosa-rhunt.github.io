@@ -46,27 +46,28 @@ $(document).ready(function() {
 
 
 function calculate_inspection_fees() {
-    function fee(id) {
+    function field(id) {
         return parseFloat($("#FOpenText" + id).val()) || 0;
     }
 
     let inspectionDate = new Date($("#FOpenText78").val()); //, jul1 = new Date("07/01/2022");
     //let mileageRate = inspectionDate > jul1 ? 0.625 : 0.585;
 
-    let baseFee = fee("116"),
-        additionalOnSiteTotal = fee("176"),
-        additionalOffSiteTotal = fee("177"),
-        residueTestTotal = fee("158"),
-        expeditedServiceFee = fee("159"),
-        lodging = fee("12"),
-        otherFeesTotal = fee("178"),
+    let inspectionDeposit = 0,
+        baseFee = field("116"),
+        additionalOnSiteTotal = field("176"),
+        additionalOffSiteTotal = field("177"),
+        residueTestTotal = field("158"),
+        expeditedServiceFee = field("159"),
+        lodging = field("12"),
+        otherFeesTotal = field("178"),
         
-        miles = fee("27"),
+        miles = field("27"),
         mileageRate = (inspectionDate.getFullYear() == 2023 ? 0.655 : 0.625),
         mileageTotal = miles * mileageRate,
         
-        driveTimeHours = fee("209"),
-        driveTimeRate = fee("210"),
+        driveTimeHours = field("209"),
+        driveTimeRate = field("210"),
         driveTotal = driveTimeHours * driveTimeRate,
 
         //staff inspector fields
@@ -81,6 +82,12 @@ function calculate_inspection_fees() {
         clientFee = 0,
         inspectorFeeItemized = ["<b>Inspector Fees:</b>"],
         clientFeeItemized = ["<b>Client Fees:</b>"];
+
+    //inspection depsosit (only for annual inspection, not for additionals)
+    if ($("#id_type option:selected").val() == "Inspection") {
+        let clientType = $("#OpenText44").html().toString();
+        inspectionDeposit = (clientType.includes("Handler") ? -400 : -300);
+    }
 
     function addInspectorFee(name, amount) {
         if (amount == 0) return;
@@ -107,6 +114,8 @@ function calculate_inspection_fees() {
         addClientFee(`Mileage @ $${mileageRate} for ${miles} miles`, mileageTotal);
         addClientFee("Lodging", lodging);
         addClientFee("Other fees", otherFeesTotal);
+        addClientFee("Admin 7% fee", clientFee * 0.07);
+        addClientFee("- Inspection Deposit", inspectionDeposit);
     }
     else { //contract inspector
         addInspectorFee("Base inspection fee", baseFee);
@@ -126,6 +135,7 @@ function calculate_inspection_fees() {
         // addClientFee("Residue test & postage", residueTestTotal);
         // addClientFee("Expedited service fee", expeditedServiceFee);
         addClientFee("Other fees", otherFeesTotal);
+        addClientFee("- Inspection Deposit", inspectionDeposit);
     } 
 
     //finalize inspector fees
@@ -135,13 +145,6 @@ function calculate_inspection_fees() {
     $("#FOpenText80").val(inspectorFee);
     
     //finalize client fees
-    //inspection depsosit (only for annual inspection, not for additionals)
-    if ($("#id_type option:selected").val() == "Inspection") {
-        let clientType = $("#OpenText44").html().toString();
-        let inspectionDeposit = (clientType.includes("Handler") ? -400 : -300);
-        addClientFee("- Inspection Deposit", inspectionDeposit);
-    }
-    if (inspectorType == "staff") addClientFee("Admin 7% fee", clientFee * 0.07);
     clientFee = parseFloat(clientFee).toFixed(2);
     clientFeeItemized.push("========");
     clientFeeItemized.push(`Client total: $${clientFee}`);
