@@ -135,6 +135,7 @@ function calculate_inspection_fees() {
         // addClientFee("Residue test & postage", residueTestTotal);
         // addClientFee("Expedited service fee", expeditedServiceFee);
         addClientFee("Other fees", otherFeesTotal);
+        addClientFee("Admin 7% fee", clientFee * 0.07);
         addClientFee("- Inspection Deposit", inspectionDeposit);
     } 
 
