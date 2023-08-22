@@ -215,7 +215,7 @@ const printform_field_dict = {
     "165": ["221", "222", "121", "74"], //prop susp - broken settlement
     "164": ["144", "221", "121", "74"], //prop susp - unresolved nonc
     "168": ["227"], //settlement agreement
-    "166": ["223", "167"], //suspension of certification
+    "166": ["223", "167", "74"], //suspension of certification
     "2": ["9", "72", "101", "109", "94"], //IR MIN
     "81": ["9", "133", "72", "109", "94"], //IR MIN Reminder
     "3": ["70", "101", "39", "109", "94"], //IR Notification
