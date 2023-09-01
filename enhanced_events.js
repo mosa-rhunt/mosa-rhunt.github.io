@@ -269,7 +269,7 @@ In mediation the certifying agency (MOSA) and the certified operation (you) work
 </p><p>
 Within ten (10) days of receipt of this letter, please contact me, or Shelby Wheeler, MOSA Compliance Manager, (608) 296-9287, to set up a time for a mediation session by phone.
 </p><p>
-A settlement agreement, signed both parties, will conclude the proposed suspension and enable continued certification. The NOP provides 30 days to reach a settlement agreement following mediation. If mediation fails, you have the option to submit an appeal to the NOP.
+A settlement agreement, signed by both parties, will conclude the proposed suspension and enable continued certification. The NOP provides 30 days to reach a settlement agreement following mediation. If mediation fails, you have the option to submit an appeal to the NOP.
 </p><p>
 We look forward to working with you for a positive outcome.
 </p><p>
