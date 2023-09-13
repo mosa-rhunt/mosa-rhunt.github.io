@@ -212,8 +212,8 @@ const printform_field_dict = {
     "170": ["144", "231", "72", "109", "94"], //nonc reminder
     "121": ["144", "160", "38", "109", "94"], //nonc resolution
     "120": ["144", "72", "38", "52", "74"], //notice of nonc
-    "165": ["221", "222", "121", "74"], //prop susp - broken settlement
-    "164": ["144", "221", "121", "74"], //prop susp - unresolved nonc
+    "165": ["220", "221", "222", "121", "74"], //prop susp - broken settlement
+    "164": ["220", "144", "221", "121", "74"], //prop susp - unresolved nonc
     "168": ["227"], //settlement agreement
     "166": ["223", "167", "74"], //suspension of certification
     "2": ["9", "72", "101", "109", "94"], //IR MIN
