@@ -3,9 +3,9 @@ Bulk event creation form. Used on ReportGeneral.asp?RptNum=462
 
 Custom fields
   1 - 120: Events
-121 - 250: EventsExtra
-251 - 370: EventsExtra2
-371 - 490: EventsExtra3
+121 - 250: EventExtra
+251 - 370: EventExtra2
+371 - 490: EventExtra3
 */
 
 
