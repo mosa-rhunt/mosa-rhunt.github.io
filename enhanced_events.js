@@ -204,7 +204,7 @@ function enable_stock_statement_copy(dropdown_id, textbox_id, sep1_or_transform=
 const printform_field_dict = {
     // "printform_id": ["field_ids"],
     "171": ["144", "219", "38", "220", "52"], //combined notice
-    "169": ["223", "144", "121"], //denial of certification
+    "169": ["223", "144", "121", "109", "94"], //denial of certification
     "173": ["91", "107", "214"], //followup letter
     "23": ["91", "107", "214"], //generic letter
     "174": ["230", "72", "38", "109", "94"], //fees nonc Letter
