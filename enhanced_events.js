@@ -255,7 +255,7 @@ ________________________ Date: _________
 </p><br><br><p>
 _______________________Date: _________
 </p><p>
-Shelby Wheeler, Compliance Manager
+Shelby Thomas, Compliance Manager
 </p><p>
 <i><span style='color:#f00'>(Note - the printed settlement agreement includes no letter date nor enclosures or cc: NOP. If a proposed settlement and acceptance of mediation are written from one event - an option - then these parts of the acceptance letter should be adjusted before printing.)</span></i>
 </p>
@@ -267,7 +267,7 @@ On OpenText225, MOSA received your written request for mediation of the OpenText
 </p><p>
 In mediation the certifying agency (MOSA) and the certified operation (you) work together to try to come to an agreement that addresses the issues resulting in the proposed suspension. Mediation can be a formal process, with a third party mediator, or, it can be pretty informal. In either case, a settlement agreement resulting from mediation typically describes steps that will be taken to address the issues which resulted in proposed suspension. Please note that MOSA charges a $100 per hour administrative fee for mediations.
 </p><p>
-Within ten (10) days of receipt of this letter, please contact me, or Shelby Wheeler, MOSA Compliance Manager, (608) 296-9287, to set up a time for a mediation session by phone.
+Within ten (10) days of receipt of this letter, please contact me, or Shelby Thomas, MOSA Compliance Manager, (608) 296-9287, to set up a time for a mediation session by phone.
 </p><p>
 A settlement agreement, signed by both parties, will conclude the proposed suspension and enable continued certification. The NOP provides 30 days to reach a settlement agreement following mediation. If mediation fails, you have the option to submit an appeal to the NOP.
 </p><p>
