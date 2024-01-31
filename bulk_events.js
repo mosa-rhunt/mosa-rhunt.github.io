@@ -158,10 +158,10 @@ const datepicker_config = {
 
 const users = {
      "90": " Unassigned",
-    "265": "Adam Clopton",
+    // "265": "Adam Clopton",
      "29": "Alexandra W Petrovits",
      "70": "Ben Caldwell",
-    "252": "Cate Eddy",
+    // "252": "Cate Eddy",
     "250": "Cathie Gotthardt",
      "40": "Cori Skolaski",
     "199": "Curt Parr",
@@ -178,21 +178,21 @@ const users = {
     // "197": "Kendra Volk ",
     "139": "Kristen Adams",
     // "251": "Liz Happ",
-     "35": "Lynne Haynor",
+     // "35": "Lynne Haynor",
      "25": "Mark Geistlinger",
     "222": "Mike Tuszynski",
     "285": "Olive Reynolds",
     "229": "Rebekah Phillips",
     "253": "Ryan Hunt",
-    "248": "Sammy Clopton",
-    "241": "Sarah Forsythe",
-    "261": "Shannon Bly",
+    // "248": "Sammy Clopton",
+    // "241": "Sarah Forsythe",
+    // "261": "Shannon Bly",
     "196": "Stephanie Leahy",
      // "22": "Stephen Walker",
      "20": "Susan Perry",
     "189": "Terri Okrasinski",
     "198": "Tracy Trahan",
-    "249": "Val Torres",
+    // "249": "Val Torres",
 };
 
 
@@ -275,7 +275,7 @@ $(document).ready(function() {
     )
     .append(
         $("<tr></tr>")
-        .append(td("Client IDs", txt_client_ids, "colspan=2"))
+        .append(td("Client IDs (separated by comma, space, and/or new lines)", txt_client_ids, "colspan=2"))
     )
     .append(
         $("<tr></tr>")
