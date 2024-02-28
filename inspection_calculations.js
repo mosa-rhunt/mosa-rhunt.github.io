@@ -4,11 +4,15 @@ and to manipulate form elements when Inspector Type
 is changed from Contractor to Staff
 */
 
-const grey = "#777!important";
+const grey = "#777";
 $(document).ready(function() {
+    if ($("#id_type").val() == "zInspection") {
+        testMockup();
+        return;
+    }
+
     //label setup
-    let nums = ["176", "177", "179", "180"];
-    for (let num of nums) {
+    for (let num of ["176", "177", "179", "180"]) {
         $("#OpenText" + num).find("span").prop("id", "Label" + num).remove("font");
     }
     $("#tdFees > label > span").prop("id", "Label116").remove("font");
@@ -46,12 +50,9 @@ $(document).ready(function() {
 
 
 function calculate_inspection_fees() {
-    function field(id) {
-        return parseFloat($("#FOpenText" + id).val()) || 0;
-    }
+    const field = (id) => parseFloat($("#FOpenText" + id).val()) || 0;
 
-    let inspectionDate = new Date($("#FOpenText78").val()); //, jul1 = new Date("07/01/2022");
-    //let mileageRate = inspectionDate > jul1 ? 0.625 : 0.585;
+    let inspectionDate = new Date($("#FOpenText78").val());
 
     let inspectionDeposit = 0,
         baseFee = field("116"),
@@ -61,18 +62,15 @@ function calculate_inspection_fees() {
         expeditedServiceFee = field("159"),
         lodging = field("12"),
         otherFeesTotal = field("178"),
-        
+
         miles = field("27"),
-        mileageRate = (inspectionDate.getFullYear() == 2023 ? 0.655 : 0.625),
+        mileageRate = (inspectionDate.getFullYear() == 2023 ? 0.655 : 0.67),
         mileageTotal = miles * mileageRate,
-        
         driveTimeHours = field("209"),
         driveTimeRate = field("210"),
         driveTotal = driveTimeHours * driveTimeRate,
 
         //staff inspector fields
-        // personalComputer = ($("#FOpenText173 option:selected").val() == "Yes" ? 10 : 0),
-        // usedMosaCC = $("#FOpenText6 option:selected").val(),
         usedMosaCar = $("#FOpenText95 option:selected").val(),
         personalPhone = ($("#FOpenText189 option:selected").val() == "Yes" ? 5 : 0),
         inspectorType = $("input:radio[name='inspector_type']:checked").val(),
@@ -152,7 +150,7 @@ function calculate_inspection_fees() {
     $("#FOpenText81").val(clientFee);
     
     //display summary lines
-    $("#feeCalc").html(inspectorFeeItemized.join("<br/>") + "<br/><br/>" + clientFeeItemized.join("<br/>"));
+    $("#feeCalc").html(inspectorFeeItemized.join("<br>") + "<br><br>" + clientFeeItemized.join("<br>"));
 }
 
 
@@ -204,7 +202,6 @@ function disableFormInputs() {
     let driveHoursAndRate = ["209", "210"];
     let staffDropdowns = ["6", "189", "95"];
     let residueAndExpedited = ["158", "159"];
-    // let contractorFees = ["116", "176", "179", "177", "180"]; //includes a few dupes from onSiteFields but w/e
 
     //re-enable all inputs
     for (let id of onSiteFields.concat(driveHoursAndRate)) {
@@ -223,7 +220,7 @@ function disableFormInputs() {
     }
     else {
         for (let id of staffDropdowns) {
-            $("#FOpenText" + id).css("background-color", grey);
+            $("#FOpenText" + id).css("background-color", grey + "!important");
             $("#FOpenText" + id + " option:not(:selected)").prop("disabled", true);
         }
     }
@@ -238,3 +235,164 @@ function disableFormInputs() {
         $("#FOpenText95 option:not(:selected)").prop("disabled", true);
     }
 }
+
+
+
+function testMockup() {
+    const originalFieldOrder = [
+        "78", //Actual Inspection Date
+        "37", //Custom Fields
+        "54", //Farm
+        "58", //
+        "56", //
+        "55", //
+        "59", //
+        "60", //
+        "62", //
+        "63", //
+        "61", //
+        "53", //
+        "217", //
+        "142", //
+        "181", //
+        "182", //
+        "216", //
+        "188", //GF Meat Handling
+        "169", //TNs
+        "170", //When
+        "87", //scheduled date
+
+        "115", //2023 Residue
+        "89", //2024 Residue
+        "143", //Date sample taken
+        "28", //fees pre-approved by
+        "42", //fees split with
+        "140", //This Year Inspector
+        "26", //Comm method
+        "93", //Postcard Sent
+        "91", //Generic Text
+        "77", //File Sent to inspector
+        "84", //Notes to inspector
+        "16", //Notes to FR
+        "213", //Insp type
+        "116", //base contract fee -- BEGIN TABLE
+        "2", //Date paper file rec
+        "44", //cust type
+        "81", //total client fee
+        "129", //note?
+        "64", //billing approved by
+        "146", //date billing approved
+        "82", //insp rpt sent to client
+        "83", //insp rpt sent by
+    ];
+
+    const fieldOrder = [
+        "140", //This Year Inspector
+        "26", //Comm method
+        "77", //File Sent to inspector
+        "91", //Generic Text
+        "37", //Custom Fields
+        "54", //Farm
+        "58", //
+        "56", //
+        "55", //
+        "59", //
+        "60", //
+        "62", //
+        "63", //
+        "61", //
+        "53", //
+        "217", //
+        "142", //
+        "181", //
+        "182", //
+        "216", //
+        "188", //GF Meat Handling
+
+        "87", //scheduled date
+        "115", //2023 Residue
+        "89", //2024 Residue
+        "84", //Notes to inspector
+
+        "28", //fees pre-approved by
+        "42", //fees split with
+        "78", //Actual Inspection Date
+        "169", //TNs
+        "170", //When
+        "16", //Notes to FR
+        "213", //Insp type
+        "116", //base contract fee -- BEGIN TABLE
+
+        // "143", //Date sample taken
+        // "93", //Postcard Sent
+        // "2", //Date paper file rec
+        // "44", //cust type
+
+        "81", //total client fee
+        "129", //note?
+        "64", //billing approved by
+        "146", //date billing approved
+        "82", //insp rpt sent to client
+        "83", //insp rpt sent by
+    ];
+
+    //REARRANGE
+
+    const hiddenDiv = $("<div></div>").hide().appendTo("body");
+    const place = $("table.fillerin div.row").eq(9).children("div")[0];
+    for (const num of originalFieldOrder) {
+        $("#OpenText" + num).appendTo(hiddenDiv);
+    }
+    for (const num of fieldOrder) {
+        $("#OpenText" + num).appendTo(place);
+    }
+    
+    //rearrange event time boxes so it's more helpful for inspectors
+    let divs = $("table.fillerin div.row").eq(3).children("div");
+    let container = $("<div class='row'></div>").insertAfter("#OpenText78"); //Actual Inspection Date
+
+    //move Event Start/End time
+    for (let i = 1; i < 4; i++) {
+        $(divs[i]).appendTo(container);
+    }
+    //hide Reminder box
+    $(divs[4]).hide(); 
+    //widen Event Date field
+    $(divs[0]).removeClass("col-lg-2").removeClass("col-md-2");
+
+    //move event status just before Scheduled Date
+    $("select[name*='field.Status']").closest("div.col-6").insertAfter($("#OpenText87 label").eq(0));
+
+    //hide any specialties that are not checked
+    for (const num of ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "181", "182", "216", "188"]) {
+        if (!$("#FOpenText" + num).is(":checked")) $("#OpenText" + num).hide();
+    }
+
+
+
+    //LABEL STUFF
+
+    //setup labels for fee fields relating to inspection type
+    for (let num of ["176", "177", "179", "180"]) {
+        $("#OpenText" + num).find("span").prop("id", "Label" + num);
+    }
+    //this one is different because in the event field configurations a <table> is jammed in
+    $("#tdFees > label > span").prop("id", "Label116");
+    $("#FOpenText213").on("change", updateLabels).trigger("change"); //inspection type dropdown
+    $("input:radio[name=inspector_type]").on("change", disableFormInputs); //staff v contractor radio
+
+    //if it was obviously a staff inspector before (use personal cell phone, personal car?), check the staff radio
+    if ($("#FOpenText95 option:selected").val() != "" || $("#FOpenText189 option:selected").val() != "") {
+        $("input:radio[value='staff']").prop("checked", true);
+    }
+
+
+    //update label text
+    $("label[for='Date']").text("Event Date (Office Use Only):");
+    $("label[for='Start']").text("Inspection Start Time:");
+    $("label[for='End']").text("Inspection End Time:"); 
+    //add label to top
+    $("#event").closest(".row").prepend("<label style='margin-left:15px; color:#333; font-size: 16px'>OFFICE USE ONLY</label>");
+    
+}
+
