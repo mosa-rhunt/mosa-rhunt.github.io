@@ -15,6 +15,10 @@ $(document).ready(function() {
         $(tbls[0]).css("border", "3px solid #f00");
     }
 
+    //add link to Cybele in print form dropdown
+    const client_id = $("input[name=CustomerNum]").val();
+    $("#FileName").append(`<option value="http://cybele-257314.appspot.com/operation/search?id=${client_id}">Certificate/COPS</option>`);
+
     //add download attribute to certain file types
     let download_file_types = [".rtf"];
     $("a[href^='downfiles.asp'").each(function() {
