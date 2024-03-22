@@ -41,7 +41,7 @@ $(document).ready(function() {
 
             //old editor
             let old_text = nicEditors.findEditor("FOpenText227").getContent();
-            nicEditors.findEditor("FOpenText227").setContent(old_text + settlement_agreement_template);
+            nicEditors.findEditor("FOpenText227").setContent(old_text + settlement_agreement_template.replace("CLIENTID", $("#h_customerex").val()));
         })
     );
 
@@ -227,6 +227,8 @@ const printform_field_dict = {
 
 const settlement_agreement_template = `
 <p>
+Account #CLIENTID 
+</p><p>
 THIS SETTLEMENT AGREEMENT is entered into by Midwest Organic Services Association (MOSA), and <span style='background: #ff0;'>___name of operation__. (additional language for corporations/non individuals): , and anyone responsibly connected with __name of operation__ </span>
 </p><p>
 MOSA and <span style='background: #ff0;'>__name of operation___</span> and have decided to compromise and settle the issues among them related to alleged violations of the Organic Foods Production Act of 1990 (7 U.S.C. §§ 6501 et seq.) (OFPA), and USDA organic regulations (7 C.F.R. §§ 205 et seq.).
@@ -252,7 +254,9 @@ This agreement will become effective upon being signed by all persons named belo
 ________________________ Date: _________
 </p><p>
 <span style='background: #ff0;'>Name , Organization</span>
-</p><br><br><p>
+</p>
+<br>MOSA<br>
+<p>
 _______________________Date: _________
 </p><p>
 Shelby Thomas, Compliance Manager
