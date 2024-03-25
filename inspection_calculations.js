@@ -14,26 +14,25 @@ $(document).ready(function() {
 
     //label setup. add ids to labels for ease of changing their text later
     for (let num of ["176", "177", "179", "180", "159", "132"]) {
-        $("#OpenText" + num).find("span").prop("id", "Label" + num).remove("font");
+        $("#OpenText" + num + " span").prop("id", "Label" + num).empty();
     }
-    $("#tdFees > label > span").prop("id", "Label116").remove("font");
-    $("#FOpenText213").on("change", updateLabels); //inspection type dropdown
+    //this one is different because it's the beginning of the inserted table to change the layout
+    $("#tdFees > label > span").prop("id", "Label116").empty();
+    //inspection type dropdown
+    $("#FOpenText213").on("change", updateLabels); 
 
     //Legacy fields (Food, Rental car, Air fare) disabled
-    $("#FOpenText32").attr("readonly", "readonly").css("background-color", grey);
-    $("#FOpenText211").attr("readonly", "readonly").css("background-color", grey);
-    $("#FOpenText212").attr("readonly", "readonly").css("background-color", grey);
+    // $("#FOpenText32").attr("readonly", "readonly").css("background-color", grey);
+    // $("#FOpenText211").attr("readonly", "readonly").css("background-color", grey);
+    // $("#FOpenText212").attr("readonly", "readonly").css("background-color", grey);
 
     //if it was obviously a staff inspector before, check that radio
-    if ($("#FOpenText95 option:selected").val() != "" || $("#FOpenText189 option:selected").val() != "") {
+    if ($("#FOpenText95 option:selected").val() || $("#FOpenText189 option:selected").val()) {
         $("input:radio[value='staff']").prop("checked", true);
     }
 
     $("input:radio[name=inspector_type]").on("change", disableFormInputs);
     updateLabels();
-
-    $("#Label159").text((isAdditionalInspection ? "Rush Fee for Additional Inspections" : "Expedited Fee for ANNUAL Inspection"));
-    $("#Label132").text("Description of Misc. fee with name of person who approved it"); //TODO move to NewOrg directly
 
     //Rearrange boxes event date boxes so it's more intuitive
     let rows = $("table.fillerin div.row");
@@ -159,6 +158,9 @@ function calculate_inspection_fees() {
 
 
 function updateLabels() {
+    $("#Label159").text((isAdditionalInspection ? "Rush Fee for Additional Inspections" : "Expedited Fee for ANNUAL Inspection"));
+    $("#Label132").text("Description of Misc. fee with name of person who approved it"); //TODO move to NewOrg directly
+    
     let inspectionType = $("#FOpenText213 option:selected").val();
     if (inspectionType.endsWith("Onsite/Traditional Inspection")) {
         $("#Label116").text("Base Contract Fee for Traditional Inspection");
