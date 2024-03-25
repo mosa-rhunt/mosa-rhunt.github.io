@@ -394,5 +394,43 @@ function testMockup() {
     //add label to top
     $("#event").closest(".row").prepend("<label style='margin-left:15px; color:#333; font-size: 16px'>OFFICE USE ONLY</label>");
     
+    //message that will eventually be moved from this script to neworg directly
+    const block = $.parseHTML(`
+    <label style="color:#333; font-size:16px">Base Fee Hours Include on-site and paperwork together</label>
+    <table>
+        <tr>
+            <td><label>Crop Only</label></td>
+            <td>4.5 hours</td>
+            <td>(includes greenhouse, maple syrup, wild crop, mushroom, etc.)</td>
+        </tr>
+        <tr>
+            <td><label>Crop and LS</label></td>
+            <td>6.5 hours</td>
+            <td>(includes grassfed, dairy, beef, small ruminant, diversified, poultry with crops, etc.)</td>
+        </tr>
+        <tr>
+            <td><label>Egg/Poultry</label></td>
+            <td>4 hours</td>
+            <td>(No crop other than pasture)</td>
+        </tr>
+        <tr>
+            <td><label>Handler</label></td>
+            <td>7 hours</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><label>Producer<br>with Handler</label></td>
+            <td colspan="2">Use the above hours for producer and charge per hour with description for  the handler portion of the inspection.</td>
+        </tr>
+        <tr>
+            <td><label>Additional/<br>Unannounced</label></td>
+            <td>2 hours</td>
+            <td></td>
+        </tr>
+    </table>
+    <hr>
+    `);
+
+    $(block).insertBefore("h4");
 }
 
