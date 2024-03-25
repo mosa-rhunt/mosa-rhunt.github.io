@@ -5,14 +5,15 @@ is changed from Contractor to Staff
 */
 
 const grey = "#777";
+const isAdditionalInspection = ($("#id_type").val() == "Inspection - Additional");
 $(document).ready(function() {
     if ($("#id_type").val() == "zInspection") {
         testMockup();
         return;
     }
 
-    //label setup
-    for (let num of ["176", "177", "179", "180"]) {
+    //label setup. add ids to labels for ease of changing their text later
+    for (let num of ["176", "177", "179", "180", "159", "132"]) {
         $("#OpenText" + num).find("span").prop("id", "Label" + num).remove("font");
     }
     $("#tdFees > label > span").prop("id", "Label116").remove("font");
@@ -30,6 +31,9 @@ $(document).ready(function() {
 
     $("input:radio[name=inspector_type]").on("change", disableFormInputs);
     updateLabels();
+
+    $("#Label159").text((isAdditionalInspection ? "Rush Fee for Additional Inspections" : "Expedited Fee for ANNUAL Inspection"));
+    $("#Label132").text("Description of Misc. fee with name of person who approved it"); //TODO move to NewOrg directly
 
     //Rearrange boxes event date boxes so it's more intuitive
     let rows = $("table.fillerin div.row");
@@ -122,7 +126,7 @@ function calculate_inspection_fees() {
         addInspectorFee(`Driving @ $${driveTimeRate} for ${driveTimeHours} hours`, driveTotal);
         addInspectorFee("Lodging", lodging);
         addInspectorFee("Residue test & postage", residueTestTotal);
-        addInspectorFee("Expedited service fee", expeditedServiceFee);
+        addInspectorFee((isAdditionalInspection ? "Rush fee" : "Expedited service fee"), expeditedServiceFee);
         addInspectorFee("Other fees", otherFeesTotal);
 
         addClientFee("Base inspection fee", baseFee);
@@ -131,7 +135,7 @@ function calculate_inspection_fees() {
         addClientFee(`Driving @ $${driveTimeRate} for ${driveTimeHours} hours`, driveTotal);
         addClientFee("Lodging", lodging);
         // addClientFee("Residue test & postage", residueTestTotal);
-        // addClientFee("Expedited service fee", expeditedServiceFee);
+        if (isAdditionalInspection) addClientFee("Rush fee", expeditedServiceFee);
         addClientFee("Other fees", otherFeesTotal);
         addClientFee("Admin 7% fee", clientFee * 0.07);
         addClientFee("- Inspection Deposit", inspectionDeposit);
@@ -157,39 +161,39 @@ function calculate_inspection_fees() {
 function updateLabels() {
     let inspectionType = $("#FOpenText213 option:selected").val();
     if (inspectionType.endsWith("Onsite/Traditional Inspection")) {
-        $("#Label116").html("Base Contract Fee for Traditional Inspection");
-        $("#Label176").html("Total Cost of Additional Time On-site for Traditional Inspection");
-        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site for Traditional Inspection");
-        $("#Label177").html("Total Cost of Additional Paperwork Off-site for Traditional Inspection");
-        $("#Label180").html("Description: REQUIRED Itemized Additional Paperwork Off-Site for Traditional Inspection");
+        $("#Label116").text("Base Contract Fee for Traditional Inspection");
+        $("#Label176").text("Total Cost of Additional Time On-site for Traditional Inspection");
+        $("#Label179").text("Description: REQUIRED Itemized Additional Time On-Site for Traditional Inspection");
+        $("#Label177").text("Total Cost of Additional Paperwork Off-site for Traditional Inspection");
+        $("#Label180").text("Description: REQUIRED Itemized Additional Paperwork Off-Site for Traditional Inspection");
     }
     else if (inspectionType.endsWith("Hybrid Inspection")) {
-        $("#Label116").html("Base Contract Fee for Hybrid Inspection");
-        $("#Label176").html("Total Cost of Additional Time On-site for Hybrid Inspection");
-        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site for Hybrid Inspection");
-        $("#Label177").html("Total Cost of Additional Paperwork Off-site for Hybrid Inspection");
-        $("#Label180").html("Description: REQUIRED Itemized Additional Paperwork Off-Site for Hybrid Inspection");
+        $("#Label116").text("Base Contract Fee for Hybrid Inspection");
+        $("#Label176").text("Total Cost of Additional Time On-site for Hybrid Inspection");
+        $("#Label179").text("Description: REQUIRED Itemized Additional Time On-Site for Hybrid Inspection");
+        $("#Label177").text("Total Cost of Additional Paperwork Off-site for Hybrid Inspection");
+        $("#Label180").text("Description: REQUIRED Itemized Additional Paperwork Off-Site for Hybrid Inspection");
     }
     else if (inspectionType.endsWith("Virtual-Only")) {
-        $("#Label116").html("Base Contract Fee");
-        $("#Label176").html("Total Cost of Additional Time On-site");
-        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site");
-        $("#Label177").html("Total Cost of Virtual Only Inspection");
-        $("#Label180").html("Description: REQUIRED Itemized # of hours at contracted hourly rate for Virtual Only Inspection");
+        $("#Label116").text("Base Contract Fee");
+        $("#Label176").text("Total Cost of Additional Time On-site");
+        $("#Label179").text("Description: REQUIRED Itemized Additional Time On-Site");
+        $("#Label177").text("Total Cost of Virtual Only Inspection");
+        $("#Label180").text("Description: REQUIRED Itemized # of hours at contracted hourly rate for Virtual Only Inspection");
     }
     else if (inspectionType.endsWith("Desk Audit")) {
-        $("#Label116").html("Base Contract Fee");
-        $("#Label176").html("Total Cost of Additional Time On-site");
-        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site");
-        $("#Label177").html("Total Cost of Desk Audit Inspection");
-        $("#Label180").html("Description: REQUIRED Itemized # of hours at contracted hourly rate for Desk Audit Inspection");
+        $("#Label116").text("Base Contract Fee");
+        $("#Label176").text("Total Cost of Additional Time On-site");
+        $("#Label179").text("Description: REQUIRED Itemized Additional Time On-Site");
+        $("#Label177").text("Total Cost of Desk Audit Inspection");
+        $("#Label180").text("Description: REQUIRED Itemized # of hours at contracted hourly rate for Desk Audit Inspection");
     }
     else { //Additional inspection where the dropdown doesn't even exist
-        $("#Label116").html("Base Contract Fee");
-        $("#Label176").html("Total Cost of Additional Time On-site");
-        $("#Label179").html("Description: REQUIRED Itemized Additional Time On-Site");
-        $("#Label177").html("Total Cost of Additional Paperwork Off-site");
-        $("#Label180").html("Description: REQUIRED Itemized Additional Paperwork Off-Site");
+        $("#Label116").text("Base Contract Fee");
+        $("#Label176").text("Total Cost of Additional Time On-site");
+        $("#Label179").text("Description: REQUIRED Itemized Additional Time On-Site");
+        $("#Label177").text("Total Cost of Additional Paperwork Off-site");
+        $("#Label180").text("Description: REQUIRED Itemized Additional Paperwork Off-Site");
     }
     disableFormInputs(); //in case the transportation fields need to get disabled
 }
