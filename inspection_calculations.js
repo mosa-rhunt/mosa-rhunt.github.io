@@ -115,7 +115,7 @@ function calculate_inspection_fees() {
         addClientFee(`Mileage @ $${mileageRate} for ${miles} miles`, mileageTotal);
         addClientFee("Lodging", lodging);
         addClientFee("Other fees", otherFeesTotal);
-        addClientFee("Admin 7% fee", clientFee * 0.07);
+        // addClientFee("Admin 7% fee", clientFee * 0.07);
         addClientFee("- Inspection Deposit", inspectionDeposit);
     }
     else { //contract inspector
@@ -136,7 +136,7 @@ function calculate_inspection_fees() {
         // addClientFee("Residue test & postage", residueTestTotal);
         if (isAdditionalInspection) addClientFee("Rush fee", expeditedServiceFee);
         addClientFee("Other fees", otherFeesTotal);
-        addClientFee("Admin 7% fee", clientFee * 0.07);
+        // addClientFee("Admin 7% fee", clientFee * 0.07);
         addClientFee("- Inspection Deposit", inspectionDeposit);
     } 
 
