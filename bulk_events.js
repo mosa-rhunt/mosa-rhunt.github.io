@@ -116,6 +116,7 @@ const fields = {
 
     //GrassFed Certification
     "202": {"name":"Grass-Fed Certificate Expiration Date", "input":"date"},
+    "186": {"name":"Grass-Fed Certificate Effective Date", "input":"date"},
     
     // "": {"name":""},
 };
@@ -133,7 +134,7 @@ const event_types = {
     "Inspection": ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "181", "182", "216", "188"],
     "New Client Outreach": ["150", "215", "153", "156", "127"],
     "Timing Need": ["124", "128", "126"],
-    "Grass-Fed Certification": ["181", "182", "216", "188", "202"],
+    "Grass-Fed Certification": ["181", "182", "216", "188", "202", "186"],
     
     // "Complaint",
     // "Final Review",
