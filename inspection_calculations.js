@@ -7,11 +7,6 @@ is changed from Contractor to Staff
 const grey = "#777";
 const isAdditionalInspection = ($("#id_type").val() == "Inspection - Additional");
 $(document).ready(function() {
-    if ($("#id_type").val() == "zInspection") {
-        testMockup();
-        //return;
-    }
-
     //label setup. add ids to labels for ease of changing their text later
     for (let num of ["176", "177", "179", "180", "159", "132"]) {
         $("#OpenText" + num + " span").prop("id", "Label" + num).empty();
@@ -32,6 +27,26 @@ $(document).ready(function() {
     $("input:radio[name=inspector_type]").on("change", disableFormInputs);
     updateLabels();
 
+    //hide any specialties that are not checked
+    for (const num of ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "181", "182", "216", "188"]) {
+        if (!$("#FOpenText" + num).is(":checked")) $("#OpenText" + num).hide();
+    }
+
+    //REARRANGE
+    const fieldRearrange = {
+        // "field": "fieldToBeInsertedBefore" 
+        "140": "77", //this year insp : file sent to inspector
+        "26": "77", //comm method : file sent to inspector
+        "91": "54", //generic text : farm
+        "37": "54", //Custom Fields : farm
+        "84": "28", //notes to insp : fees for this client...
+        "16": "170", //notes to fr : when does this need to be completed
+        "": "", 
+    };
+    for (const [field, anchor] of Object.entries(fieldRearrange)) {
+        $("#OpenText" + field).insertBefore("#OpenText" + anchor);
+    }
+
     //Rearrange boxes event date boxes so it's more intuitive
     let rows = $("table.fillerin div.row");
     let divs = $(rows[3]).children("div");
@@ -44,9 +59,14 @@ $(document).ready(function() {
     $(divs[4]).hide(); //minutes box
     $(divs[0]).removeClass("col-lg-2").removeClass("col-md-2").addClass("col-lg-3").addClass("col-md-3");
 
-    $("label[for='Date']").text("Event Date (Office Use Only):");
+    //move event status just before Scheduled Date
+    $("select[name*='field.Status']").closest("div.col-6").insertAfter($("#OpenText87 label").eq(0));
+
+    // $("label[for='Date']").text("Event Date (Office Use Only):");
     $("label[for='Start']").text("Inspection Start Time:");
     $("label[for='End']").text("Inspection End Time:"); 
+    $("#event").closest(".row").prepend("<label style='margin-left:15px; color:#333; font-size: 16px'>OFFICE USE ONLY</label>");
+
 });
 
 
@@ -237,7 +257,7 @@ function disableFormInputs() {
     }
 }
 
-
+/*
 
 function testMockup() {
     const originalFieldOrder = [
@@ -337,16 +357,6 @@ function testMockup() {
         "83", //insp rpt sent by
     ];
 
-    //REARRANGE
-
-    const hiddenDiv = $("<div></div>").hide().appendTo("body");
-    const place = $("table.fillerin div.row").eq(9).children("div")[0];
-    for (const num of originalFieldOrder) {
-        $("#OpenText" + num).appendTo(hiddenDiv);
-    }
-    for (const num of fieldOrder) {
-        $("#OpenText" + num).appendTo(place);
-    }
     
     //rearrange event time boxes so it's more helpful for inspectors
     let divs = $("table.fillerin div.row").eq(3).children("div");
@@ -361,13 +371,7 @@ function testMockup() {
     //widen Event Date field
     $(divs[0]).removeClass("col-lg-2").removeClass("col-md-2");
 
-    //move event status just before Scheduled Date
-    $("select[name*='field.Status']").closest("div.col-6").insertAfter($("#OpenText87 label").eq(0));
-
-    //hide any specialties that are not checked
-    for (const num of ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "181", "182", "216", "188"]) {
-        if (!$("#FOpenText" + num).is(":checked")) $("#OpenText" + num).hide();
-    }
+    
 
 
 
@@ -387,51 +391,7 @@ function testMockup() {
         $("input:radio[value='staff']").prop("checked", true);
     }
 
-
-    //update label text
-    $("label[for='Date']").text("Event Date (Office Use Only):");
-    $("label[for='Start']").text("Inspection Start Time:");
-    $("label[for='End']").text("Inspection End Time:"); 
-    //add label to top
-    $("#event").closest(".row").prepend("<label style='margin-left:15px; color:#333; font-size: 16px'>OFFICE USE ONLY</label>");
     
-    //message that will eventually be moved from this script to neworg directly
-    const block = $.parseHTML(`
-    <label style="color:#333; font-size:16px">Base Fee Hours Include on-site and paperwork together</label>
-    <table>
-        <tr>
-            <td><label>Crop Only</label></td>
-            <td>4.5 hours</td>
-            <td>(includes greenhouse, maple syrup, wild crop, mushroom, etc.)</td>
-        </tr>
-        <tr>
-            <td><label>Crop and LS</label></td>
-            <td>6.5 hours</td>
-            <td>(includes grassfed, dairy, beef, small ruminant, diversified, poultry with crops, etc.)</td>
-        </tr>
-        <tr>
-            <td><label>Egg/Poultry</label></td>
-            <td>4 hours</td>
-            <td>(No crop other than pasture)</td>
-        </tr>
-        <tr>
-            <td><label>Handler</label></td>
-            <td>7 hours</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><label>Producer<br>with Handler</label></td>
-            <td colspan="2">Use the above hours for producer and charge per hour with description for  the handler portion of the inspection.</td>
-        </tr>
-        <tr>
-            <td><label>Additional/<br>Unannounced</label></td>
-            <td>2 hours</td>
-            <td></td>
-        </tr>
-    </table>
-    <hr>
-    `);
-
-    $(block).insertBefore("h4");
 }
 
+*/
