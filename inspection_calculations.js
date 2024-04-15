@@ -35,12 +35,12 @@ $(document).ready(function() {
     //REARRANGE
     const fieldRearrange = {
         // "field": "fieldToBeInsertedBefore" 
-        "140": "77", //this year insp : file sent to inspector
         "26": "77", //comm method : file sent to inspector
-        "91": "54", //generic text : farm
+        "140": "77", //this year insp : file sent to inspector
         "37": "54", //Custom Fields : farm
+        "91": "54", //generic text : farm
         "84": "28", //notes to insp : fees for this client...
-        "16": "170", //notes to fr : when does this need to be completed
+        "16": "213", //notes to fr : insp type
         "": "", 
     };
     for (const [field, anchor] of Object.entries(fieldRearrange)) {
