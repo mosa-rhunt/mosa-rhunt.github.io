@@ -67,6 +67,8 @@ $(document).ready(function() {
     $("label[for='End']").text("Inspection End Time:"); 
     $("#event").closest(".row").prepend("<label style='margin-left:15px; color:#333; font-size: 16px'>OFFICE USE ONLY</label>");
 
+    //prepopulate drive time hourly rate with $60
+    if (!$("#FOpenText210").val()) $("#FOpenText210").val("60");
 });
 
 
@@ -77,8 +79,11 @@ function calculate_inspection_fees() {
 
     let inspectionDeposit = 0,
         baseFee = field("116"),
-        additionalOnSiteTotal = field("176"),
-        additionalOffSiteTotal = field("177"),
+        contractedHourlyFee = field("3"),
+        totalHoursOverBase = field("8"),
+        hourlyTotal = contractedHourlyFee * totalHoursOverBase,
+        //additionalOnSiteTotal = field("176"),
+        //additionalOffSiteTotal = field("177"),
         residueTestTotal = field("158"),
         expeditedServiceFee = field("159"),
         lodging = field("12"),
@@ -128,8 +133,10 @@ function calculate_inspection_fees() {
         addInspectorFee("Personal phone use", personalPhone);
 
         addClientFee("Base inspection fee", baseFee);
-        addClientFee("Additional on-site time", additionalOnSiteTotal);
-        addClientFee("Additional off-site time", additionalOffSiteTotal);
+        addClientFee(`Hourly fee @ $${contractedHourlyFee} for ${totalHoursOverBase} hours`, hourlyTotal);
+        
+        // addClientFee("Additional on-site time", additionalOnSiteTotal);
+        // addClientFee("Additional off-site time", additionalOffSiteTotal);
         addClientFee(`Mileage @ $${mileageRate} for ${miles} miles`, mileageTotal);
         addClientFee("Lodging", lodging);
         addClientFee("Other fees", otherFeesTotal);
@@ -138,8 +145,9 @@ function calculate_inspection_fees() {
     }
     else { //contract inspector
         addInspectorFee("Base inspection fee", baseFee);
-        addInspectorFee("Additional on-site time", additionalOnSiteTotal);
-        addInspectorFee("Additional off-site time", additionalOffSiteTotal);
+        addClientFee(`Hourly fee @ $${contractedHourlyFee} for ${totalHoursOverBase} hours`, hourlyTotal);
+        // addInspectorFee("Additional on-site time", additionalOnSiteTotal);
+        // addInspectorFee("Additional off-site time", additionalOffSiteTotal);
         addInspectorFee(`Driving @ $${driveTimeRate} for ${driveTimeHours} hours`, driveTotal);
         addInspectorFee("Lodging", lodging);
         addInspectorFee("Residue test & postage", residueTestTotal);
@@ -147,8 +155,9 @@ function calculate_inspection_fees() {
         addInspectorFee("Other fees", otherFeesTotal);
 
         addClientFee("Base inspection fee", baseFee);
-        addClientFee("Additional on-site time", additionalOnSiteTotal);
-        addClientFee("Additional off-site time", additionalOffSiteTotal);
+        addClientFee(`Hourly fee @ $${contractedHourlyFee} for ${totalHoursOverBase} hours`, hourlyTotal);
+        // addClientFee("Additional on-site time", additionalOnSiteTotal);
+        // addClientFee("Additional off-site time", additionalOffSiteTotal);
         addClientFee(`Driving @ $${driveTimeRate} for ${driveTimeHours} hours`, driveTotal);
         addClientFee("Lodging", lodging);
         // addClientFee("Residue test & postage", residueTestTotal);
