@@ -145,7 +145,7 @@ function calculate_inspection_fees() {
     }
     else { //contract inspector
         addInspectorFee("Base inspection fee", baseFee);
-        addClientFee(`Hourly fee @ $${contractedHourlyFee} for ${totalHoursOverBase} hours`, hourlyTotal);
+        addInspectorFee(`Hourly fee @ $${contractedHourlyFee} for ${totalHoursOverBase} hours`, hourlyTotal);
         // addInspectorFee("Additional on-site time", additionalOnSiteTotal);
         // addInspectorFee("Additional off-site time", additionalOffSiteTotal);
         addInspectorFee(`Driving @ $${driveTimeRate} for ${driveTimeHours} hours`, driveTotal);
