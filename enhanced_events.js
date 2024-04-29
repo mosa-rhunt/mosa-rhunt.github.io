@@ -45,6 +45,23 @@ $(document).ready(function() {
         })
     );
 
+    //Reinstatement letter
+    if ($("#id_type").val() == "Communications") {
+        $("#OpenText91").append(
+            $("<button type=button>Reinstatement Template</button>").on("click", function() {
+                //new editor
+                // let ed = editors["FOpenText227"];
+                // let view_fragment = ed.data.processor.toView(settlement_agreement_template);
+                // let model_fragment = ed.data.toModel(view_fragment);
+                // ed.model.insertContent(model_fragment, ed.model.document.selection);
+
+                //old editor
+                let old_text = nicEditors.findEditor("FOpenText91").getContent();
+                nicEditors.findEditor("FOpenText91").setContent(old_text + reinstatement_template);
+            })
+        );
+    }
+
     //mediation notice (if exists)
     $("#OpenText232").append(
         $("<button type=button>Mediation Notice Template</button>").on("click", function() {
@@ -288,5 +305,33 @@ We have considered your request for mediation, in response to the Notice of Prop
 If you so choose, you may file an appeal pursuant to §205.681. Your appeal must be filed within 30 days of your receiving this written notification of Rejection of Mediation. The appeal should be submitted in writing to: Administrator, USDA, AMS, c/o NOP Appeals Team, 1400 Independence Ave SW., Room 2648-So., Stop 0268, Washington, D.C. 20250-0268. Alternatively, you can submit your appeal via email to <a href="mailto:NOPAppeals@usda.gov">NOPAppeals@usda.gov</a>.
 </p><p>
 If you do not file an appeal within the time frame indicated above, your operation's certificate as a producer under the National Organic Program will be suspended as of OpenText223. You will be unable to sell or label your products as organic. If you have questions regarding this letter, please contact the MOSA office.
+</p>
+`;
+
+const reinstatement_template = `
+<p>
+This letter is a follow up to our_________ phone conversation regarding reinstatement of your MOSA organic certificate.
+</p><p>
+Your organic certificate was suspended on _______________, as described in the enclosed _____________ Notice of Suspension. Also enclosed are the related ______________Notice of Proposed Suspension and ______________ Notice of Noncompliance.
+</p><p>
+Because your certificate is suspended and no longer active, you are required to seek reinstatement. Enclosed is NOP Instruction 2605  -  Reinstating Suspended Operations. The Instruction describes the reinstatement process and procedures.
+</p><p>
+As a suspended operation, your application would be considered a new or initial application. Enclosed is an initial application packet. The suspension will remain so until all of the following items have been completed.
+</p><p>
+1. <u>Complete the New Client Overview form:</u> Complete and submit the New Client Overview (NCO). The NCO must provide a description of your production and timing needs. After we've reviewed your NCO, we'll let you know whether you may submit your initial application.  (If you would like, you may complete and return the enclosed initial application forms with the NCO. However, we can not accept your application and fee payment until Step 1 is completed).
+</p><p>
+2. <u>Submit initial application and Fees (after Step 1 is completed):</u>
+</p><p>
+<u>Initial Application:</u> The enclosed initial application forms must be completed and submitted to MOSA. As an alternative to sending in a paper application, you may complete and submit your application online using MyMOSA, our online application system. To access MyMOSA, please call the MOSA office - 844-637-2526, or call me directly - 608-572-7276. Make sure to complete all documents required and/or applicable to your operation. 
+</p><p>
+<u>Fees:</u>  Submit total payment of $______________ This includes initial certification fee ($______________) and a minimum, non-refundable reinstatement review fee ($500.00). Fees include an inspection deposit or base fee of $___________. If your inspection costs exceed $_______________, you will be billed for the difference. Please do not submit payment until Step 1 is completed and you have heard back from MOSA.
+</p><p>
+3. <u>Review and Inspection:</u> MOSA will conduct a full review and inspect the operation. All identified noncompliances must be resolved. 
+</p><p>
+4. <u>NOP Review:</u> The USDA/NOP Instruction for Reinstating Suspended Organic Operations <a href="https://www.ams.usda.gov/sites/default/files/media/2605.pdf">https://www.ams.usda.gov/sites/default/files/media/2605.pdf</a> is enclosed. MOSA must ensure all requirements for certification have been met and that the operation is capable of remaining in compliance before submitting written statements to the NOP in support of reinstatement.  Once the NOP receives the written request from the suspended operation and statement of compliance from MOSA, the NOP will review the request and either approve the reinstatement, or deny it with a letter sent to the operation with the reasons for denying eligibility for reinstatement.  If reinstatement is approved, MOSA will send you a certificate and a notice of reinstatement. 
+</p><p>
+The reinstatement process can take up to 4 - 6 months. MOSA cannot provide an exact time frame. 
+</p><p>
+Please contact me with any questions or concerns regarding the reinstatement process.
 </p>
 `;
