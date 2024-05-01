@@ -129,7 +129,7 @@ function calculate_inspection_fees() {
     //add up fees
     if (inspectorType == "staff") {
         if (usedMosaCar == "Personal car") addInspectorFee(`Mileage @ $${mileageRate} for ${miles} miles`, mileageTotal);
-        addInspectorFee("Lodging", lodging);
+        // addInspectorFee("Lodging", lodging);
         addInspectorFee("Personal phone use", personalPhone);
 
         addClientFee("Base inspection fee", baseFee);
