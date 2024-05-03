@@ -45,23 +45,6 @@ $(document).ready(function() {
         })
     );
 
-    //Reinstatement letter
-    if ($("#id_type").val() == "Communications") {
-        $("#OpenText91").append(
-            $("<button type=button>Reinstatement Template</button>").on("click", function() {
-                //new editor
-                // let ed = editors["FOpenText227"];
-                // let view_fragment = ed.data.processor.toView(settlement_agreement_template);
-                // let model_fragment = ed.data.toModel(view_fragment);
-                // ed.model.insertContent(model_fragment, ed.model.document.selection);
-
-                //old editor
-                let old_text = nicEditors.findEditor("FOpenText91").getContent();
-                nicEditors.findEditor("FOpenText91").setContent(old_text + reinstatement_template);
-            })
-        );
-    }
-
     //mediation notice (if exists)
     $("#OpenText232").append(
         $("<button type=button>Mediation Notice Template</button>").on("click", function() {
@@ -81,6 +64,34 @@ $(document).ready(function() {
             nicEditors.findEditor("FOpenText232").setContent(old_text + new_text);
         })
     );
+
+    //Reinstatement letter
+    if ($("#id_type").val() == "Communications") {
+        $("#OpenText91").append(
+            $("<button type=button>Reinstatement Template</button>").on("click", function() {
+                //old editor
+                let old_text = nicEditors.findEditor("FOpenText91").getContent();
+                nicEditors.findEditor("FOpenText91").setContent(old_text + reinstatement_template);
+
+                let enclosureText = "NOP Instruction 2605 - Reinstating Suspended Operations<br>Application Packet<br>Sent by priority mail";
+                nicEditors.findEditor("FOpenText94").setContent(enclosureText);
+            })
+        );
+    }
+    // Transfer letter
+    else if ($("#id_type").val() == "Transfers") {
+        $("#OpenText91").append(
+            $("<button type=button>Instructions for Transfer Template</button>").on("click", function() {
+                //old editor
+                let old_text = nicEditors.findEditor("FOpenText91").getContent();
+                let year = (new Date()).getFullYear();
+                nicEditors.findEditor("FOpenText91").setContent(old_text + transfer_template.replaceAll("FULLYEAR", year));
+
+                let enclosureText = "NOP 2604 Responsibilities of Certified Operations Changing Certifiying Agents<br>MOSA Fee Schedule<br>Sent by Priority Mail # ___";
+                nicEditors.findEditor("FOpenText94").setContent(enclosureText);
+            })
+        );
+    }
 
     //highlight fields based on printform selection
     $("#FileName").on("change", function() {
@@ -334,4 +345,37 @@ The reinstatement process can take up to 4 - 6 months. MOSA cannot provide an ex
 </p><p>
 Please contact me with any questions or concerns regarding the reinstatement process.
 </p>
+`;
+
+
+const transfer_template = `
+<p>
+Thank you for letting us know you will be seeking organic certification with __________ for the FULLYEAR certification year. On _________, I reviewed with you both the National Organic Program's and MOSA's related requirements and procedures for operations changing certifying agents. I noted MOSA would send a follow-up letter describing requirements. We're providing the information below to clarify the transfer process, identify potential compliance concerns, and also help support a smooth transition. Please review this letter carefully and contact me with any questions or concerns.
+</p><p>
+Enclosed is the <b><i>National Organic Program Instruction 2604 - Responsibilities of Certified Operations Changing Certifying Agents (NOP 2604)</i></b>. The instruction applies to organic operations changing (transferring) from one accredited agency to another. MOSA's requirements for operations changing certifying agents are also described.
+</p><p>
+<b><u>National Organic Program Instructions and Requirements for Organic Operations Changing Certifiers</u></b>
+<br>The enclosed NOP 2604 instruction says, 
+"When changing certifying agents, the certified operation must either maintain the prior certification according to the USDA organic regulations or surrender their prior certification in writing. Certified Operations that are changing certifying agents and intend to continue to produce or sell products as organic must maintain their current certification until they have been granted certification by the new certifying agent." (Section 4.1.4)
+</p><p>
+<i>If you intend to continue to produce or sell product as organic while you are changing certifiers, you must maintain your current MOSA certification until your new certificate is issued</i>. NOP 2604 describes that maintaining your certificate includes 
+"... submitting annual updates, allowing timely inspections, and paying all required fees to the current certifying agent." (Section 5.1.4)
+</p><p>
+You've told us that you intend to produce and sell product as organic during the transfer process. Therefore, you'll need to maintain your MOSA certificate until the new certificate is issued. You may voluntarily surrender your MOSA certificate once your new certificate is issued.
+</p><p>
+<b><u>MOSA's Requirements and Responsibilities for Operations Changing Certifiers</u></b>
+<br>MOSA's annual update paperwork and fees are due 4/1/FULLYEAR. To meet the annual update requirement described in NOP instruction 2604, by 4/1/FULLYEAR you must submit your FULLYEAR annual update paperwork and fees to MOSA. If by 4/1/FULLYEAR you have not submitted to MOSA your annual update paperwork and fees (or alternatively, have not voluntarily surrendered your MOSA organic certificate), MOSA may issue a Notice of Noncompliance for failure to meet the annual update requirements. In addition, as your current certifier, MOSA requires that once you've submitted your application and fees to your new certifier, you provide us written confirmation of the new certifying agent's name (e.g., _______) and the date you submitted your application. MOSA may also periodically check on the progress of the application. This will support our responsibility to verify compliance during the transfer process and help determine reasonable steps for review. Until you voluntarily surrender your MOSA certificate, or until such time as your new certificate is issued, MOSA may continue with the FULLYEAR annual review of your operation.  Depending upon the process of your application with your new certifier, our work may include conducting the initial review, inspection, and final review.
+<br><br>
+If you will be maintaining your MOSA organic certificate during the transfer process, once your new certificate is issued, you may voluntarily terminate or "surrender" your MOSA certificate, in writing.  <b>NOP 2604 notes that "Operations should surrender their organic certifications only after the new certification process is complete."</b> (Section 5.1.5). 
+<br><br>
+If you choose not to maintain your MOSA certificate while changing certifiers, by 4/1/FULLYEAR please notify MOSA of your voluntary surrender in writing.  Please keep in mind that if you surrender your MOSA certificate prior receiving an organic certificate from your new certifier, you may not sell or represent products as organic.
+<br><br>
+<b><u>MOSA Fees</u></b>
+<br>Our Program Manual notes that clients are responsible for any charges incurred up to the point of surrender. Please carefully review MOSA's <b><i>Surrender, Withdrawal, Transfer, or Other Termination</i></b> Policy described in the enclosed Fee Schedule.
+<br><br>
+<b><u>Cooperation between Accredited Agencies and Exchange of Information</u></b>
+<br>Accredited certification agencies work cooperatively during transfers, and your new agency may request information from MOSA. This information typically includes your certification determination letter and certificate. Other information may also be requested.  As noted above, MOSA will also periodically check on the status of your new application.
+<br><br>
+<b><u>Comments and Considerations</u></b>
+<br>We understand the logistical challenges that come with changing certifiers.  It may seem cumbersome. During the transfer, your operation will be subject to two separate certification processes, varying documentation requirements, and associated costs. We anticipate your new certification process will move forward in a timely fashion and that MOSA's role and responsibilities as your current certifier will conclude in reasonable time and with reasonable cost.  MOSA is available to answer any questions or concerns and will work with you and your new certifier during this process.";
 `;
