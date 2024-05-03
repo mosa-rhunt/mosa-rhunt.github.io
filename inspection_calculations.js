@@ -40,6 +40,7 @@ $(document).ready(function() {
         "37": "54", //Custom Fields : farm
         "91": "54", //generic text : farm
         "84": "28", //notes to insp : fees for this client...
+        "136": "28", //notes to insp addl : fees for this client...
         "16": "213", //notes to fr : insp type
         "": "", 
     };
@@ -90,7 +91,7 @@ function calculate_inspection_fees() {
         otherFeesTotal = field("178"),
 
         miles = field("27"),
-        mileageRate = (inspectionDate.getFullYear() == 2023 ? 0.655 : 0.67),
+        mileageRate = (inspectionDate.getFullYear() == 2024 ?  0.67 : 0.655),
         mileageTotal = miles * mileageRate,
         driveTimeHours = field("209"),
         driveTimeRate = field("210"),
