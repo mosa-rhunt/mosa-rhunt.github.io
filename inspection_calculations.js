@@ -28,7 +28,7 @@ $(document).ready(function() {
     updateLabels();
 
     //hide any specialties that are not checked
-    for (const num of ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "181", "182", "216", "188"]) {
+    for (const num of ["54", "58", "56", "55", "59", "60", "62", "63", "53", "61", "217", "142", "181", "182", "216", "188", "242"]) {
         if (!$("#FOpenText" + num).is(":checked")) $("#OpenText" + num).hide();
     }
 
