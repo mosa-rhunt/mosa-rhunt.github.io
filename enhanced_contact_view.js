@@ -40,8 +40,10 @@ $(document).ready(function() {
     //add collapse- and expand-all functions on Files tab
     if (window.location.toString().includes("Page=Files")) {
         let file_types = [
+            "Printxx",
             "AdverseAction",
             "Audittrail",
+            "ClientOIDCertificate",
             "Fieldinformation",
             "Generalsanitation",
             "Ingredients,Certificates&Non-GMODocuments",
@@ -87,6 +89,6 @@ $(document).ready(function() {
         });
 
         //add to DOM
-        $("a[href*='Page=Files']").prop("id", "filetop").parent().prop("align", null).prepend(collapse_all).prepend(expand_all);
+        $("a[href*='Page=Files']:not(.menu)").prop("id", "filetop").parent().prop("align", null).prepend(collapse_all).prepend(expand_all);
     }
 });
