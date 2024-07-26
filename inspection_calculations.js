@@ -89,6 +89,7 @@ function calculate_inspection_fees() {
         expeditedServiceFee = field("159"),
         lodging = field("12"),
         otherFeesTotal = field("178"),
+        miscFee = field("241"),
 
         miles = field("27"),
         mileageRate = (inspectionDate.getFullYear() == 2024 ?  0.67 : 0.655),
@@ -140,6 +141,7 @@ function calculate_inspection_fees() {
         // addClientFee("Additional off-site time", additionalOffSiteTotal);
         addClientFee(`Mileage @ $${mileageRate} for ${miles} miles`, mileageTotal);
         addClientFee("Lodging", lodging);
+        addClientFee("Misc Fee", miscFee);
         addClientFee("Other fees", otherFeesTotal);
         // addClientFee("Admin 7% fee", clientFee * 0.07);
         addClientFee("- Inspection Deposit", inspectionDeposit);
@@ -153,6 +155,7 @@ function calculate_inspection_fees() {
         addInspectorFee("Lodging", lodging);
         addInspectorFee("Residue test & postage", residueTestTotal);
         addInspectorFee((isAdditionalInspection ? "Rush fee" : "Expedited service fee"), expeditedServiceFee);
+        addInspectorFee("Misc Fee", miscFee);
         addInspectorFee("Other fees", otherFeesTotal);
 
         addClientFee("Base inspection fee", baseFee);
@@ -163,6 +166,7 @@ function calculate_inspection_fees() {
         addClientFee("Lodging", lodging);
         // addClientFee("Residue test & postage", residueTestTotal);
         if (isAdditionalInspection) addClientFee("Rush fee", expeditedServiceFee);
+        addClientFee("Misc Fee", miscFee);
         addClientFee("Other fees", otherFeesTotal);
         // addClientFee("Admin 7% fee", clientFee * 0.07);
         addClientFee("- Inspection Deposit", inspectionDeposit);
