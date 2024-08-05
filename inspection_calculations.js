@@ -42,7 +42,6 @@ $(document).ready(function() {
         "84": "28", //notes to insp : fees for this client...
         "136": "28", //notes to insp addl : fees for this client...
         "16": "213", //notes to fr : insp type
-        "": "", 
     };
     for (const [field, anchor] of Object.entries(fieldRearrange)) {
         $("#OpenText" + field).insertBefore("#OpenText" + anchor);
@@ -112,7 +111,7 @@ function calculate_inspection_fees() {
     //inspection depsosit (only for annual inspection, not for additionals)
     if ($("#id_type option:selected").val() == "Inspection") {
         let clientType = $("#OpenText44").html().toString();
-        inspectionDeposit = (clientType.includes("Handler") ? -400 : -300);
+        inspectionDeposit = (clientType.includes("Handler") ? -450 : -350);
     }
 
     function addInspectorFee(name, amount) {
@@ -270,142 +269,3 @@ function disableFormInputs() {
         $("#FOpenText95 option:not(:selected)").prop("disabled", true);
     }
 }
-
-/*
-
-function testMockup() {
-    const originalFieldOrder = [
-        "78", //Actual Inspection Date
-        "37", //Custom Fields
-        "54", //Farm
-        "58", //
-        "56", //
-        "55", //
-        "59", //
-        "60", //
-        "62", //
-        "63", //
-        "61", //
-        "53", //
-        "217", //
-        "142", //
-        "181", //
-        "182", //
-        "216", //
-        "188", //GF Meat Handling
-        "169", //TNs
-        "170", //When
-        "87", //scheduled date
-
-        "115", //2023 Residue
-        "89", //2024 Residue
-        "143", //Date sample taken
-        "28", //fees pre-approved by
-        "42", //fees split with
-        "140", //This Year Inspector
-        "26", //Comm method
-        "93", //Postcard Sent
-        "91", //Generic Text
-        "77", //File Sent to inspector
-        "84", //Notes to inspector
-        "16", //Notes to FR
-        "213", //Insp type
-        "116", //base contract fee -- BEGIN TABLE
-        "2", //Date paper file rec
-        "44", //cust type
-        "81", //total client fee
-        "129", //note?
-        "64", //billing approved by
-        "146", //date billing approved
-        "82", //insp rpt sent to client
-        "83", //insp rpt sent by
-    ];
-
-    const fieldOrder = [
-        "140", //This Year Inspector
-        "26", //Comm method
-        "77", //File Sent to inspector
-        "91", //Generic Text
-        "37", //Custom Fields
-        "54", //Farm
-        "58", //
-        "56", //
-        "55", //
-        "59", //
-        "60", //
-        "62", //
-        "63", //
-        "61", //
-        "53", //
-        "217", //
-        "142", //
-        "181", //
-        "182", //
-        "216", //
-        "188", //GF Meat Handling
-
-        "87", //scheduled date
-        "115", //2023 Residue
-        "89", //2024 Residue
-        "84", //Notes to inspector
-
-        "28", //fees pre-approved by
-        "42", //fees split with
-        "78", //Actual Inspection Date
-        "169", //TNs
-        "170", //When
-        "16", //Notes to FR
-        "213", //Insp type
-        "116", //base contract fee -- BEGIN TABLE
-
-        // "143", //Date sample taken
-        // "93", //Postcard Sent
-        // "2", //Date paper file rec
-        // "44", //cust type
-
-        "81", //total client fee
-        "129", //note?
-        "64", //billing approved by
-        "146", //date billing approved
-        "82", //insp rpt sent to client
-        "83", //insp rpt sent by
-    ];
-
-    
-    //rearrange event time boxes so it's more helpful for inspectors
-    let divs = $("table.fillerin div.row").eq(3).children("div");
-    let container = $("<div class='row'></div>").insertAfter("#OpenText78"); //Actual Inspection Date
-
-    //move Event Start/End time
-    for (let i = 1; i < 4; i++) {
-        $(divs[i]).appendTo(container);
-    }
-    //hide Reminder box
-    $(divs[4]).hide(); 
-    //widen Event Date field
-    $(divs[0]).removeClass("col-lg-2").removeClass("col-md-2");
-
-    
-
-
-
-    //LABEL STUFF
-
-    //setup labels for fee fields relating to inspection type
-    for (let num of ["176", "177", "179", "180"]) {
-        $("#OpenText" + num).find("span").prop("id", "Label" + num);
-    }
-    //this one is different because in the event field configurations a <table> is jammed in
-    $("#tdFees > label > span").prop("id", "Label116");
-    $("#FOpenText213").on("change", updateLabels).trigger("change"); //inspection type dropdown
-    $("input:radio[name=inspector_type]").on("change", disableFormInputs); //staff v contractor radio
-
-    //if it was obviously a staff inspector before (use personal cell phone, personal car?), check the staff radio
-    if ($("#FOpenText95 option:selected").val() != "" || $("#FOpenText189 option:selected").val() != "") {
-        $("input:radio[value='staff']").prop("checked", true);
-    }
-
-    
-}
-
-*/
