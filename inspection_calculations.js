@@ -237,7 +237,7 @@ function disableFormInputs() {
     let onSiteFields = ["116", "176", "179", "158", "159", "12", "27"];
     let driveHoursAndRate = ["209", "210"];
     let staffDropdowns = ["6", "189", "95"];
-    let residueAndExpedited = ["158", "159"];
+    let residueExpeditedAndIncentive = ["158", "159", "34"];
 
     //re-enable all inputs
     for (let id of onSiteFields.concat(driveHoursAndRate)) {
@@ -250,7 +250,7 @@ function disableFormInputs() {
 
     //then we'll selectively disable inputs
     if (inspectorType == "staff") {
-        for (let id of driveHoursAndRate.concat(residueAndExpedited)) {
+        for (let id of driveHoursAndRate.concat(residueExpeditedAndIncentive)) {
             $("#FOpenText" + id).attr("readonly", "readonly").css("background-color", grey);
         }
     }
