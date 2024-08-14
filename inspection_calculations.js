@@ -89,6 +89,7 @@ function calculate_inspection_fees() {
         lodging = field("12"),
         otherFeesTotal = field("178"),
         miscFee = field("241"),
+        incentiveFee = field("34"), 
 
         miles = field("27"),
         mileageRate = (inspectionDate.getFullYear() == 2024 ?  0.67 : 0.655),
@@ -155,6 +156,7 @@ function calculate_inspection_fees() {
         addInspectorFee("Residue test & postage", residueTestTotal);
         addInspectorFee((isAdditionalInspection ? "Rush fee" : "Expedited service fee"), expeditedServiceFee);
         addInspectorFee("Misc Fee", miscFee);
+        addInspectorFee("Incentive Fee", incentiveFee);
         addInspectorFee("Other fees", otherFeesTotal);
 
         addClientFee("Base inspection fee", baseFee);
