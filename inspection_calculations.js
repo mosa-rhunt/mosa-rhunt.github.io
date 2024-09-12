@@ -12,7 +12,6 @@ $(document).ready(function() {
         $("#OpenText" + num + " span").prop("id", "Label" + num).empty();
     }
     $("#Label159").text((isAdditionalInspection ? "Rush Fee for Additional Inspections" : "Expedited Fee for ANNUAL Inspection"));
-    $("#Label132").text("Description of Misc. fee with name of person who approved it"); //TODO move to NewOrg directly
 
     //this one is different because it's the beginning of the inserted table to change the layout
     $("#tdFees > label > span").prop("id", "Label116").empty();
