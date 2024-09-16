@@ -32,19 +32,19 @@ $(document).ready(function() {
     }
 
     //REARRANGE
-    const fieldRearrange = {
-        // "field": "fieldToBeInsertedBefore" 
-        "26": "77", //comm method : file sent to inspector
-        "140": "77", //this year insp : file sent to inspector
-        "37": "54", //Custom Fields : farm
-        "91": "54", //generic text : farm
-        "84": "28", //notes to insp : fees for this client...
-        "136": "28", //notes to insp addl : fees for this client...
-        "145": "28", //insp stock statements : fees for this client...
-        "16": "213", //notes to fr : insp type
-    };
-    for (const [field, anchor] of Object.entries(fieldRearrange)) {
-        $("#OpenText" + field).insertBefore("#OpenText" + anchor);
+    const fieldRearrange = [
+        // [ "field", "fieldToBeInsertedBefore" ]
+        [ "26", "77" ], //comm method : file sent to inspector
+        [ "140", "77" ], //this year insp : file sent to inspector
+        [ "37", "54" ], //Custom Fields : farm
+        [ "91", "54" ], //generic text : farm
+        [ "84", "28" ], //notes to insp : fees for this client...
+        [ "136", "28" ], //notes to insp addl : fees for this client...
+        [ "145", "28" ], //insp stock statements : fees for this client...
+        [ "16", "213" ], //notes to fr : insp type
+    ];
+    for (const arr of fieldRearrange) {
+        $("#OpenText" + arr[0]).insertBefore("#OpenText" + arr[1]);
     }
 
     //Rearrange boxes event date boxes so it's more intuitive
