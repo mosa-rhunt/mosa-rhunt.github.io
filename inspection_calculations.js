@@ -8,7 +8,7 @@ const grey = "#777";
 const isAdditionalInspection = ($("#id_type").val() == "Inspection - Additional");
 $(document).ready(function() {
     //label setup. add ids to labels for ease of changing their text later
-    for (let num of ["176", "177", "179", "180", "159", "132"]) {
+    for (let num of ["176", "177", "179", "180", "159"]) {
         $("#OpenText" + num + " span").prop("id", "Label" + num).empty();
     }
     $("#Label159").text((isAdditionalInspection ? "Rush Fee for Additional Inspections" : "Expedited Fee for ANNUAL Inspection"));
