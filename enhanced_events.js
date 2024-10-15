@@ -455,30 +455,19 @@ Please contact me with any questions or concerns regarding the reinstatement pro
 
 const producer_estimate_template = `
 <p>
-MOSA has received your New Client Overview, and before we proceed with your application, we want to make sure you understand the potential inspection
-and certification costs. The USDA National Organic Program requires that your facility undergo an inspection every year, and we want to make sure
-that you understand these annual fees.
+MOSA has received your New Client Overview, and before we proceed with your application, we want to make sure you understand the potential inspection and certification costs. The USDA National Organic Program requires that your facility undergo an inspection every year, and we want to make sure that you understand these annual fees.
 </p><p>
-As a new client, you will pay $1375 when you submit your application. Included in the $1375 payment is a $350 deposit towards the final cost of inspection. 
-After your first year, your certification fee is based on your organic sales, plus the inspection deposit. Attached is our fee schedule to give you an idea
-of what your fees might be in future years.
+As a new client, you will pay $1375 when you submit your application. Included in the $1375 payment is a $350 deposit towards the final cost of inspection. After your first year, your certification fee is based on your organic sales, plus the inspection deposit. Attached is our fee schedule to give you an idea of what your fees might be in future years.
 </p><p>
-You may be billed later for inspection fees beyond the initial deposit. Your final Inspection Fees reflect the Organic Inspector's total time and expenses
-(travel, inspection, and report writing) and are affected by your organization and preparation, the complexity and location of your operation, and by 
-post-inspection reporting. Good preparation can keep your costs down.
+You may be billed later for inspection fees beyond the initial deposit. Your final Inspection Fees reflect the Organic Inspector's total time and expenses (travel, inspection, and report writing) and are affected by your organization and preparation, the complexity and location of your operation, and by post-inspection reporting. Good preparation can keep your costs down.
 </p><p>
-Based on the closest inspector to your area ( ______ miles away) the inspection fee could be approximately an additional _______ in cost above the _______
-certification base fee. 
+Based on the closest inspector to your area ( ______ miles away) the inspection fee could be approximately an additional _______ in cost above the _______ certification base fee. 
 </p><p>
-If possible, our inspectors try to coordinate multiple inspections on the same trip in order to save clients' expenses, however due to timing, location, 
-and the complexity of scheduling other operations, it may not be possible for the inspector to coordinate multiple inspections in your area.
+If possible, our inspectors try to coordinate multiple inspections on the same trip in order to save clients' expenses, however due to timing, location, and the complexity of scheduling other operations, it may not be possible for the inspector to coordinate multiple inspections in your area.
 </p><p>
-Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees)
-will be around _______ to _______ for your first year of certification. 
+Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) will be around _______ to _______ for your first year of certification. 
 </p><p>
-As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your 
-organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: 
-<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
+As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: <a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
 </p><p>
 <b>We need your approval indicating you understand the potential fees before we proceed further.</b> Please call or email me at your earliest convenience.
 </p>
@@ -486,27 +475,19 @@ organic certification costs per certified scope (crop, livestock, wildcrop, hand
 
 const handler_estimate_template = `
 <p>
-MOSA has received your New Client Overview, and before we proceed with your application, we want to make sure you understand the potential inspection and certification costs.
-The USDA National Organic Program requires that your facility undergo an inspection every year, and we want to make sure that you understand these annual fees.
+MOSA has received your New Client Overview, and before we proceed with your application, we want to make sure you understand the potential inspection and certification costs. The USDA National Organic Program requires that your facility undergo an inspection every year, and we want to make sure that you understand these annual fees.
 </p><p>
-As a new client, you will pay $1600 when you submit your application. Included in the $1600 payment is a $450 deposit towards the final cost of inspection.
-After your first year, your certification fee is based on your organic sales, plus the inspection deposit. Attached is our fee schedule to give you an idea of what your fees might be in future years.
+As a new client, you will pay $1600 when you submit your application. Included in the $1600 payment is a $450 deposit towards the final cost of inspection. After your first year, your certification fee is based on your organic sales, plus the inspection deposit. Attached is our fee schedule to give you an idea of what your fees might be in future years.
 </p><p>
-You may be billed later for inspection fees beyond the initial deposit. Your final Inspection Fees reflect the Organic Inspector's total time and expenses 
-(travel, inspection, and report writing) and are affected by your organization and preparation, the complexity and location of your operation, and by post-inspection reporting. 
-Good preparation can keep your costs down.
+You may be billed later for inspection fees beyond the initial deposit. Your final Inspection Fees reflect the Organic Inspector's total time and expenses (travel, inspection, and report writing) and are affected by your organization and preparation, the complexity and location of your operation, and by post-inspection reporting. Good preparation can keep your costs down.
 </p><p>
 Based on the closest inspector to your area ( ______ miles away) the inspection fee could be approximately an additional _______ in cost above the _______ certification base fee. 
 </p><p>
-If possible, our inspectors try to coordinate multiple inspections on the same trip in order to save clients' expenses, however due to timing, location, and the complexity 
-of scheduling other operations, it may not be possible for the inspector to coordinate multiple inspections in your area.
+If possible, our inspectors try to coordinate multiple inspections on the same trip in order to save clients' expenses, however due to timing, location, and the complexity of scheduling other operations, it may not be possible for the inspector to coordinate multiple inspections in your area.
 </p><p>
-Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) 
-will be around _______ to _______ for your first year of certification. 
+Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) will be around _______ to _______ for your first year of certification. 
 </p><p>
-As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your
-organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website:
-<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
+As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: <a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
 </p><p>
 We need your approval indicating you understand the potential fees before we proceed further. Please call or email me at your earliest convenience.
 </p>
@@ -515,29 +496,20 @@ We need your approval indicating you understand the potential fees before we pro
 
 const app_accepted_template = `
 <p>
-Congratulations! MOSA has secured an inspector, and with your acceptance of our cost estimate, MOSA will accept your application for certification. It is now your 
-responsibility to pay fees and submit all paperwork required for certification in a timely manner. Keep in mind that while we have located an inspector for you, 
-all of your paperwork and fees must be submitted before an inspection can be scheduled. If paperwork and fees are not submitted in a timely manner, the inspectors schedule 
-may fill up and they may no longer be able to accept this assignment, resulting in delayed inspection and increased inspection fees. 
+Congratulations! MOSA has secured an inspector, and with your acceptance of our cost estimate, MOSA will accept your application for certification. It is now your responsibility to pay fees and submit all paperwork required for certification in a timely manner. Keep in mind that while we have located an inspector for you, all of your paperwork and fees must be submitted before an inspection can be scheduled. If paperwork and fees are not submitted in a timely manner, the inspectors schedule may fill up and they may no longer be able to accept this assignment, resulting in delayed inspection and increased inspection fees. 
 </p><p>
-Thank you for your interest in organic certification, and for choosing MOSA as your partner. Please contact MOSA's Client Services with any questions. They can help you 
-complete your application in a timely manner. They can be reached by phone at: 1-844-637-2526, by email at <a href="mailto:mosa@mosaorganic.org">mosa@mosaorganic.org</a>, 
-or by text at 608-424-4118. MOSA office hours are Monday through Friday from 8:30 to 4:30 Central. 
+Thank you for your interest in organic certification, and for choosing MOSA as your partner. Please contact MOSA's Client Services with any questions. They can help you complete your application in a timely manner. They can be reached by phone at: 1-844-637-2526, by email at <a href="mailto:mosa@mosaorganic.org">mosa@mosaorganic.org</a>, or by text at 608-424-4118. MOSA office hours are Monday through Friday from 8:30 to 4:30 Central. 
 </p>
 `;
 
 
 const app_rejected_template = `
 <p>
-Thank you for your interest in MOSA's certification services. After careful consideration, we regret to inform you that we are currently unable to accept your application. 
-Due to the limited capacity of our inspectors, and the significant cost of sending an inspector to your location each year, we are unable to provide the required 
-level of service and support.
+Thank you for your interest in MOSA's certification services. After careful consideration, we regret to inform you that we are currently unable to accept your application. Due to the limited capacity of our inspectors, and the significant cost of sending an inspector to your location each year, we are unable to provide the required level of service and support.
 </p><p>
-We understand the importance of finding a certifier who can meet your needs efficiently. We recommend using the following USDA resource to locate another accredited 
-certification agency offering services in your area: <a href="https://organic.ams.usda.gov/integrity/Certifiers/CertifiersLocationsSearchPage" target="_blank">Certifier Locator</a>.
+We understand the importance of finding a certifier who can meet your needs efficiently. We recommend using the following USDA resource to locate another accredited certification agency offering services in your area: <a href="https://organic.ams.usda.gov/integrity/Certifiers/CertifiersLocationsSearchPage" target="_blank">Certifier Locator</a>.
 </p><p>
-You are also welcome to contact MOSA's Client Services team for assistance with finding an alternative certification service. They can be reached by phone at 1-844-637-2526, 
-by email at <a href="mailto:mosa@mosaorganic.org">mosa@mosaorganic.org</a>, or by text at 608-424-4118. MOSA office hours are Monday through Friday from 8:30 to 4:30 Central.
+You are also welcome to contact MOSA's Client Services team for assistance with finding an alternative certification service. They can be reached by phone at 1-844-637-2526, by email at <a href="mailto:mosa@mosaorganic.org">mosa@mosaorganic.org</a>, or by text at 608-424-4118. MOSA office hours are Monday through Friday from 8:30 to 4:30 Central.
 </p><p>
 We appreciate your understanding and wish you the best in your certification journey.
 </p>
