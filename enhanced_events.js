@@ -96,13 +96,13 @@ $(document).ready(function() {
         }
 
         let button = $("<button type=button>Add</button>").on("click", function() {
-            let old_text = nicEditors.findEditor("FOpenText91").getContent();
+            // let old_text = nicEditors.findEditor("FOpenText91").getContent();
             let definition = template_definitions[$("#letter_template").val()] || {};
-            nicEditors.findEditor("FOpenText91").setContent(old_text + definition.template);
+            nicEditors.findEditor("FOpenText91").setContent(definition.template);
             nicEditors.findEditor("FOpenText94").setContent(definition.attachments);
         });
 
-        $("#OpenText91").prepend(button).prepend(select);
+        $("#OpenText91").append(select).append(button);
     }
     // Transfer letter
     else if ($("#id_type").val() == "Transfers") {
