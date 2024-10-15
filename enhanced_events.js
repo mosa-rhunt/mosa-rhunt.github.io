@@ -67,16 +67,42 @@ $(document).ready(function() {
 
     //Reinstatement letter
     if ($("#id_type").val() == "Communications") {
-        $("#OpenText91").append(
-            $("<button type=button>Reinstatement Template</button>").on("click", function() {
-                //old editor
-                let old_text = nicEditors.findEditor("FOpenText91").getContent();
-                nicEditors.findEditor("FOpenText91").setContent(old_text + reinstatement_template);
+        const template_definitions = {
+            "Reinstatement": {
+                template: reinstatement_template,
+                attachments: "NOP Instruction 2605 - Reinstating Suspended Operations<br>Application Packet<br>Sent by priority mail",
+            },
+            "Crop/Livestock Inspection Fee Estimate": {
+                template: producer_estimate_template,
+                attachments: "Producer Fee Schedule",
+            },
+            "Handler Inspection Inspection Fee Estimate": {
+                template: handler_estimate_template,
+                attachments: "Handler Fee Schedule",
+            },
+            "Application Accepted": {
+                template: app_accepted_template,
+                attachments: "",
+            },
+            "Application Rejected": {
+                template: app_rejected_template,
+                attachments: "",
+            },
+        };
 
-                let enclosureText = "NOP Instruction 2605 - Reinstating Suspended Operations<br>Application Packet<br>Sent by priority mail";
-                nicEditors.findEditor("FOpenText94").setContent(enclosureText);
-            })
-        );
+        let select = $("<select id='letter_template'></select>");
+        for (let key of Object.keys(template_definitions).sort((a, b) => a.localeCompare(b))) {
+            $(select).append(`<option value="${key}">${key}</option>`);
+        }
+
+        let button = $("<button type=button>Add</button>").on("click", function() {
+            let old_text = nicEditors.findEditor("FOpenText91").getContent();
+            let definition = template_definitions[$("#letter_template").val()] || {};
+            nicEditors.findEditor("FOpenText91").setContent(old_text + definition.template);
+            nicEditors.findEditor("FOpenText94").setContent(definition.attachments);
+        });
+
+        $("#OpenText91").prepend(button).prepend(select);
     }
     // Transfer letter
     else if ($("#id_type").val() == "Transfers") {
@@ -130,7 +156,7 @@ $(document).ready(function() {
 
     //code to prepopulate events based on MosaPrepopulate querystring
     let parameters = {};
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
         parameters[key] = value; //decodeURIComponent(value)
     });
     //support functions
@@ -367,35 +393,6 @@ If you do not file an appeal within the time frame indicated above, your operati
 </p>
 `;
 
-const reinstatement_template = `
-<p>
-This letter is a follow up to our_________ phone conversation regarding reinstatement of your MOSA organic certificate.
-</p><p>
-Your organic certificate was suspended on _______________, as described in the enclosed _____________ Notice of Suspension. Also enclosed are the related ______________Notice of Proposed Suspension and ______________ Notice of Noncompliance.
-</p><p>
-Because your certificate is suspended and no longer active, you are required to seek reinstatement. Enclosed is NOP Instruction 2605  -  Reinstating Suspended Operations. The Instruction describes the reinstatement process and procedures.
-</p><p>
-As a suspended operation, your application would be considered a new or initial application. Enclosed is an initial application packet. The suspension will remain so until all of the following items have been completed.
-</p><p>
-1. <u>Complete the New Client Overview form:</u> Complete and submit the New Client Overview (NCO). The NCO must provide a description of your production and timing needs. After we've reviewed your NCO, we'll let you know whether you may submit your initial application.  (If you would like, you may complete and return the enclosed initial application forms with the NCO. However, we can not accept your application and fee payment until Step 1 is completed).
-</p><p>
-2. <u>Submit initial application and Fees (after Step 1 is completed):</u>
-</p><p>
-<u>Initial Application:</u> The enclosed initial application forms must be completed and submitted to MOSA. As an alternative to sending in a paper application, you may complete and submit your application online using MyMOSA, our online application system. To access MyMOSA, please call the MOSA office - 844-637-2526, or call me directly - 608-572-7276. Make sure to complete all documents required and/or applicable to your operation. 
-</p><p>
-<u>Fees:</u>  Submit total payment of $______________ This includes initial certification fee ($______________) and a minimum, non-refundable reinstatement review fee ($500.00). Fees include an inspection deposit or base fee of $___________. If your inspection costs exceed $_______________, you will be billed for the difference. Please do not submit payment until Step 1 is completed and you have heard back from MOSA.
-</p><p>
-3. <u>Review and Inspection:</u> MOSA will conduct a full review and inspect the operation. All identified noncompliances must be resolved. 
-</p><p>
-4. <u>NOP Review:</u> The USDA/NOP Instruction for Reinstating Suspended Organic Operations <a href="https://www.ams.usda.gov/sites/default/files/media/2605.pdf">https://www.ams.usda.gov/sites/default/files/media/2605.pdf</a> is enclosed. MOSA must ensure all requirements for certification have been met and that the operation is capable of remaining in compliance before submitting written statements to the NOP in support of reinstatement.  Once the NOP receives the written request from the suspended operation and statement of compliance from MOSA, the NOP will review the request and either approve the reinstatement, or deny it with a letter sent to the operation with the reasons for denying eligibility for reinstatement.  If reinstatement is approved, MOSA will send you a certificate and a notice of reinstatement. 
-</p><p>
-The reinstatement process can take up to 4 - 6 months. MOSA cannot provide an exact time frame. 
-</p><p>
-Please contact me with any questions or concerns regarding the reinstatement process.
-</p>
-`;
-
-
 const transfer_template = `
 <p>
 Thank you for letting us know you will be seeking organic certification with __________ for the FULLYEAR certification year. On _________, I reviewed with you both the National Organic Program's and MOSA's related requirements and procedures for operations changing certifying agents. I noted MOSA would send a follow-up letter describing requirements. We're providing the information below to clarify the transfer process, identify potential compliance concerns, and also help support a smooth transition. Please review this letter carefully and contact me with any questions or concerns.
@@ -426,4 +423,122 @@ If you choose not to maintain your MOSA certificate while changing certifiers, b
 <br><br>
 <b><u>Comments and Considerations</u></b>
 <br>We understand the logistical challenges that come with changing certifiers.  It may seem cumbersome. During the transfer, your operation will be subject to two separate certification processes, varying documentation requirements, and associated costs. We anticipate your new certification process will move forward in a timely fashion and that MOSA's role and responsibilities as your current certifier will conclude in reasonable time and with reasonable cost.  MOSA is available to answer any questions or concerns and will work with you and your new certifier during this process.";
+`;
+
+const reinstatement_template = `
+<p>
+This letter is a follow up to our_________ phone conversation regarding reinstatement of your MOSA organic certificate.
+</p><p>
+Your organic certificate was suspended on _______________, as described in the enclosed _____________ Notice of Suspension. Also enclosed are the related ______________Notice of Proposed Suspension and ______________ Notice of Noncompliance.
+</p><p>
+Because your certificate is suspended and no longer active, you are required to seek reinstatement. Enclosed is NOP Instruction 2605  -  Reinstating Suspended Operations. The Instruction describes the reinstatement process and procedures.
+</p><p>
+As a suspended operation, your application would be considered a new or initial application. Enclosed is an initial application packet. The suspension will remain so until all of the following items have been completed.
+</p><p>
+1. <u>Complete the New Client Overview form:</u> Complete and submit the New Client Overview (NCO). The NCO must provide a description of your production and timing needs. After we've reviewed your NCO, we'll let you know whether you may submit your initial application.  (If you would like, you may complete and return the enclosed initial application forms with the NCO. However, we can not accept your application and fee payment until Step 1 is completed).
+</p><p>
+2. <u>Submit initial application and Fees (after Step 1 is completed):</u>
+</p><p>
+<u>Initial Application:</u> The enclosed initial application forms must be completed and submitted to MOSA. As an alternative to sending in a paper application, you may complete and submit your application online using MyMOSA, our online application system. To access MyMOSA, please call the MOSA office - 844-637-2526, or call me directly - 608-572-7276. Make sure to complete all documents required and/or applicable to your operation. 
+</p><p>
+<u>Fees:</u>  Submit total payment of $______________ This includes initial certification fee ($______________) and a minimum, non-refundable reinstatement review fee ($500.00). Fees include an inspection deposit or base fee of $___________. If your inspection costs exceed $_______________, you will be billed for the difference. Please do not submit payment until Step 1 is completed and you have heard back from MOSA.
+</p><p>
+3. <u>Review and Inspection:</u> MOSA will conduct a full review and inspect the operation. All identified noncompliances must be resolved. 
+</p><p>
+4. <u>NOP Review:</u> The USDA/NOP Instruction for Reinstating Suspended Organic Operations <a href="https://www.ams.usda.gov/sites/default/files/media/2605.pdf">https://www.ams.usda.gov/sites/default/files/media/2605.pdf</a> is enclosed. MOSA must ensure all requirements for certification have been met and that the operation is capable of remaining in compliance before submitting written statements to the NOP in support of reinstatement.  Once the NOP receives the written request from the suspended operation and statement of compliance from MOSA, the NOP will review the request and either approve the reinstatement, or deny it with a letter sent to the operation with the reasons for denying eligibility for reinstatement.  If reinstatement is approved, MOSA will send you a certificate and a notice of reinstatement. 
+</p><p>
+The reinstatement process can take up to 4 - 6 months. MOSA cannot provide an exact time frame. 
+</p><p>
+Please contact me with any questions or concerns regarding the reinstatement process.
+</p>
+`;
+
+const producer_estimate_template = `
+<p>
+MOSA has received your New Client Overview, and before we proceed with your application, we want to make sure you understand the potential inspection
+and certification costs. The USDA National Organic Program requires that your facility undergo an inspection every year, and we want to make sure
+that you understand these annual fees.
+</p><p>
+As a new client, you will pay $1375 when you submit your application. Included in the $1375 payment is a $350 deposit towards the final cost of inspection. 
+After your first year, your certification fee is based on your organic sales, plus the inspection deposit. Attached is our fee schedule to give you an idea
+of what your fees might be in future years.
+</p><p>
+You may be billed later for inspection fees beyond the initial deposit. Your final Inspection Fees reflect the Organic Inspector's total time and expenses
+(travel, inspection, and report writing) and are affected by your organization and preparation, the complexity and location of your operation, and by 
+post-inspection reporting. Good preparation can keep your costs down.
+</p><p>
+Based on the closest inspector to your area ( ______ miles away) the inspection fee could be approximately an additional _______ in cost above the _______
+certification base fee. 
+</p><p>
+If possible, our inspectors try to coordinate multiple inspections on the same trip in order to save clients' expenses, however due to timing, location, 
+and the complexity of scheduling other operations, it may not be possible for the inspector to coordinate multiple inspections in your area.
+</p><p>
+Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees)
+will be around _______ to _______ for your first year of certification. 
+</p><p>
+As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your 
+organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: 
+<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
+</p><p>
+<b>We need your approval indicating you understand the potential fees before we proceed further.</b> Please call or email me at your earliest convenience.
+</p>
+`;
+
+const handler_estimate_template = `
+<p>
+MOSA has received your New Client Overview, and before we proceed with your application, we want to make sure you understand the potential inspection and certification costs.
+The USDA National Organic Program requires that your facility undergo an inspection every year, and we want to make sure that you understand these annual fees.
+</p><p>
+As a new client, you will pay $1600 when you submit your application. Included in the $1600 payment is a $450 deposit towards the final cost of inspection.
+After your first year, your certification fee is based on your organic sales, plus the inspection deposit. Attached is our fee schedule to give you an idea of what your fees might be in future years.
+</p><p>
+You may be billed later for inspection fees beyond the initial deposit. Your final Inspection Fees reflect the Organic Inspector's total time and expenses 
+(travel, inspection, and report writing) and are affected by your organization and preparation, the complexity and location of your operation, and by post-inspection reporting. 
+Good preparation can keep your costs down.
+</p><p>
+Based on the closest inspector to your area ( ______ miles away) the inspection fee could be approximately an additional _______ in cost above the _______ certification base fee. 
+</p><p>
+If possible, our inspectors try to coordinate multiple inspections on the same trip in order to save clients' expenses, however due to timing, location, and the complexity 
+of scheduling other operations, it may not be possible for the inspector to coordinate multiple inspections in your area.
+</p><p>
+Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) 
+will be around _______ to _______ for your first year of certification. 
+</p><p>
+As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your
+organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website:
+<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
+</p><p>
+We need your approval indicating you understand the potential fees before we proceed further. Please call or email me at your earliest convenience.
+</p>
+`;
+
+
+const app_accepted_template = `
+<p>
+Congratulations! MOSA has secured an inspector, and with your acceptance of our cost estimate, MOSA will accept your application for certification. It is now your 
+responsibility to pay fees and submit all paperwork required for certification in a timely manner. Keep in mind that while we have located an inspector for you, 
+all of your paperwork and fees must be submitted before an inspection can be scheduled. If paperwork and fees are not submitted in a timely manner, the inspectors schedule 
+may fill up and they may no longer be able to accept this assignment, resulting in delayed inspection and increased inspection fees. 
+</p><p>
+Thank you for your interest in organic certification, and for choosing MOSA as your partner. Please contact MOSA's Client Services with any questions. They can help you 
+complete your application in a timely manner. They can be reached by phone at: 1-844-637-2526, by email at <a href="mailto:mosa@mosaorganic.org">mosa@mosaorganic.org</a>, 
+or by text at 608-424-4118. MOSA office hours are Monday through Friday from 8:30 to 4:30 Central. 
+</p>
+`;
+
+
+const app_rejected_template = `
+<p>
+Thank you for your interest in MOSA's certification services. After careful consideration, we regret to inform you that we are currently unable to accept your application. 
+Due to the limited capacity of our inspectors, and the significant cost of sending an inspector to your location each year, we are unable to provide the required 
+level of service and support.
+</p><p>
+We understand the importance of finding a certifier who can meet your needs efficiently. We recommend using the following USDA resource to locate another accredited 
+certification agency offering services in your area: <a href="https://organic.ams.usda.gov/integrity/Certifiers/CertifiersLocationsSearchPage" target="_blank">Certifier Locator</a>.
+</p><p>
+You are also welcome to contact MOSA's Client Services team for assistance with finding an alternative certification service. They can be reached by phone at 1-844-637-2526, 
+by email at <a href="mailto:mosa@mosaorganic.org">mosa@mosaorganic.org</a>, or by text at 608-424-4118. MOSA office hours are Monday through Friday from 8:30 to 4:30 Central.
+</p><p>
+We appreciate your understanding and wish you the best in your certification journey.
+</p>
 `;
