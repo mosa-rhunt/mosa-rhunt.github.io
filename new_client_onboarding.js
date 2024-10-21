@@ -73,7 +73,7 @@ function specialties() {
     for (let key in parsed) {
         if (parsed[key] == "Yes") list.push(key);
     }
-    $("#specialties").text(list.join(", "));
+    $("#specialties").text(list.join(", ")).css("margin-left", "15px").css("color", "#333");
 }
 
 
@@ -114,8 +114,8 @@ function compliance_topics() {
 
 
 function comm_events() {
-    let table = $("<table></table>");
-    let thead = $("<thead class='thead-light'></thead>").appendTo(table);
+    let table = $("<table class='table border'></table>");
+    let thead = $("<thead class='thead-default'></thead>").appendTo(table);
     let tbody = $("<tbody></tbody>").appendTo(table);
 
     $("<tr></tr>")
