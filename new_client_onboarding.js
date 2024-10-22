@@ -66,13 +66,12 @@ function parse_neworg_content(content_id, context=null, as_array=true) {
 
 
 function new_table(headers=[]) {
-    let thead = $("<thead class='thead-default thead-light'></thead>").appendTo(table); // -light for new BS version, -default for old
+    let thead = $("<thead class='thead-default thead-light'></thead>"); // -light for new BS version, -default for old
     let row = $("<tr></tr>").appendTo(thead);
     for (let header of headers) {
         $(row).append(`<th>${header}</th>`);
-
     }
-    return $("<table class='table border'></table>").append(thead);
+    return $("<table class='table table-sm table-hover border'></table>").append(thead);
 }
 
 
