@@ -107,7 +107,7 @@ function init_osps() {
 
     $("#osps")
     .append($("<label>Organic System Plans</label>"))
-    .appendTo(table);
+    .append(table);
 }
 
 //////////==========//////////==========//////////==========//////////==========//////////==========//////////==========//////////==========//////////
@@ -132,7 +132,7 @@ function init_gatekeeper() {
 
     $("#gatekeeper")
     .append($("<label>Gatekeeper Requirements</label>"))
-    .appendTo(table);
+    .append(table);
 }
 
 //////////==========//////////==========//////////==========//////////==========//////////==========//////////==========//////////==========//////////
@@ -151,7 +151,7 @@ function init_forms_required() {
 
     $("#forms-required")
     .append($("<label>Additional Forms</label>"))
-    .appendTo(table);
+    .append(table);
 }
 
 //////////==========//////////==========//////////==========//////////==========//////////==========//////////==========//////////==========//////////
@@ -176,7 +176,7 @@ function init_compliance_topics() {
 
     $("#compliance-topics")
     .append($("<label>Compliance Topics</label>"))
-    .appendTo(table);
+    .append(table);
 }
 
 //////////==========//////////==========//////////==========//////////==========//////////==========//////////==========//////////==========//////////
