@@ -22,4 +22,7 @@ $(document).ready(function() {
         let title = $(this).text();
         $(this).closest("table.outer").prev("div.nav-container").find("p.text").empty().text(title).css("padding", "8px").css("font-size", "12pt");
     });
+
+    // hide all the "pencil-man" icons/links
+    $("a[target=ContactUpdate]").hide();
 });
