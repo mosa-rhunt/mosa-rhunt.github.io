@@ -89,6 +89,6 @@ $(document).ready(function() {
         });
 
         //add to DOM
-        $("a[href*='Page=Files']:not(.menu)").prop("id", "filetop").parent().prop("align", null).prepend(collapse_all).prepend(expand_all);
+        $("a[href*='Page=Files']:not(.menu)").first().prop("id", "filetop").parent().prop("align", null).prepend(collapse_all).prepend(expand_all);
     }
 });
