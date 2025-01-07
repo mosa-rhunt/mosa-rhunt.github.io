@@ -92,7 +92,7 @@ function calculate_inspection_fees() {
         incentiveFee = field("34"), 
 
         miles = field("27"),
-        mileageRate = (inspectionDate.getFullYear() == 2024 ?  0.67 : 0.655),
+        mileageRate = (inspectionDate.getFullYear() == 2025 ? 0.7 : 0.67),
         mileageTotal = miles * mileageRate,
         driveTimeHours = field("209"),
         driveTimeRate = field("210"),
