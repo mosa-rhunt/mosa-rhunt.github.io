@@ -72,8 +72,12 @@ $(document).ready(function() {
                 template: reinstatement_template,
                 attachments: "NOP Instruction 2605 - Reinstating Suspended Operations<br>Application Packet<br>Sent by priority mail",
             },
-            "Crop/Livestock Inspection Fee Estimate": {
+            "Crop Inspection Fee Estimate": {
                 template: producer_estimate_template,
+                attachments: "Producer Fee Schedule",
+            },
+            "Livestock Inspection Fee Estimate": {
+                template: livestock_estimate_template,
                 attachments: "Producer Fee Schedule",
             },
             "Handler Inspection Inspection Fee Estimate": {
@@ -367,6 +371,7 @@ Shelby Thomas, Compliance Manager
 </p>
 `;
 
+
 const mediation_accepted_template = `
 <p>
 On OpenText225, MOSA received your written request for mediation of the OpenText221 Notice of Proposed Suspension. This letter is to inform you that MOSA has accepted your request for mediation.
@@ -383,6 +388,7 @@ If you have any questions or concerns, please contact us right away.
 </p>
 `;
 
+
 const mediation_rejected_template = `
 <p>
 We have considered your request for mediation, in response to the Notice of Proposed Suspension (or Revocation) dated OpenText221. We have decided to reject mediation. We have rejected mediation because OpenText228.
@@ -392,6 +398,7 @@ If you so choose, you may file an appeal pursuant to §205.681. Your appeal must
 If you do not file an appeal within the time frame indicated above, your operation's certificate as a producer under the National Organic Program will be suspended as of OpenText223. You will be unable to sell or label your products as organic. If you have questions regarding this letter, please contact the MOSA office.
 </p>
 `;
+
 
 const transfer_template = `
 <p>
@@ -425,6 +432,7 @@ If you choose not to maintain your MOSA certificate while changing certifiers, b
 <br>We understand the logistical challenges that come with changing certifiers.  It may seem cumbersome. During the transfer, your operation will be subject to two separate certification processes, varying documentation requirements, and associated costs. We anticipate your new certification process will move forward in a timely fashion and that MOSA's role and responsibilities as your current certifier will conclude in reasonable time and with reasonable cost.  MOSA is available to answer any questions or concerns and will work with you and your new certifier during this process.";
 `;
 
+
 const reinstatement_template = `
 <p>
 This letter is a follow up to our_________ phone conversation regarding reinstatement of your MOSA organic certificate.
@@ -453,6 +461,7 @@ Please contact me with any questions or concerns regarding the reinstatement pro
 </p>
 `;
 
+
 const producer_estimate_template = `
 <p>
 MOSA has received your New Client Overview, and before we proceed with your application, we want to make sure you understand the potential inspection and certification costs. The USDA National Organic Program requires that your facility undergo an inspection every year, and we want to make sure that you understand these annual fees.
@@ -467,11 +476,35 @@ If possible, our inspectors try to coordinate multiple inspections on the same t
 </p><p>
 Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) will be around _______ to _______ for your first year of certification. 
 </p><p>
-As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: <a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
+As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: 
+<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
 </p><p>
 <b>We need your approval indicating you understand the potential fees before we proceed further.</b> Please call or email me at your earliest convenience.
 </p>
 `;
+
+
+const livestock_estimate_template = `
+<p>
+MOSA has received your New Client Overview, and before we proceed with your application, we want to make sure you understand the potential inspection and certification costs. The USDA National Organic Program requires that your facility undergo an inspection every year, and we want to make sure that you understand these annual fees.
+</p><p>
+As a new client, you will pay $1525 when you submit your application. Included in the $1525 payment is a $350 deposit towards the final cost of inspection. After your first year, your certification fee is based on your organic sales, plus the inspection deposit. Attached is our fee schedule to give you an idea of what your fees might be in future years.
+</p><p>
+You may be billed later for inspection fees beyond the initial deposit. Your final Inspection Fees reflect the Organic Inspector’s total time and expenses (travel, inspection, and report writing) and are affected by your organization and preparation, the complexity and location of your operation, and by post-inspection reporting. Good preparation can keep your costs down.
+</p><p>
+Based on the closest inspector to your area ( ______ miles away) the inspection fee could be approximately an additional _______ in cost above the _______ certification base fee. 
+</p><p>
+If possible, our inspectors try to coordinate multiple inspections on the same trip in order to save clients' expenses, however due to timing, location, and the complexity of scheduling other operations, it may not be possible for the inspector to coordinate multiple inspections in your area.
+</p><p>
+Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) will be around _______ to _______ for your first year of certification. 
+</p><p>
+As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: 
+<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
+</p><p>
+<b>We need your approval indicating you understand the potential fees before we proceed further.</b> Please call or email me at your earliest convenience.
+</p>
+`;
+
 
 const handler_estimate_template = `
 <p>
@@ -487,7 +520,8 @@ If possible, our inspectors try to coordinate multiple inspections on the same t
 </p><p>
 Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) will be around _______ to _______ for your first year of certification. 
 </p><p>
-As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: <a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
+As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: 
+<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
 </p><p>
 We need your approval indicating you understand the potential fees before we proceed further. Please call or email me at your earliest convenience.
 </p>
@@ -496,9 +530,10 @@ We need your approval indicating you understand the potential fees before we pro
 
 const app_accepted_template = `
 <p>
-Congratulations! MOSA has secured an inspector, and with your acceptance of our cost estimate, MOSA will accept your application for certification. It is now your responsibility to pay fees and submit all paperwork required for certification in a timely manner. Keep in mind that while we have located an inspector for you, all of your paperwork and fees must be submitted before an inspection can be scheduled. If paperwork and fees are not submitted in a timely manner, the inspectors schedule may fill up and they may no longer be able to accept this assignment, resulting in delayed inspection and increased inspection fees. 
+Congratulations! MOSA has secured an inspector, and with your acceptance of our cost estimate, MOSA will accept your application for certification. It is now your responsibility to pay fees and submit all paperwork required for certification in a timely manner. Keep in mind that while we have located an inspector for you, all of your paperwork and fees must be submitted before an inspection can be scheduled. If paperwork and fees are not submitted in a timely manner, the inspector’s schedule may fill up and they may no longer be able to accept this assignment, resulting in delayed inspection and increased inspection fees. 
 </p><p>
-Thank you for your interest in organic certification, and for choosing MOSA as your partner. Please contact MOSA's Client Services with any questions. They can help you complete your application in a timely manner. They can be reached by phone at: 1-844-637-2526, by email at <a href="mailto:mosa@mosaorganic.org">mosa@mosaorganic.org</a>, or by text at 608-424-4118. MOSA office hours are Monday through Friday from 8:30 to 4:30 Central. 
+Thank you for your interest in organic certification, and for choosing MOSA as your partner. Please contact MOSA’s Client Services with any questions. They can help you complete your application in a timely manner. They can be reached by phone at: 1-844-637-2526, by email at 
+<a href="mailto:mosa@mosaorganic.org">mosa@mosaorganic.org</a>, or by text at 608-424-4118. MOSA office hours are Monday through Friday from 8:30 to 4:30 Central. 
 </p>
 `;
 
