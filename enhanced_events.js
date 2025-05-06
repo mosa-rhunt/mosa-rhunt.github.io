@@ -476,9 +476,6 @@ If possible, our inspectors try to coordinate multiple inspections on the same t
 </p><p>
 Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) will be around _______ to _______ for your first year of certification. 
 </p><p>
-As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: 
-<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
-</p><p>
 <b>We need your approval indicating you understand the potential fees before we proceed further.</b> Please call or email me at your earliest convenience.
 </p>
 `;
@@ -498,9 +495,6 @@ If possible, our inspectors try to coordinate multiple inspections on the same t
 </p><p>
 Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) will be around _______ to _______ for your first year of certification. 
 </p><p>
-As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: 
-<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
-</p><p>
 <b>We need your approval indicating you understand the potential fees before we proceed further.</b> Please call or email me at your earliest convenience.
 </p>
 `;
@@ -519,9 +513,6 @@ Based on the closest inspector to your area ( ______ miles away) the inspection 
 If possible, our inspectors try to coordinate multiple inspections on the same trip in order to save clients' expenses, however due to timing, location, and the complexity of scheduling other operations, it may not be possible for the inspector to coordinate multiple inspections in your area.
 </p><p>
 Before we move forward with your application, we need to be sure that you understand and approve the potential costs. Total costs (certification fees + inspection fees) will be around _______ to _______ for your first year of certification. 
-</p><p>
-As an organic producer, you are eligible for the Organic Certification Cost Share rebate, which can reimburse up to 75% to a maximum of $750.00 of your organic certification costs per certified scope (crop, livestock, wildcrop, handler). Please contact MOSA for more information or visit our website: 
-<a href="https://mosaorganic.org/certification-cost-share/certification-cost-share-information" target="_blank">Certification Cost Share</a>.
 </p><p>
 We need your approval indicating you understand the potential fees before we proceed further. Please call or email me at your earliest convenience.
 </p>
